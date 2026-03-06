@@ -1,8 +1,10 @@
 import { ArrowUpRight, Bank, Megaphone, FilmStrip } from "phosphor-react";
 import ScrollReveal from "./ScrollReveal";
+import { Link } from "react-router-dom";
 
 const caseStudies = [
     {
+        id: "wall-street-bank",
         client: "Top 10 Wall Street Bank",
         title: "Agent Brain: Ecosystem-Wide AI Understanding",
         description: "A custom plugin and skill set that gives Claude Code, OpenCode, and other AI coding tools comprehensive knowledge of an entire enterprise ecosystem.",
@@ -12,7 +14,8 @@ const caseStudies = [
         borderHover: "hover:border-emerald-500/50"
     },
     {
-        client: "Spark Digital Agency",
+        id: "dusted-pixels",
+        client: "Dusted Pixels",
         title: "From Burnout to Breakthrough: 10x Content Scaling",
         description: "Designed and deployed a custom multi-agent 'Content Engine' that fully automated 95% of a boutique agency's content creation and scheduling workflow.",
         impact: "Scaled monthly output from 180 to 720 pieces and reduced content approval time from 4.2 days to 18 hours—without hiring a single person.",
@@ -21,6 +24,7 @@ const caseStudies = [
         borderHover: "hover:border-purple-500/50"
     },
     {
+        id: "hollywood-screenwriter",
         client: "Hollywood Screenwriter",
         title: "Voice-First AI Ideation Partner",
         description: "Fine-tuned a Claude Haiku model on the writer's full body of work to learn tone, cadence, and creative instincts. Built a mobile voice-first experience.",
@@ -55,8 +59,9 @@ const Portfolio = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {caseStudies.map((study, index) => (
                         <ScrollReveal key={index} delay={index * 150}>
-                            <div
-                                className={`group relative p-8 md:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl transition-all duration-500 ${study.borderHover} hover:bg-white/[0.04] overflow-hidden flex flex-col h-full glass-shine`}
+                            <Link
+                                to={`/case-study/${study.id}`}
+                                className={`group relative p-8 md:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl transition-all duration-500 ${study.borderHover} hover:bg-white/[0.04] overflow-hidden flex flex-col h-full glass-shine block`}
                             >
                                 {/* Abstract Gradient Mesh Placeholder */}
                                 <div className="absolute top-0 right-0 w-64 h-64 opacity-50 transition-transform duration-700 group-hover:scale-110 transform-gpu pointer-events-none">
@@ -92,7 +97,7 @@ const Portfolio = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         </ScrollReveal>
                     ))}
                 </div>
