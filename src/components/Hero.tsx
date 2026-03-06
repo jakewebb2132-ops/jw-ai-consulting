@@ -6,6 +6,11 @@ import ScrollReveal from "./ScrollReveal";
 const Hero = () => {
     return (
         <section className="relative min-h-[90vh] flex items-center pt-28 pb-20 overflow-hidden bg-[#050505] z-0">
+            {/* Base Background Decorative Elements (Fallback) */}
+            <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none animate-pulse -z-[5]" />
+            <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-purple-500/10 blur-[100px] rounded-full pointer-events-none -z-[5]" />
+            <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10 pointer-events-none -z-[5]" />
+
             {/* Spline 3D Scene Background */}
             <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40 lg:opacity-60 xl:opacity-80">
                 <SplineScene
