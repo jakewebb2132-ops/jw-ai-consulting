@@ -38,7 +38,10 @@ const Hero = () => {
                 {/* CTAs */}
                 {/* Full width on mobile, auto width on larger screens for better UX */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
-                    <button className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-blue-50 transition-colors flex items-center justify-center gap-2 group">
+                    <button
+                        onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-blue-50 transition-colors flex items-center justify-center gap-2 group"
+                    >
                         Book a Discovery Call
                         <ArrowRight size={20} weight="bold" className="group-hover:translate-x-1 transition-transform" />
                     </button>
