@@ -18,7 +18,7 @@ const caseStudyData = {
         client: "Dusted Pixels",
         title: "From Burnout to Breakthrough: 10x Content Scaling",
         overview: "Dusted Pixels, a high-growth digital agency, was hitting a hard ceiling. Content creation was a manual bottleneck, with senior creatives spending 70% of their time on repetitive formatting and scheduling tasks rather than strategy.",
-        solution: "We deployed a bespoke multi-agent 'Content Engine.' This system doesn't just generate text; it researches trends, cross-references brand voice, designs layout concepts, and automatically stages posts across 6 platforms simultaneously.",
+        solution: "We deployed a bespoke multi-agent 'Content Engine.' This system doesn't just generate text; it researches trends, cross-references brand voice, designs layout concepts, and automatically stages posts across 9 platforms simultaneously.",
         metrics: [
             { label: "Content Volume", value: "10x", icon: <Rocket /> },
             { label: "Creation Time", value: "-92%", icon: <Clock /> },
