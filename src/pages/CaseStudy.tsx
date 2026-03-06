@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, Clock, ChartBar, Rocket } from "phosphor-react";
+import { ArrowLeft, CheckCircle, Clock, ChartBar, Rocket, ArrowUpRight } from "phosphor-react";
 import ScrollReveal from '../components/ScrollReveal';
 
 const caseStudyData = {
@@ -12,7 +12,11 @@ const caseStudyData = {
             { label: "Onboarding Time", value: "-65%", icon: <Clock /> },
             { label: "Code Quality Index", value: "+42%", icon: <ChartBar /> },
             { label: "AI Completion Rate", value: "98%", icon: <CheckCircle /> }
-        ]
+        ],
+        externalLink: {
+            label: "Full Project Details from the Engineer",
+            url: "https://pub.spillwave.com/agent-brain-agentic-skills-for-enterprise-context-engineering-b5f61d8f57f0"
+        }
     },
     "dusted-pixels": {
         client: "Dusted Pixels",
@@ -137,6 +141,24 @@ const CaseStudy = () => {
                                 </div>
                             </div>
                         </ScrollReveal>
+
+                        {study.externalLink && (
+                            <ScrollReveal delay={400}>
+                                <div className="pt-8 border-t border-white/5">
+                                    <a
+                                        href={study.externalLink.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-3 text-blue-400 hover:text-blue-300 transition-colors group text-lg font-medium"
+                                    >
+                                        <div className="w-12 h-12 rounded-full border border-blue-400/20 flex items-center justify-center group-hover:bg-blue-400/10 transition-colors text-blue-400">
+                                            <ArrowUpRight size={20} />
+                                        </div>
+                                        {study.externalLink.label}
+                                    </a>
+                                </div>
+                            </ScrollReveal>
+                        )}
                     </div>
                 </div>
             </main>
