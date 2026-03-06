@@ -2,7 +2,25 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Clock, ChartBar, Rocket, ArrowUpRight } from "phosphor-react";
 import ScrollReveal from '../components/ScrollReveal';
 
-const caseStudyData = {
+interface CaseStudyMetric {
+    label: string;
+    value: string;
+    icon: React.ReactNode;
+}
+
+interface CaseStudyInfo {
+    client: string;
+    title: string;
+    overview: string;
+    solution: string;
+    metrics: CaseStudyMetric[];
+    externalLink?: {
+        label: string;
+        url: string;
+    };
+}
+
+const caseStudyData: Record<string, CaseStudyInfo> = {
     "wall-street-bank": {
         client: "Top 10 Wall Street Bank",
         title: "Agent Brain: Ecosystem-Wide AI Understanding",
@@ -11,7 +29,7 @@ const caseStudyData = {
         metrics: [
             { label: "Onboarding Time", value: "-65%", icon: <Clock /> },
             { label: "Code Quality Index", value: "+42%", icon: <ChartBar /> },
-            { label: "AI Completion Rate", value: "98%", icon: <CheckCircle /> }
+            { label: "AI Completion Rate", value: "98%", icon: <CheckCircle weight="thin" /> }
         ],
         externalLink: {
             label: "Full Project Details from the Engineer",
@@ -26,7 +44,7 @@ const caseStudyData = {
         metrics: [
             { label: "Content Volume", value: "10x", icon: <Rocket /> },
             { label: "Creation Time", value: "-92%", icon: <Clock /> },
-            { label: "Brand Consistency", value: "100%", icon: <CheckCircle /> }
+            { label: "Brand Consistency", value: "100%", icon: <CheckCircle weight="thin" /> }
         ]
     }
 };
