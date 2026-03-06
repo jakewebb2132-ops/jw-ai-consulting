@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import Hero from './components/Hero';
@@ -6,8 +6,8 @@ import ServicesSection from './components/Services';
 import Navbar from './components/Navbar';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
-import GithubLogo from 'phosphor-react/dist/icons/github-logo';
-import TwitterLogo from 'phosphor-react/dist/icons/twitter-logo';
+import ScrollProgress from './components/ScrollProgress';
+import { GithubLogo, TwitterLogo } from 'phosphor-react';
 
 function App() {
     useEffect(() => {
@@ -22,6 +22,7 @@ function App() {
 
     return (
         <div className="flex min-h-screen flex-col bg-[#050505] text-white selection:bg-blue-400/30 font-sans">
+            <ScrollProgress />
             {/* Navbar */}
             <Navbar />
 

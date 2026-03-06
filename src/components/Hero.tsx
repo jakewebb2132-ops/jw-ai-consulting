@@ -1,6 +1,4 @@
-import React from 'react';
-import ArrowRight from "phosphor-react/dist/icons/arrow-right";
-import Code from "phosphor-react/dist/icons/code";
+import { ArrowRight } from "phosphor-react";
 import Terminal from './Terminal';
 
 const Hero = () => {

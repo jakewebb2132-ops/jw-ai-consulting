@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CheckCircle from "phosphor-react/dist/icons/check-circle";
+import { CheckCircle } from "phosphor-react";
 
 const Contact = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);

@@ -35,4 +35,41 @@ body {
     .animate-fade-in {
         animation: fadeIn 0.5s ease-out forwards;
     }
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .glass-shine {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .glass-shine::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg,
+                transparent,
+                rgba(255, 255, 255, 0.03),
+                transparent);
+        transform: rotate(45deg);
+        transition: 0.5s;
+        pointer-events: none;
+    }
+
+    .glass-shine:hover::after {
+        left: 100%;
+        top: 100%;
+    }
 }

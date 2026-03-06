@@ -1,8 +1,5 @@
-import React from 'react';
-import Strategy from "phosphor-react/dist/icons/strategy";
-import Cpu from "phosphor-react/dist/icons/cpu";
-import TreeStructure from "phosphor-react/dist/icons/tree-structure";
-import Database from "phosphor-react/dist/icons/database";
+import { Strategy, Cpu, TreeStructure, Database } from "phosphor-react";
+import ScrollReveal from "./ScrollReveal";
 
 const services = [
     {
@@ -32,24 +29,27 @@ const ServicesSection = () => {
         <section className="py-24 bg-[#050505] text-white" id="services">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="mb-16">
-                    <h2 className="text-4xl font-semibold tracking-tight mb-4">Core Service Pillars</h2>
-                    <p className="text-white/60 max-w-2xl">Architecting high-conviction AI solutions for the modern enterprise.</p>
+                    <ScrollReveal>
+                        <h2 className="text-4xl font-semibold tracking-tight mb-4">Core Service Pillars</h2>
+                        <p className="text-white/60 max-w-2xl">Architecting high-conviction AI solutions for the modern enterprise.</p>
+                    </ScrollReveal>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {services.map((service, index) => (
-                        <div
-                            key={index}
-                            className="group p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl hover:border-blue-400/50 transition-all duration-300"
-                        >
-                            <div className="w-12 h-12 rounded-lg bg-blue-400/10 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
-                                {service.icon}
+                        <ScrollReveal key={index} delay={index * 100}>
+                            <div
+                                className="group p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl hover:border-blue-400/50 transition-all duration-300 glass-shine h-full"
+                            >
+                                <div className="w-12 h-12 rounded-lg bg-blue-400/10 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                                    {service.icon}
+                                </div>
+                                <h3 className="text-xl font-medium mb-3">{service.title}</h3>
+                                <p className="text-white/50 text-sm leading-relaxed">
+                                    {service.description}
+                                </p>
                             </div>
-                            <h3 className="text-xl font-medium mb-3">{service.title}</h3>
-                            <p className="text-white/50 text-sm leading-relaxed">
-                                {service.description}
-                            </p>
-                        </div>
+                        </ScrollReveal>
                     ))}
                 </div>
             </div>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import List from "phosphor-react/dist/icons/list";
-import X from "phosphor-react/dist/icons/x";
+import { List, X } from "phosphor-react";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
