@@ -14,7 +14,6 @@ import LazySection from './components/LazySection';
 // Lazy load below-the-fold sections and subpages
 const ServicesSection = lazy(() => import('./components/Services'));
 const Portfolio = lazy(() => import('./components/Portfolio'));
-const ROICalculator = lazy(() => import('./components/ROICalculator'));
 const Contact = lazy(() => import('./components/Contact'));
 const ServicePage = lazy(() => import('./pages/ServicePage'));
 
@@ -43,9 +42,6 @@ const HomePage = () => (
         </LazySection>
         <LazySection minHeight="800px">
             <Portfolio />
-        </LazySection>
-        <LazySection minHeight="600px">
-            <ROICalculator />
         </LazySection>
         <LazySection minHeight="800px">
             <Contact />
