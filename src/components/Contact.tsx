@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle } from "phosphor-react";
+import { CheckCircle, LinkedinLogo, Envelope } from "phosphor-react";
 
 const Contact = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -25,7 +25,7 @@ const Contact = () => {
         setError(null);
 
         try {
-            const response = await fetch("https://formspree.io/f/xeerqaab", {
+            const response = await fetch("https://formspree.io/f/mjgavnwe", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -51,6 +51,58 @@ const Contact = () => {
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const ContactInfo = () => {
+        const links = [
+            {
+                href: "https://www.linkedin.com/in/jakewebb/",
+                label: "Professional Network",
+                value: "linkedin.com/in/jakewebb",
+                icon: LinkedinLogo,
+                isExternal: true
+            },
+            {
+                href: "mailto:jake@jwaiconsulting.com",
+                label: "Direct Correspondence",
+                value: "jake@jwaiconsulting.com",
+                icon: Envelope
+            },
+            {
+                href: "mailto:jw@connectivity.vc",
+                label: "Venture Capital",
+                value: "jw@connectivity.vc",
+                icon: Envelope
+            },
+            {
+                href: "mailto:jake@wonderwomentech.com",
+                label: "Tech Advocacy",
+                value: "jake@wonderwomentech.com",
+                icon: Envelope
+            }
+        ];
+
+        return (
+            <div className="mt-16 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+                {links.map((link, index) => (
+                    <a
+                        key={index}
+                        href={link.href}
+                        target={link.isExternal ? "_blank" : undefined}
+                        rel={link.isExternal ? "noopener noreferrer" : undefined}
+                        className="flex items-center gap-4 group transition-all"
+                    >
+                        <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-400/20 transition-all border border-white/10 group-hover:border-blue-400/30 shadow-sm shrink-0">
+                            <link.icon size={24} weight="light" className="text-white/70 group-hover:text-blue-400 transition-colors" />
+                        </div>
+                        <div className="text-left">
+                            <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-medium mb-0.5">{link.label}</p>
+                            <p className="text-white/70 group-hover:text-white transition-colors font-medium text-sm sm:text-base break-all sm:break-normal">{link.value}</p>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        );
     };
 
     return (
@@ -113,6 +165,7 @@ const Contact = () => {
                                 )}
                             </button>
                         </form>
+                        <ContactInfo />
                     </>
                 ) : (
                     /* SUCCESS STATE */
@@ -126,10 +179,11 @@ const Contact = () => {
                         </p>
                         <button
                             onClick={() => setIsSubmitted(false)}
-                            className="text-sm text-blue-400 hover:text-blue-300 underline underline-offset-4"
+                            className="text-sm text-blue-400 hover:text-blue-300 underline underline-offset-4 mb-12"
                         >
                             Send another message
                         </button>
+                        <ContactInfo />
                     </div>
                 )}
             </div>

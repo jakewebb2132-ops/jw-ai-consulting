@@ -23,9 +23,9 @@ const Hero = () => {
                     </div>
                 </ScrollReveal>
 
-                {/* Seamless Spline Interactive Experience - Primary Focal Point */}
+                {/* Seamless Spline Interactive Experience - Full Width Focus */}
                 <ScrollReveal delay={100}>
-                    <div className="relative max-w-5xl mx-auto h-[400px] sm:h-[500px] md:h-[600px] overflow-visible mb-12 group">
+                    <div className="relative w-screen left-1/2 -translate-x-1/2 h-[400px] sm:h-[450px] md:h-[600px] overflow-hidden mb-12 group">
                         {/* Spline Scene as a seamless background element */}
                         <div className="absolute inset-0 z-0 opacity-90 group-hover:opacity-100 transition-opacity duration-1000">
                             <SplineScene

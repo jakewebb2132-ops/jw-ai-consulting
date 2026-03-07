@@ -66,6 +66,39 @@ const SplineScene = ({ scene, className }: SplineSceneProps) => {
                                 canvas.style.transition = 'opacity 1s ease-in-out';
                                 canvas.style.opacity = '1';
                             }
+
+                            // Programmatically hide the original text layers from the Spline scene
+                            try {
+                                const objects = splineApp.getAllObjects();
+
+                                const hideText = (obj: any) => {
+                                    if (!obj) return;
+
+                                    // Target specific names or generic Text types
+                                    if (obj.name && (
+                                        obj.name.includes("Clarity") ||
+                                        obj.name.includes("Focus") ||
+                                        obj.name.includes("Impact") ||
+                                        obj.name.includes("We turn")
+                                    )) {
+                                        obj.visible = false;
+                                    }
+
+                                    if (obj.type === 'Text') {
+                                        obj.visible = false;
+                                    }
+
+                                    if (obj.children && Array.isArray(obj.children)) {
+                                        obj.children.forEach(hideText);
+                                    }
+                                };
+
+                                if (Array.isArray(objects)) {
+                                    objects.forEach(hideText);
+                                }
+                            } catch (e) {
+                                console.error("Error hiding spline text:", e);
+                            }
                         }}
                     />
                 </Suspense>
