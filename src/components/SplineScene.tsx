@@ -74,18 +74,23 @@ const SplineScene = ({ scene, className }: SplineSceneProps) => {
                                 const hideText = (obj: any) => {
                                     if (!obj) return;
 
-                                    // Target specific names or generic Text types
-                                    if (obj.name && (
-                                        obj.name.includes("Clarity") ||
-                                        obj.name.includes("Focus") ||
-                                        obj.name.includes("Impact") ||
-                                        obj.name.includes("We turn")
-                                    )) {
+                                    const name = obj.name ? obj.name.toLowerCase() : "";
+
+                                    // Hide objects based on Spline layer names or contents
+                                    if (
+                                        name === "text" ||
+                                        name === "text 2" ||
+                                        name.includes("clarity") ||
+                                        name.includes("we turn")
+                                    ) {
                                         obj.visible = false;
                                     }
 
-                                    if (obj.type === 'Text') {
-                                        obj.visible = false;
+                                    // Also check text values if accessible
+                                    if (obj.text && typeof obj.text === 'string') {
+                                        if (obj.text.includes("Clarity") || obj.text.includes("turn complex")) {
+                                            obj.visible = false;
+                                        }
                                     }
 
                                     if (obj.children && Array.isArray(obj.children)) {
