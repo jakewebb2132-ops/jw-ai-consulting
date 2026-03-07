@@ -43,7 +43,7 @@ const caseStudyData: Record<string, CaseStudyInfo> = {
         solution: "We deployed a bespoke multi-agent 'Content Engine.' This system doesn't just generate text; it researches trends, cross-references brand voice, designs layout concepts, and automatically stages posts across 9 platforms simultaneously.",
         metrics: [
             { label: "Content Volume", value: "10x", icon: <Rocket /> },
-            { label: "Creation Time", value: "-92%", icon: <Clock /> },
+            { label: "Creation Time", value: "-95%", icon: <Clock /> },
             { label: "Brand Consistency", value: "100%", icon: <CheckCircle weight="thin" /> }
         ]
     }
