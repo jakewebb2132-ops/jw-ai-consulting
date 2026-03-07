@@ -1,5 +1,4 @@
 import { ArrowRight, Sparkle } from "phosphor-react";
-import Terminal from './Terminal';
 import SplineScene from "./SplineScene";
 import ScrollReveal from "./ScrollReveal";
 
@@ -11,12 +10,7 @@ const Hero = () => {
             <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-purple-500/10 blur-[100px] rounded-full pointer-events-none -z-[5]" />
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10 pointer-events-none -z-[5]" />
 
-            {/* Spline 3D Scene Background */}
-            <div className="absolute inset-0 z-[-1] pointer-events-none opacity-40 lg:opacity-60 xl:opacity-80">
-                <SplineScene
-                    scene="https://prod.spline.design/kZS1ORPeLrtByu7X/scene.splinecode"
-                />
-            </div>
+
 
             {/* Premium Gradient Overlays for Readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/30 to-[#050505] z-0 pointer-events-none" />
@@ -29,22 +23,39 @@ const Hero = () => {
                     </div>
                 </ScrollReveal>
 
+                {/* Seamless Spline Interactive Experience - Primary Focal Point */}
                 <ScrollReveal delay={100}>
-                    <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 leading-[1.1] text-balance">
-                        <span className="bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent block">
-                            Bespoke AI
-                        </span>
-                        <span className="bg-gradient-to-r from-blue-400 via-blue-200 to-indigo-400 bg-clip-text text-transparent block">
-                            Context Engineering
-                        </span>
-                    </h1>
-                </ScrollReveal>
+                    <div className="relative max-w-5xl mx-auto h-[400px] sm:h-[500px] md:h-[600px] overflow-visible mb-12 group">
+                        {/* Spline Scene as a seamless background element */}
+                        <div className="absolute inset-0 z-0 opacity-90 group-hover:opacity-100 transition-opacity duration-1000">
+                            <SplineScene
+                                scene="https://prod.spline.design/XVKGVA47YfyrZy5H/scene.splinecode"
+                                className="w-full h-full"
+                            />
+                        </div>
 
-                <ScrollReveal delay={200}>
-                    <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-white/50 mb-12 leading-relaxed text-balance backdrop-blur-[1px]">
-                        Bridging the gap between raw data potential and executive vision with
-                        bespoke multi-agent architectures designed for complex ecosystems.
-                    </p>
+                        {/* Custom Text Overlay - Centered and Integrated to perfectly match Spline typography */}
+                        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+                            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-6 -mt-10">
+                                <span className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide bg-gradient-to-r from-[#8ab4f8] to-[#bfdbfe] bg-clip-text text-transparent">
+                                    Startups.
+                                </span>
+                                <span className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide text-[#f8f9fa]">
+                                    SMB.
+                                </span>
+                                <span className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide bg-gradient-to-r from-[#b152d1] to-[#e879f9] bg-clip-text text-transparent">
+                                    Enterprise.
+                                </span>
+                            </div>
+
+                            <p className="text-xl sm:text-2xl md:text-3xl font-thin text-[#a8adc2] tracking-wide mt-2">
+                                No matter where you are in your AI journey
+                            </p>
+                        </div>
+
+                        {/* Subtle bottom fade to blend */}
+                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent pointer-events-none z-20" />
+                    </div>
                 </ScrollReveal>
 
                 <ScrollReveal delay={300}>
@@ -62,12 +73,6 @@ const Hero = () => {
                     </div>
                 </ScrollReveal>
 
-                {/* Animated Terminal as content, not just decoration */}
-                <ScrollReveal delay={400}>
-                    <div className="max-w-3xl mx-auto opacity-80 hover:opacity-100 transition-opacity">
-                        <Terminal />
-                    </div>
-                </ScrollReveal>
             </div>
         </section>
     );
