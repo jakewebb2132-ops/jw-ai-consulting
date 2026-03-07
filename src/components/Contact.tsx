@@ -111,9 +111,9 @@ const Contact = () => {
             <div className="max-w-3xl mx-auto px-6 text-center">
                 {!isSubmitted ? (
                     <>
-                        <h2 className="text-4xl font-semibold text-white mb-6">Initiate Consultation</h2>
+                        <h2 className="text-4xl font-semibold text-white mb-6">Let's Chat</h2>
                         <p className="text-white/50 mb-12">
-                            Ready to architect your intelligence layer? Brief us on your objectives and a senior consultant will reach out within 24 hours.
+                            No matter where you are in your AI journey - I promise you will learn something new
                         </p>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
