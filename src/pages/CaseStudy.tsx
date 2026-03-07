@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Clock, ChartBar, Rocket, ArrowUpRight } from "phosphor-react";
 import ScrollReveal from '../components/ScrollReveal';
+import ContentEngineDiagram from '../components/ContentEngineDiagram';
 
 interface CaseStudyMetric {
     label: string;
@@ -18,6 +19,7 @@ interface CaseStudyInfo {
         label: string;
         url: string;
     };
+    diagram?: React.ReactNode;
 }
 
 const caseStudyData: Record<string, CaseStudyInfo> = {
@@ -45,7 +47,8 @@ const caseStudyData: Record<string, CaseStudyInfo> = {
             { label: "Content Volume", value: "10x", icon: <Rocket /> },
             { label: "Creation Time", value: "-95%", icon: <Clock /> },
             { label: "Brand Consistency", value: "100%", icon: <CheckCircle weight="thin" /> }
-        ]
+        ],
+        diagram: <ContentEngineDiagram />
     }
 };
 
@@ -134,6 +137,13 @@ const CaseStudy = () => {
                                 <p className="text-lg text-white/70 leading-relaxed lg:pr-12">
                                     {study.solution}
                                 </p>
+
+                                {study.diagram && (
+                                    <div className="mt-16 mb-8 w-full max-w-[100vw] overflow-x-hidden">
+                                        {study.diagram}
+                                    </div>
+                                )}
+
                                 <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
                                         <h4 className="font-semibold mb-2">Technical Discovery</h4>
