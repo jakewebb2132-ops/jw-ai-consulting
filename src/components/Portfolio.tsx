@@ -16,7 +16,7 @@ const caseStudies = [
     {
         id: "dusted-pixels",
         client: "Dusted Pixels",
-        title: "From fully manual to 95% autonomous",
+        title: "From Fully Manual to 95% Autonomous",
         description: "Designed and deployed a custom multi-agent 'Content Engine' that fully automated 95% of a boutique agency's content creation and scheduling workflow.",
         impact: "Scaled monthly output from under 100 to over 800 and reduced content creation time from days to minutes",
         icon: <Megaphone size={32} weight="thin" />,
