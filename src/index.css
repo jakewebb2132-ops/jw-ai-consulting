@@ -19,6 +19,14 @@ body {
     @apply bg-[#050505] text-white antialiased overflow-x-hidden;
 }
 
+@media (pointer: fine) {
+
+    body,
+    body * {
+        cursor: none !important;
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

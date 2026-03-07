@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle, LinkedinLogo, Envelope } from "phosphor-react";
+import MagneticHover from "./MagneticHover";
 
 const Contact = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -150,20 +151,22 @@ const Contact = () => {
                                 <p className="text-red-400 text-sm text-left px-2">{error}</p>
                             )}
 
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className={`w-full py-4 bg-white text-black font-bold rounded-xl transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-50'}`}
-                            >
-                                {isSubmitting ? (
-                                    <>
-                                        <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                                        Processing...
-                                    </>
-                                ) : (
-                                    'Send Briefing Request'
-                                )}
-                            </button>
+                            <MagneticHover>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className={`w-full py-4 bg-white text-black font-bold rounded-xl transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-50'}`}
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                                            Processing...
+                                        </>
+                                    ) : (
+                                        'Send Briefing Request'
+                                    )}
+                                </button>
+                            </MagneticHover>
                         </form>
                         <ContactInfo />
                     </>

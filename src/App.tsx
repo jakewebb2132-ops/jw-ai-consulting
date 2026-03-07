@@ -1,15 +1,22 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
+
 import Hero from './components/Hero';
-import ServicesSection from './components/Services';
 import Navbar from './components/Navbar';
-import Portfolio from './components/Portfolio';
-import Contact from './components/Contact';
 import ScrollProgress from './components/ScrollProgress';
 import CaseStudy from './pages/CaseStudy';
 import { GithubLogo, TwitterLogo } from 'phosphor-react';
+import Cursor from './components/Cursor';
+import LazySection from './components/LazySection';
+
+// Lazy load below-the-fold sections and subpages
+const ServicesSection = lazy(() => import('./components/Services'));
+const Portfolio = lazy(() => import('./components/Portfolio'));
+const ROICalculator = lazy(() => import('./components/ROICalculator'));
+const Contact = lazy(() => import('./components/Contact'));
+const ServicePage = lazy(() => import('./pages/ServicePage'));
 
 const ScrollToTop = () => {
     const { pathname, hash } = useLocation();
@@ -31,9 +38,18 @@ const ScrollToTop = () => {
 const HomePage = () => (
     <>
         <Hero />
-        <ServicesSection />
-        <Portfolio />
-        <Contact />
+        <LazySection minHeight="800px">
+            <ServicesSection />
+        </LazySection>
+        <LazySection minHeight="800px">
+            <Portfolio />
+        </LazySection>
+        <LazySection minHeight="600px">
+            <ROICalculator />
+        </LazySection>
+        <LazySection minHeight="800px">
+            <Contact />
+        </LazySection>
     </>
 );
 
@@ -53,11 +69,17 @@ function App() {
             <ScrollToTop />
             <div className="flex min-h-screen flex-col bg-[#050505] text-white selection:bg-blue-400/30 font-sans">
                 <ScrollProgress />
+                <Cursor />
                 <Navbar />
 
                 <main className="flex-1">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
+                        <Route path="/services/:slug" element={
+                            <LazySection minHeight="100vh">
+                                <ServicePage />
+                            </LazySection>
+                        } />
                         <Route path="/case-study/:id" element={<CaseStudy />} />
                     </Routes>
                 </main>

@@ -1,8 +1,19 @@
 import { ArrowRight, Sparkle } from "phosphor-react";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
 import SplineScene from "./SplineScene";
 import ScrollReveal from "./ScrollReveal";
+import MagneticHover from "./MagneticHover";
 
 const Hero = () => {
+    const { scrollY } = useScroll();
+
+    // Smooth scroll-driven parallax effects
+    const textY = useTransform(scrollY, [0, 500], [0, 150]);
+    const textOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+    const splineScale = useTransform(scrollY, [0, 600], [1, 1.15]);
+    const splineOpacity = useTransform(scrollY, [0, 600], [0.9, 0.2]);
+
     return (
         <section className="relative min-h-[90vh] flex items-center pt-28 pb-20 overflow-hidden bg-[#050505] z-0">
             {/* Base Background Decorative Elements (Fallback) */}
@@ -26,32 +37,38 @@ const Hero = () => {
                 {/* Seamless Spline Interactive Experience - Full Width Focus */}
                 <ScrollReveal delay={100}>
                     <div className="relative w-screen left-1/2 -translate-x-1/2 h-[400px] sm:h-[450px] md:h-[600px] overflow-hidden mb-12 group">
-                        {/* Spline Scene as a seamless background element */}
-                        <div className="absolute inset-0 z-0 opacity-90 group-hover:opacity-100 transition-opacity duration-1000">
+                        {/* Spline Scene as a seamless background element with Scroll Scale */}
+                        <motion.div
+                            style={{ scale: splineScale, opacity: splineOpacity }}
+                            className="absolute inset-0 z-0 transition-opacity duration-1000"
+                        >
                             <SplineScene
                                 scene="https://prod.spline.design/XVKGVA47YfyrZy5H/scene.splinecode"
                                 className="w-full h-full"
                             />
-                        </div>
+                        </motion.div>
 
                         {/* Custom Text Overlay - Centered and Integrated to perfectly match Spline typography */}
-                        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+                        <motion.div
+                            style={{ y: textY, opacity: textOpacity }}
+                            className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 pointer-events-none"
+                        >
                             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-6 -mt-10">
-                                <span className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide bg-gradient-to-r from-[#8ab4f8] to-[#bfdbfe] bg-clip-text text-transparent">
+                                <Link to="/services/startups" className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide bg-gradient-to-r from-[#8ab4f8] to-[#bfdbfe] bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(138,180,248,0.5)]">
                                     Startups.
-                                </span>
-                                <span className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide text-[#f8f9fa]">
+                                </Link>
+                                <Link to="/services/smb" className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide text-[#f8f9fa] hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
                                     SMB.
-                                </span>
-                                <span className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide bg-gradient-to-r from-[#b152d1] to-[#e879f9] bg-clip-text text-transparent">
+                                </Link>
+                                <Link to="/services/enterprise" className="text-5xl sm:text-7xl md:text-[5.5rem] font-light tracking-wide bg-gradient-to-r from-[#b152d1] to-[#e879f9] bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(177,82,209,0.5)]">
                                     Enterprise.
-                                </span>
+                                </Link>
                             </div>
 
                             <p className="text-xl sm:text-2xl md:text-3xl font-thin text-[#a8adc2] tracking-wide mt-2">
                                 No matter where you are in your AI journey
                             </p>
-                        </div>
+                        </motion.div>
 
                         {/* Subtle bottom fade to blend */}
                         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent pointer-events-none z-20" />
@@ -60,16 +77,21 @@ const Hero = () => {
 
                 <ScrollReveal delay={300}>
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-20">
-                        <button
-                            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-blue-50 transition-all flex items-center justify-center gap-2 group shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95"
-                        >
-                            Book a Discovery Call
-                            <ArrowRight size={20} weight="bold" className="group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        <a href="#portfolio" className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white font-medium rounded-full border border-white/10 hover:bg-white/10 transition-all flex items-center justify-center gap-2 backdrop-blur-md active:scale-95">
-                            Our Architectural Proof
-                        </a>
+                        <MagneticHover>
+                            <button
+                                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-blue-50 transition-all flex items-center justify-center gap-2 group shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95"
+                            >
+                                Book a Discovery Call
+                                <ArrowRight size={20} weight="bold" className="group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </MagneticHover>
+
+                        <MagneticHover>
+                            <a href="#portfolio" className="w-full sm:w-auto px-8 py-4 bg-white/5 text-white font-medium rounded-full border border-white/10 hover:bg-white/10 transition-all flex items-center justify-center gap-2 backdrop-blur-md active:scale-95">
+                                Our Architectural Proof
+                            </a>
+                        </MagneticHover>
                     </div>
                 </ScrollReveal>
 

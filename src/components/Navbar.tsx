@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { List, X } from "phosphor-react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -14,28 +15,34 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: "Services", href: "#services" },
-        { name: "Portfolio", href: "#portfolio" },
-        { name: "Strategy", href: "#strategy" },
+        { name: "Services", href: "/#services" },
+        { name: "Portfolio", href: "/#portfolio" },
+        { name: "Strategy", href: "/#contact" },
     ];
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            setIsMobileMenuOpen(false);
-            const element = document.querySelector(href);
-            if (element) {
-                const offset = 80;
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.scrollY - offset;
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-                window.history.pushState(null, '', href);
-            }
-        } else {
-            setIsMobileMenuOpen(false);
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+        const hash = href.replace('/', '');
+
+        if (location.pathname !== '/') {
+            navigate('/' + hash);
+            return;
+        }
+
+        const element = document.querySelector(hash);
+        if (element) {
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - offset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            window.history.pushState(null, '', hash);
         }
     };
 
@@ -44,14 +51,14 @@ const Navbar = () => {
             }`}>
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <div className="flex items-center gap-2">
+                <Link to="/" className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-blue-400 rounded-lg flex items-center justify-center font-bold text-black">
                         JW
                     </div>
-                    <span className="text-xl font-semibold tracking-tight text-white">
+                    <span className="text-xl font-semibold tracking-tight text-white hover:text-white/80 transition-colors">
                         AI Consulting
                     </span>
-                </div>
+                </Link>
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8">
@@ -66,8 +73,8 @@ const Navbar = () => {
                         </a>
                     ))}
                     <a
-                        href="#contact"
-                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, '#contact')}
+                        href="/#contact"
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, '/#contact')}
                         className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-blue-50 transition-colors"
                     >
                         Contact
@@ -97,8 +104,8 @@ const Navbar = () => {
                         </a>
                     ))}
                     <a
-                        href="#contact"
-                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, '#contact')}
+                        href="/#contact"
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, '/#contact')}
                         className="w-full flex items-center justify-center py-3 bg-blue-400 text-white font-semibold rounded-xl hover:bg-blue-500 transition-colors"
                     >
                         Contact

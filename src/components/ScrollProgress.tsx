@@ -1,27 +1,20 @@
-import { useEffect, useState } from 'react';
+import { motion, useScroll, useSpring } from "framer-motion";
 
 const ScrollProgress = () => {
-    const [progress, setProgress] = useState(0);
+    const { scrollYProgress } = useScroll();
 
-    useEffect(() => {
-        const updateProgress = () => {
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (scrollHeight > 0) {
-                setProgress((window.scrollY / scrollHeight) * 100);
-            }
-        };
-
-        window.addEventListener('scroll', updateProgress);
-        return () => window.removeEventListener('scroll', updateProgress);
-    }, []);
+    // Smooth, physics-based spring animation for the progress bar
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     return (
-        <div className="fixed top-0 left-0 w-full h-[2px] z-[100] pointer-events-none">
-            <div
-                className="h-full bg-gradient-to-r from-blue-500 via-blue-400 to-indigo-500 transition-all duration-150 ease-out"
-                style={{ width: `${progress}%` }}
-            />
-        </div>
+        <motion.div
+            className="fixed top-0 left-0 right-0 h-1 z-[100] pointer-events-none origin-left bg-gradient-to-r from-blue-500 to-[#b152d1]"
+            style={{ scaleX }}
+        />
     );
 };
 
