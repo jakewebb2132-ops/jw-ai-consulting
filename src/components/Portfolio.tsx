@@ -16,9 +16,9 @@ const caseStudies = [
     {
         id: "dusted-pixels",
         client: "Dusted Pixels",
-        title: "From Burnout to Breakthrough: 10x Content Scaling",
+        title: "From fully manual to 95% autonomous",
         description: "Designed and deployed a custom multi-agent 'Content Engine' that fully automated 95% of a boutique agency's content creation and scheduling workflow.",
-        impact: "Scaled monthly output from 180 to 720 pieces and reduced content approval time from 4.2 days to 18 hours—without hiring a single person.",
+        impact: "Scaled monthly output from under 100 to over 800 and reduced content creation time from days to minutes",
         icon: <Megaphone size={32} weight="thin" />,
         color: "from-purple-400/20 to-purple-900/20",
         borderHover: "hover:border-purple-500/50"
