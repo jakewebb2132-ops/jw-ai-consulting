@@ -164,16 +164,7 @@ const CaseStudy = () => {
                                     </div>
                                 )}
 
-                                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                                        <h4 className="font-semibold mb-2">Technical Discovery</h4>
-                                        <p className="text-sm text-white/50">Comprehensive audit of existing data silos and workflow friction points.</p>
-                                    </div>
-                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                                        <h4 className="font-semibold mb-2">Bespoke Engineering</h4>
-                                        <p className="text-sm text-white/50">Custom model tuning and multi-agent systems designed for the specific ecosystem.</p>
-                                    </div>
-                                </div>
+
                             </section>
                         </ScrollReveal>
 
