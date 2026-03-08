@@ -11,12 +11,12 @@
 
 @layer utilities {
     .glass-card {
-        @apply bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl;
+        @apply bg-white/70 backdrop-blur-xl border border-blue-100 shadow-xl shadow-blue-900/5 rounded-2xl;
     }
 }
 
 body {
-    @apply bg-[#050505] text-white antialiased overflow-x-hidden;
+    @apply bg-[#f8fafc] text-[#0f172a] antialiased overflow-x-hidden;
 }
 
 @media (pointer: fine) {
