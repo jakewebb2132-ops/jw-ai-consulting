@@ -139,23 +139,23 @@ const AgentBrainDiagram = () => {
                         </div>
 
                         {/* 1. Raw Code Input Box */}
-                        <div className="absolute top-[50px] left-[40px] w-[340px] h-[420px] bg-[#1e1e1e] rounded-xl shadow-2xl border border-gray-800 p-5 font-mono text-[13px] leading-relaxed z-20 overflow-hidden">
-                            <div className="text-[#d4d4d4]">
-                                <span className="text-[#c678dd]">function</span> <span className="text-[#61afef]">processData</span>(input) {'{'}<br />
-                                &nbsp;&nbsp;<span className="text-[#c678dd]">const</span> ast = <span className="text-[#61afef]">parse</span>(input);<br />
-                                &nbsp;&nbsp;<span className="text-[#c678dd]">let</span> result = <span className="text-[#c678dd]">new</span> <span className="text-[#e5c07b]">GraphRAG</span>();<br />
-                                &nbsp;&nbsp;<span className="text-[#c678dd]">for</span> (<span className="text-[#c678dd]">let</span> node <span className="text-[#c678dd]">in</span> ast.nodes) {'{'}<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#c678dd]">if</span> (node.type === <span className="text-[#98c379]">'function_call'</span>) {'{'}<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.<span className="text-[#61afef]">addEdge</span>(node.name, node.args);<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#6a9955]">// Focus on AST structure</span><br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.<span className="text-[#61afef]">log</span>(<span className="text-[#98c379]">'Processing '</span> + node.name);<br />
+                        <div className="absolute top-[50px] left-[40px] w-[340px] h-[420px] bg-slate-50 rounded-xl shadow-xl border border-blue-100 p-5 font-mono text-[13px] leading-relaxed z-20 overflow-hidden">
+                            <div className="text-slate-700">
+                                <span className="text-blue-600">function</span> <span className="text-blue-800 font-bold">processData</span>(input) {'{'}<br />
+                                &nbsp;&nbsp;<span className="text-blue-600">const</span> ast = <span className="text-blue-800 font-bold">parse</span>(input);<br />
+                                &nbsp;&nbsp;<span className="text-blue-600">let</span> result = <span className="text-blue-600">new</span> <span className="text-sky-600 font-bold">GraphRAG</span>();<br />
+                                &nbsp;&nbsp;<span className="text-blue-600">for</span> (<span className="text-blue-600">let</span> node <span className="text-blue-600">in</span> ast.nodes) {'{'}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-600">if</span> (node.type === <span className="text-sky-500">'function_call'</span>) {'{'}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.<span className="text-blue-800 font-bold">addEdge</span>(node.name, node.args);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-slate-400 italic">// Focus on AST structure</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.<span className="text-blue-800 font-bold">log</span>(<span className="text-sky-500">'Processing '</span> + node.name);<br />
                                 &nbsp;&nbsp;&nbsp;&nbsp;{'}'}<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#6a9955]">// Local persistence check</span><br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#c678dd]">if</span> (node.<span className="text-[#61afef]">isLocal</span>()) {'{'}<br />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-[#61afef]">saveToDisk</span>(node);<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-slate-400 italic">// Local persistence check</span><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-600">if</span> (node.<span className="text-blue-800 font-bold">isLocal</span>()) {'{'}<br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-800 font-bold">saveToDisk</span>(node);<br />
                                 &nbsp;&nbsp;&nbsp;&nbsp;{'}'}<br />
                                 &nbsp;&nbsp;{'}'}<br />
-                                &nbsp;&nbsp;<span className="text-[#c678dd]">return</span> result.<span className="text-[#61afef]">optimize</span>();<br />
+                                &nbsp;&nbsp;<span className="text-blue-600">return</span> result.<span className="text-blue-800 font-bold">optimize</span>();<br />
                                 {'}'}
                             </div>
                         </div>

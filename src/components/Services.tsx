@@ -26,12 +26,12 @@ const services = [
 
 const ServicesSection = () => {
     return (
-        <section className="py-24 bg-[#050505] text-white" id="services">
+        <section className="py-24 bg-[#f0f4f8] text-slate-900 border-t border-slate-200/50 relative z-10" id="services">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="mb-16">
                     <ScrollReveal>
-                        <h2 className="text-4xl font-semibold tracking-tight mb-4">Core Service Pillars</h2>
-                        <p className="text-white/60 max-w-2xl">Architecting high-conviction AI solutions for the modern enterprise.</p>
+                        <h2 className="text-4xl font-bold tracking-tight mb-4 text-slate-900">Core Service Pillars</h2>
+                        <p className="text-slate-500 max-w-2xl text-lg">Architecting high-conviction AI solutions for the modern enterprise.</p>
                     </ScrollReveal>
                 </div>
 
@@ -39,13 +39,13 @@ const ServicesSection = () => {
                     {services.map((service, index) => (
                         <ScrollReveal key={index} delay={index * 100}>
                             <div
-                                className="group p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl hover:border-blue-400/50 transition-all duration-300 glass-shine h-full"
+                                className="group p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 h-full"
                             >
-                                <div className="w-12 h-12 rounded-lg bg-blue-400/10 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                                <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 group-hover:bg-blue-100 transition-transform">
                                     {service.icon}
                                 </div>
-                                <h3 className="text-xl font-medium mb-3">{service.title}</h3>
-                                <p className="text-white/50 text-sm leading-relaxed">
+                                <h3 className="text-xl font-bold mb-3 text-slate-800">{service.title}</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">
                                     {service.description}
                                 </p>
                             </div>

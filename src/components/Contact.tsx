@@ -84,7 +84,7 @@ const Contact = () => {
         ];
 
         return (
-            <div className="mt-16 pt-12 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+            <div className="mt-16 pt-12 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
                 {links.map((link, index) => (
                     <a
                         key={index}
@@ -93,12 +93,12 @@ const Contact = () => {
                         rel={link.isExternal ? "noopener noreferrer" : undefined}
                         className="flex items-center gap-4 group transition-all"
                     >
-                        <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-400/20 transition-all border border-white/10 group-hover:border-blue-400/30 shadow-sm shrink-0">
-                            <link.icon size={24} weight="light" className="text-white/70 group-hover:text-blue-400 transition-colors" />
+                        <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-blue-50 transition-all border border-slate-200 group-hover:border-blue-200 shadow-sm shrink-0">
+                            <link.icon size={24} weight="light" className="text-slate-500 group-hover:text-blue-600 transition-colors" />
                         </div>
                         <div className="text-left">
-                            <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-medium mb-0.5">{link.label}</p>
-                            <p className="text-white/70 group-hover:text-white transition-colors font-medium text-sm sm:text-base break-all sm:break-normal">{link.value}</p>
+                            <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-medium mb-0.5">{link.label}</p>
+                            <p className="text-slate-600 group-hover:text-blue-700 transition-colors font-medium text-sm sm:text-base break-all sm:break-normal">{link.value}</p>
                         </div>
                     </a>
                 ))}
@@ -107,12 +107,12 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-24 bg-[#050505]">
+        <section id="contact" className="py-24 bg-[#f0f4f8] border-t border-slate-200/50 relative z-10">
             <div className="max-w-3xl mx-auto px-6 text-center">
                 {!isSubmitted ? (
                     <>
-                        <h2 className="text-4xl font-semibold text-white mb-6">Let's Chat</h2>
-                        <p className="text-white/50 mb-12">
+                        <h2 className="text-4xl font-bold text-slate-900 mb-6">Let's Chat</h2>
+                        <p className="text-slate-500 mb-12">
                             No matter where you are in your AI journey - I promise you will learn something new
                         </p>
 
@@ -125,7 +125,7 @@ const Contact = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Full Name"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-blue-400/50 transition-colors"
+                                    className="w-full bg-white border border-slate-200 rounded-xl px-6 py-4 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-sm"
                                 />
                                 <input
                                     required
@@ -134,7 +134,7 @@ const Contact = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="Corporate Email"
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-blue-400/50 transition-colors"
+                                    className="w-full bg-white border border-slate-200 rounded-xl px-6 py-4 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-sm"
                                 />
                             </div>
                             <textarea
@@ -144,7 +144,7 @@ const Contact = () => {
                                 onChange={handleChange}
                                 rows={4}
                                 placeholder="Tell us about your strategic objectives..."
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:outline-none focus:border-blue-400/50 transition-colors"
+                                className="w-full bg-white border border-slate-200 rounded-xl px-6 py-4 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-sm"
                             ></textarea>
 
                             {error && (
@@ -155,11 +155,11 @@ const Contact = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className={`w-full py-4 bg-white text-black font-bold rounded-xl transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-50'}`}
+                                    className={`w-full py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-xl transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 shadow-sm shadow-blue-500/20 hover:shadow-blue-500/40 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:opacity-90'}`}
                                 >
                                     {isSubmitting ? (
                                         <>
-                                            <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                                            <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                                             Processing...
                                         </>
                                     ) : (
@@ -172,21 +172,24 @@ const Contact = () => {
                     </>
                 ) : (
                     /* SUCCESS STATE */
-                    <div className="py-12 px-8 rounded-3xl bg-white/[0.02] border border-blue-400/20 backdrop-blur-xl animate-fade-in">
-                        <div className="flex justify-center mb-6 text-blue-400">
+                    <div className="py-12 px-8 rounded-3xl bg-white border border-blue-100 shadow-xl shadow-blue-900/5 backdrop-blur-xl animate-fade-in relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-white/50 pointer-events-none" />
+                        <div className="relative z-10 flex justify-center mb-6 text-blue-600">
                             <CheckCircle size={64} weight="thin" />
                         </div>
-                        <h2 className="text-3xl font-semibold text-white mb-4">Briefing Received</h2>
-                        <p className="text-white/50 mb-8 max-w-md mx-auto">
+                        <h2 className="relative z-10 text-3xl font-bold text-slate-900 mb-4">Briefing Received</h2>
+                        <p className="relative z-10 text-slate-500 mb-8 max-w-md mx-auto">
                             Your inquiry has been logged. A senior partner is reviewing your objectives and will contact you shortly to schedule a technical discovery session.
                         </p>
                         <button
                             onClick={() => setIsSubmitted(false)}
-                            className="text-sm text-blue-400 hover:text-blue-300 underline underline-offset-4 mb-12"
+                            className="relative z-10 text-sm font-semibold text-blue-600 hover:text-blue-700 underline underline-offset-4 mb-12"
                         >
                             Send another message
                         </button>
-                        <ContactInfo />
+                        <div className="relative z-10">
+                            <ContactInfo />
+                        </div>
                     </div>
                 )}
             </div>

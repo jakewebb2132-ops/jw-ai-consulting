@@ -28,9 +28,9 @@ const ServicePage = () => {
 
     if (!content) {
         return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-[#050505] text-white">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 text-slate-900">
                 <h1 className="text-4xl font-bold mb-4">Service Not Found</h1>
-                <Link to="/" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                <Link to="/" className="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2 transition-colors">
                     <ArrowLeft /> Return Home
                 </Link>
             </div>
@@ -38,7 +38,7 @@ const ServicePage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#050505] pt-32 pb-24 px-6 text-white text-center">
+        <div className="min-h-screen bg-slate-50 pt-32 pb-24 px-6 text-slate-900 text-center">
             {/* SEO Meta Tags dynamically inserted into the document head for Web Crawlers */}
             <SEO
                 title={content.title}
@@ -46,31 +46,31 @@ const ServicePage = () => {
             />
 
             <div className="max-w-4xl mx-auto">
-                <Link to="/" className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-12">
+                <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 font-medium transition-colors mb-12">
                     <ArrowLeft size={20} />
                     <span>Back to Home</span>
                 </Link>
 
                 <ScrollReveal>
-                    <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-blue-400 font-medium text-sm mb-6 uppercase tracking-widest">
+                    <div className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-bold text-sm mb-6 uppercase tracking-widest shadow-sm">
                         Service Offering
                     </div>
                 </ScrollReveal>
 
                 <ScrollReveal delay={100}>
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 bg-gradient-to-r from-white to-white/50 bg-clip-text text-transparent">
+                    <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
                         {content.title}
                     </h1>
                 </ScrollReveal>
 
                 <ScrollReveal delay={200}>
-                    <p className="text-2xl text-white/70 font-light mb-12">
+                    <p className="text-2xl text-slate-600 font-light mb-12">
                         {content.desc}
                     </p>
                 </ScrollReveal>
 
                 <ScrollReveal delay={300}>
-                    <div className="p-10 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-xl text-left leading-relaxed text-lg text-white/60 shadow-2xl">
+                    <div className="p-10 rounded-3xl bg-white border border-slate-200 text-left leading-relaxed text-lg text-slate-600 shadow-xl shadow-blue-900/5">
                         <p>{content.details}</p>
                     </div>
                 </ScrollReveal>

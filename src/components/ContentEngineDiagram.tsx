@@ -10,24 +10,24 @@ import { motion } from 'framer-motion';
 
 const ContentEngineDiagram = () => {
     return (
-        <div className="w-full mt-12 bg-[#020617] text-slate-50 font-sans rounded-[40px] border border-white/10 overflow-hidden relative p-6 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <div className="w-full mt-12 bg-white text-slate-900 font-sans rounded-[40px] border border-slate-200 overflow-hidden relative p-6 md:p-12 shadow-2xl shadow-blue-900/5">
             {/* Header */}
             <div className="mb-12 text-center md:text-left">
-                <h3 className="text-3xl md:text-5xl font-black tracking-tighter italic mb-4 text-white">
-                    AGENTIC CONTENT <span className="text-blue-500">GEM</span> ARCHITECTURE
+                <h3 className="text-3xl md:text-5xl font-black tracking-tighter italic mb-4 text-slate-900">
+                    AGENTIC CONTENT <span className="text-blue-600">GEM</span> ARCHITECTURE
                 </h3>
-                <p className="text-slate-400 text-lg max-w-2xl">
-                    A fully autonomous content OS designed to scale <span className="text-white font-semibold">1 Idea to 14 Platforms</span> while maintaining high-fidelity brand voice.
+                <p className="text-slate-600 text-lg max-w-2xl">
+                    A fully autonomous content OS designed to scale <span className="text-slate-900 font-bold">1 Idea to 14 Platforms</span> while maintaining high-fidelity brand voice.
                 </p>
             </div>
 
             {/* Main Schematic */}
-            <div className="relative w-full h-auto min-h-[600px] bg-slate-800/30 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 mb-10 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.4)]">
+            <div className="relative w-full h-auto min-h-[600px] bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-12 mb-10 overflow-hidden shadow-inner">
 
                 {/* Background Grid */}
                 <div
-                    className="absolute inset-0 opacity-10 pointer-events-none"
-                    style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+                    className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                    style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '40px 40px' }}
                 />
 
                 {/* SVG Connections Layer */}
@@ -49,44 +49,44 @@ const ContentEngineDiagram = () => {
                         {/* Raw Idea */}
                         <motion.div
                             whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }}
-                            className="w-64 p-6 rounded-2xl text-center border border-amber-500/20 bg-slate-800/40 backdrop-blur-md transition-colors duration-300 relative z-20"
+                            className="w-64 p-6 rounded-2xl text-center border border-amber-200 bg-white shadow-sm transition-colors duration-300 relative z-20"
                         >
-                            <div className="w-16 h-16 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-amber-500/30">
-                                <Lightbulb weight="fill" className="text-amber-400 text-2xl" />
+                            <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-amber-100">
+                                <Lightbulb weight="fill" className="text-amber-500 text-2xl" />
                             </div>
-                            <h4 className="font-bold text-lg mb-1 text-white">Raw Idea</h4>
-                            <p className="text-xs text-slate-400">Voice memos, notes, or research intake.</p>
+                            <h4 className="font-bold text-lg mb-1 text-slate-900">Raw Idea</h4>
+                            <p className="text-xs text-slate-500">Voice memos, notes, or research intake.</p>
                         </motion.div>
 
-                        <div className="hidden md:block text-slate-600 relative z-20">
+                        <div className="hidden md:block text-slate-300 relative z-20">
                             <ArrowRight weight="bold" className="text-2xl animate-pulse" />
                         </div>
 
                         {/* Synthesis Brain */}
                         <motion.div
                             whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }}
-                            className="w-80 p-6 rounded-2xl text-center border border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.2)] bg-slate-800/40 backdrop-blur-md relative z-20"
+                            className="w-80 p-6 rounded-2xl text-center border border-blue-200 shadow-lg shadow-blue-500/10 bg-white relative z-20"
                         >
                             <div className="absolute inset-0 rounded-2xl border-2 border-blue-500/0 animate-[pulse-ring_2s_cubic-bezier(0.455,0.03,0.515,0.955)_infinite] pointer-events-none" />
-                            <div className="w-20 h-20 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-500/40 relative z-10">
-                                <Cpu weight="fill" className="text-blue-400 text-4xl" />
+                            <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-100 relative z-10">
+                                <Cpu weight="fill" className="text-blue-600 text-4xl" />
                             </div>
-                            <h4 className="font-bold text-xl mb-1 text-blue-400 relative z-10">Synthesis Brain</h4>
-                            <p className="text-sm text-slate-300 relative z-10">Generates Master Content DNA: hooks, tone, and logic.</p>
+                            <h4 className="font-bold text-xl mb-1 text-blue-700 relative z-10">Synthesis Brain</h4>
+                            <p className="text-sm text-slate-600 relative z-10">Generates Master Content DNA: hooks, tone, and logic.</p>
                         </motion.div>
                     </div>
 
                     {/* MIDDLE: SPECIALIST PODS */}
                     <motion.div
                         whileHover={{ borderColor: 'rgba(59, 130, 246, 0.6)' }}
-                        className="rounded-2xl p-6 md:p-8 border border-slate-700/50 bg-slate-800/40 backdrop-blur-md transition-colors duration-300 relative z-20"
+                        className="rounded-2xl p-6 md:p-8 border border-slate-200 bg-white shadow-sm transition-colors duration-300 relative z-20"
                     >
                         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
-                            <h4 className="font-bold text-emerald-400 flex items-center gap-2 m-0 text-lg">
+                            <h4 className="font-bold text-emerald-600 flex items-center gap-2 m-0 text-lg">
                                 <UsersThree weight="fill" className="text-xl" />
                                 SPECIALIST PODS (14 AGENTS)
                             </h4>
-                            <span className="text-[10px] uppercase tracking-widest text-slate-400 py-1.5 px-3 rounded-full border border-slate-700 bg-slate-800">Parallel Processing Active</span>
+                            <span className="text-[10px] uppercase tracking-widest text-emerald-700 font-bold py-1.5 px-3 rounded-full border border-emerald-200 bg-emerald-50">Parallel Processing Active</span>
                         </div>
                         <div className="grid grid-cols-4 md:grid-cols-7 gap-3">
                             <PlatformCard icon={<LinkedinLogo weight="fill" />} name="LINKEDIN" />
@@ -109,36 +109,36 @@ const ContentEngineDiagram = () => {
                     {/* BOTTOM ROW: AUDIT & HITL */}
                     <div className="flex flex-col md:flex-row items-stretch justify-center gap-6 relative z-20">
                         {/* Audit Agent */}
-                        <motion.div whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }} className="flex-1 p-6 rounded-2xl border border-indigo-500/20 bg-slate-800/40 backdrop-blur-md">
+                        <motion.div whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }} className="flex-1 p-6 rounded-2xl border border-sky-200 bg-sky-50/50 shadow-sm">
                             <div className="flex items-center gap-4 mb-3">
-                                <div className="w-12 h-12 bg-indigo-500/10 rounded-lg flex items-center justify-center border border-indigo-500/30">
-                                    <ShieldCheck weight="fill" className="text-indigo-400 text-2xl" />
+                                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-sky-100">
+                                    <ShieldCheck weight="fill" className="text-sky-600 text-2xl" />
                                 </div>
-                                <h4 className="font-bold text-indigo-100 italic m-0">Audit Agent</h4>
+                                <h4 className="font-bold text-sky-900 italic m-0">Audit Agent</h4>
                             </div>
-                            <p className="text-xs text-slate-400 m-0">Voice validation against Brand KB. Hallucination filter active.</p>
+                            <p className="text-xs text-sky-700/70 m-0">Voice validation against Brand KB. Hallucination filter active.</p>
                         </motion.div>
 
                         {/* Design Wrap */}
-                        <motion.div whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }} className="flex-1 p-6 rounded-2xl border border-purple-500/20 bg-slate-800/40 backdrop-blur-md">
+                        <motion.div whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }} className="flex-1 p-6 rounded-2xl border border-cyan-200 bg-cyan-50/50 shadow-sm">
                             <div className="flex items-center gap-4 mb-3">
-                                <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center border border-purple-500/30">
-                                    <Palette weight="fill" className="text-purple-400 text-2xl" />
+                                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-cyan-100">
+                                    <Palette weight="fill" className="text-cyan-600 text-2xl" />
                                 </div>
-                                <h4 className="font-bold text-purple-100 italic m-0">Design Wrap</h4>
+                                <h4 className="font-bold text-cyan-900 italic m-0">Design Wrap</h4>
                             </div>
-                            <p className="text-xs text-slate-400 m-0">Automated branding & visual formatting for all 14 channels.</p>
+                            <p className="text-xs text-cyan-700/70 m-0">Automated branding & visual formatting for all 14 channels.</p>
                         </motion.div>
 
                         {/* HITL Approval */}
-                        <motion.div whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }} className="flex-1 p-6 rounded-2xl border border-emerald-500/40 bg-emerald-500/5 backdrop-blur-md shadow-[0_0_30px_rgba(34,197,94,0.1)]">
+                        <motion.div whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.6)' }} className="flex-1 p-6 rounded-2xl border border-emerald-300 bg-emerald-50 shadow-sm">
                             <div className="flex items-center gap-4 mb-3">
-                                <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center border border-emerald-500/40">
-                                    <User weight="fill" className="text-emerald-400 text-2xl" />
+                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border border-emerald-200 shadow-sm">
+                                    <User weight="fill" className="text-emerald-600 text-2xl" />
                                 </div>
-                                <h4 className="font-bold text-emerald-100 italic m-0 tracking-tighter uppercase">HITL Approval</h4>
+                                <h4 className="font-bold text-emerald-800 italic m-0 tracking-tighter uppercase">HITL Approval</h4>
                             </div>
-                            <p className="text-xs text-slate-300 m-0">Human-In-The-Loop final review. One-click distribution.</p>
+                            <p className="text-xs text-emerald-700/70 m-0">Human-In-The-Loop final review. One-click distribution.</p>
                         </motion.div>
                     </div>
                 </div>
@@ -146,21 +146,21 @@ const ContentEngineDiagram = () => {
 
             {/* Metric Footer */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-4 rounded-xl text-center bg-slate-800/40 border border-white/10">
+                <div className="p-4 rounded-xl text-center bg-white border border-slate-200 shadow-sm">
                     <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Scale Ratio</div>
-                    <div className="text-2xl font-black text-white italic">1 : 14</div>
+                    <div className="text-2xl font-black text-slate-900 italic">1 : 14</div>
                 </div>
-                <div className="p-4 rounded-xl text-center bg-slate-800/40 border border-emerald-500/30 shadow-[0_0_20px_rgba(34,197,94,0.15)] glow-green">
-                    <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Status</div>
-                    <div className="text-2xl font-black text-emerald-400 italic">ACTIVE</div>
+                <div className="p-4 rounded-xl text-center bg-emerald-50 border border-emerald-200 shadow-sm">
+                    <div className="text-[10px] text-emerald-700 uppercase tracking-widest font-bold mb-1">Status</div>
+                    <div className="text-2xl font-black text-emerald-600 italic">ACTIVE</div>
                 </div>
-                <div className="p-4 rounded-xl text-center bg-slate-800/40 border border-white/10">
+                <div className="p-4 rounded-xl text-center bg-white border border-slate-200 shadow-sm">
                     <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Brand Accuracy</div>
-                    <div className="text-2xl font-black text-white italic">100%</div>
+                    <div className="text-2xl font-black text-slate-900 italic">100%</div>
                 </div>
-                <div className="p-4 rounded-xl text-center bg-slate-800/40 border border-white/10">
+                <div className="p-4 rounded-xl text-center bg-white border border-slate-200 shadow-sm">
                     <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Human Effort</div>
-                    <div className="text-2xl font-black text-blue-400 italic">-95%</div>
+                    <div className="text-2xl font-black text-blue-600 italic">-95%</div>
                 </div>
             </div>
 
@@ -179,9 +179,9 @@ const ContentEngineDiagram = () => {
 };
 
 const PlatformCard = ({ icon, name }: { icon: React.ReactNode; name: string }) => (
-    <div className="p-3 bg-slate-900/60 rounded-lg text-center border border-slate-700 hover:border-emerald-500/60 transition-all flex flex-col items-center justify-center text-slate-400 hover:text-emerald-400 group h-20 shadow-inner">
+    <div className="p-3 bg-slate-50 rounded-lg text-center border border-slate-200 hover:bg-emerald-50 hover:border-emerald-300 transition-all flex flex-col items-center justify-center text-slate-500 hover:text-emerald-600 group h-20 shadow-sm">
         <div className="text-2xl mb-1 group-hover:scale-110 transition-transform">{icon}</div>
-        <div className="text-[9px] font-bold text-slate-500 group-hover:text-emerald-300">{name}</div>
+        <div className="text-[9px] font-bold text-slate-400 group-hover:text-emerald-600">{name}</div>
     </div>
 );
 

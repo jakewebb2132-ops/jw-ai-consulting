@@ -63,7 +63,7 @@ function App() {
     return (
         <Router>
             <ScrollToTop />
-            <div className="flex min-h-screen flex-col bg-[#050505] text-white selection:bg-blue-400/30 font-sans">
+            <div className="flex min-h-screen flex-col bg-[#f0f4f8] text-[#0f172a] selection:bg-blue-400/30 font-sans">
                 <ScrollProgress />
                 <Cursor />
                 <Navbar />
@@ -80,12 +80,12 @@ function App() {
                     </Routes>
                 </main>
 
-                <footer className="border-t border-white/10 bg-[#0a0a0b] px-6 py-8">
-                    <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 text-zinc-400 md:flex-row">
+                <footer className="border-t border-slate-200 bg-white px-6 py-8">
+                    <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 text-slate-500 md:flex-row">
                         <p>&copy; 2026 JW AI Consulting. All rights reserved.</p>
                         <div className="flex gap-4">
-                            <a href="#" className="hover:text-white transition-colors"><GithubLogo size={24} /></a>
-                            <a href="#" className="hover:text-white transition-colors"><TwitterLogo size={24} /></a>
+                            <a href="#" className="hover:text-blue-600 transition-colors"><GithubLogo size={24} /></a>
+                            <a href="#" className="hover:text-blue-600 transition-colors"><TwitterLogo size={24} /></a>
                         </div>
                     </div>
                 </footer>

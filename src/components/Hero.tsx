@@ -15,7 +15,7 @@ const Hero = () => {
     const splineOpacity = useTransform(scrollY, [0, 600], [0.9, 0.2]);
 
     return (
-        <section className="relative min-h-[90vh] flex items-center pt-28 pb-20 overflow-hidden bg-[#f8fafc] z-0">
+        <section className="relative min-h-[90vh] flex items-center pt-28 pb-20 overflow-hidden bg-[#f0f4f8] z-0">
             {/* Base Background Decorative Elements (Fallback) */}
             <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-blue-300/30 blur-[120px] rounded-full pointer-events-none animate-pulse -z-[5]" />
             <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-sky-300/30 blur-[100px] rounded-full pointer-events-none -z-[5]" />
@@ -23,7 +23,7 @@ const Hero = () => {
 
 
             {/* Premium Gradient Overlays for Readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f8fafc]/50 to-[#f8fafc] z-0 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f0f4f8]/50 to-[#f0f4f8] z-0 pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 text-center z-10 w-full">
                 <ScrollReveal>
@@ -39,12 +39,14 @@ const Hero = () => {
                         {/* Spline Scene as a seamless background element with Scroll Scale */}
                         <motion.div
                             style={{ scale: splineScale, opacity: splineOpacity }}
-                            className="absolute inset-0 z-0 transition-opacity duration-1000"
+                            className="absolute inset-0 z-0 transition-opacity duration-1000 mix-blend-multiply opacity-80"
                         >
-                            <SplineScene
-                                scene="https://prod.spline.design/XVKGVA47YfyrZy5H/scene.splinecode"
-                                className="w-full h-full"
-                            />
+                            <div className="w-full h-full [filter:invert(1)_hue-rotate(180deg)_saturate(1.5)]">
+                                <SplineScene
+                                    scene="https://prod.spline.design/XVKGVA47YfyrZy5H/scene.splinecode"
+                                    className="w-full h-full"
+                                />
+                            </div>
                         </motion.div>
 
                         {/* Custom Text Overlay - Centered and Integrated to perfectly match Spline typography */}
@@ -53,13 +55,13 @@ const Hero = () => {
                             className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 pointer-events-none"
                         >
                             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-6 -mt-10">
-                                <Link to="/services/startups" className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+                                <Link to="/services/startups" className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(37,99,235,0.2)]">
                                     Startups.
                                 </Link>
-                                <Link to="/services/smb" className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight text-slate-800 hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(15,23,42,0.2)]">
+                                <Link to="/services/smb" className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight bg-gradient-to-r from-blue-500 to-sky-600 bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(14,165,233,0.2)]">
                                     SMB.
                                 </Link>
-                                <Link to="/services/enterprise" className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">
+                                <Link to="/services/enterprise" className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer pointer-events-auto hover:drop-shadow-[0_0_15px_rgba(56,189,248,0.2)]">
                                     Enterprise.
                                 </Link>
                             </div>
@@ -70,7 +72,7 @@ const Hero = () => {
                         </motion.div>
 
                         {/* Subtle bottom fade to blend */}
-                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f8fafc] to-transparent pointer-events-none z-20" />
+                        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f0f4f8] to-transparent pointer-events-none z-20" />
                     </div>
                 </ScrollReveal>
 
@@ -79,7 +81,7 @@ const Hero = () => {
                         <MagneticHover>
                             <button
                                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 active:scale-95"
+                                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-full hover:from-blue-600 hover:to-blue-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 active:scale-95"
                             >
                                 Book a Discovery Call
                                 <ArrowRight size={20} weight="bold" className="group-hover:translate-x-1 transition-transform" />
