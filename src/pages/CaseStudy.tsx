@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Clock, ChartBar, Rocket, ArrowUpRight } from "phosphor-react";
 import ScrollReveal from '../components/ScrollReveal';
 import ContentEngineDiagram from '../components/ContentEngineDiagram';
+import AgentBrainDiagram from '../components/AgentBrainDiagram';
 
 interface CaseStudyMetric {
     label: string;
@@ -37,7 +38,8 @@ const caseStudyData: Record<string, CaseStudyInfo> = {
         externalLink: {
             label: "Full Project Details from the Engineer",
             url: "https://pub.spillwave.com/agent-brain-agentic-skills-for-enterprise-context-engineering-b5f61d8f57f0"
-        }
+        },
+        diagram: <AgentBrainDiagram />
     },
     "dusted-pixels": {
         client: "Dusted Pixels",
