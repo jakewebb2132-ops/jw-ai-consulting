@@ -109,9 +109,9 @@ const CaseStudy = () => {
             {/* Content */}
             <main className="max-w-7xl mx-auto px-6 py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                    {/* Left Column: Metrics */}
+                    {/* Left Column: Metrics (Hidden for Wall Street Bank to make room for diagram) */}
                     <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-32 h-fit">
-                        {study.metrics.map((metric, idx) => (
+                        {id !== 'wall-street-bank' && study.metrics.map((metric, idx) => (
                             <ScrollReveal key={idx} delay={idx * 100}>
                                 <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
                                     <div className="flex items-center gap-4 mb-4">
@@ -129,7 +129,7 @@ const CaseStudy = () => {
                     </div>
 
                     {/* Right Column: Case Story */}
-                    <div className="lg:col-span-8 space-y-16">
+                    <div className={`${id === 'wall-street-bank' ? "lg:col-span-12" : "lg:col-span-8"} space-y-16`}>
                         <ScrollReveal>
                             <section>
                                 <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
