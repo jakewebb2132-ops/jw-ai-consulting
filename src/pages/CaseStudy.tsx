@@ -37,8 +37,7 @@ const caseStudyData: Record<string, CaseStudyInfo> = {
         externalLink: {
             label: "Full Project Details from the Engineer",
             url: "https://pub.spillwave.com/agent-brain-agentic-skills-for-enterprise-context-engineering-b5f61d8f57f0"
-        },
-        image: "/agent-brain.png"
+        }
     },
     "dusted-pixels": {
         client: "Dusted Pixels",
