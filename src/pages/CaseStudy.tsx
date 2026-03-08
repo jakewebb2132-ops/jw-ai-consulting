@@ -49,6 +49,17 @@ const caseStudyData: Record<string, CaseStudyInfo> = {
             { label: "Brand Consistency", value: "100%", icon: <CheckCircle weight="thin" /> }
         ],
         diagram: <ContentEngineDiagram />
+    },
+    "hollywood-screenwriter": {
+        client: "Hollywood Screenwriter",
+        title: "Voice-First AI Ideation Partner",
+        overview: "A prolific Hollywood screenwriter needed a sounding board that functioned like a creative partner, not a generic chatbot. The requirement was a system that understood their specific tone, pacing, and thematic instincts.",
+        solution: "We engineered a voice-first mobile experience powered by a fine-tuned Claude Haiku model. The system was trained entirely on the writer's past scripts and treatments, allowing them to brainstorm hands-free while driving or walking, with the AI maintaining their authentic creative voice.",
+        metrics: [
+            { label: "Ideation Speed", value: "3x", icon: <Rocket /> },
+            { label: "Voice Accuracy", value: "98%", icon: <CheckCircle weight="thin" /> },
+            { label: "Active Projects", value: "3+", icon: <ChartBar /> }
+        ]
     }
 };
 
