@@ -20,6 +20,7 @@ interface CaseStudyInfo {
         url: string;
     };
     diagram?: React.ReactNode;
+    image?: string;
 }
 
 const caseStudyData: Record<string, CaseStudyInfo> = {
@@ -36,7 +37,8 @@ const caseStudyData: Record<string, CaseStudyInfo> = {
         externalLink: {
             label: "Full Project Details from the Engineer",
             url: "https://pub.spillwave.com/agent-brain-agentic-skills-for-enterprise-context-engineering-b5f61d8f57f0"
-        }
+        },
+        image: "/agent-brain.png"
     },
     "dusted-pixels": {
         client: "Dusted Pixels",
@@ -148,6 +150,12 @@ const CaseStudy = () => {
                                 <p className="text-lg text-white/70 leading-relaxed lg:pr-12">
                                     {study.solution}
                                 </p>
+
+                                {study.image && (
+                                    <div className="mt-16 mb-8 w-full rounded-3xl border border-white/10 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)] bg-white/5">
+                                        <img src={study.image} alt="Architecture Schematic" className="w-full h-auto" />
+                                    </div>
+                                )}
 
                                 {study.diagram && (
                                     <div className="mt-16 mb-8 w-full max-w-[100vw] overflow-x-hidden">
