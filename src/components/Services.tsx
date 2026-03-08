@@ -19,7 +19,7 @@ const services = [
     },
     {
         title: "Enterprise Data Synthesis",
-        description: "Architecting the bridge between fragmented data and actionable intelligence through advanced vector databases.",
+        description: "Building the bridge between fragmented data and actionable intelligence through custom skills and a bespoke \"Agent Brain\" data architecture.",
         icon: <Database size={32} weight="thin" />,
     },
 ];

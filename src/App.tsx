@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
 import CaseStudy from './pages/CaseStudy';
 import { GithubLogo, TwitterLogo } from 'phosphor-react';
-import Cursor from './components/Cursor';
+
 import LazySection from './components/LazySection';
 
 // Lazy load below-the-fold sections and subpages
@@ -65,7 +65,7 @@ function App() {
             <ScrollToTop />
             <div className="flex min-h-screen flex-col bg-[#f0f4f8] text-[#0f172a] selection:bg-blue-400/30 font-sans">
                 <ScrollProgress />
-                <Cursor />
+
                 <Navbar />
 
                 <main className="flex-1">
