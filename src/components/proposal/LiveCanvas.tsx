@@ -110,9 +110,29 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
               )}
             </>
           ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-400 p-6 text-center">
+            <div 
+              className="absolute inset-0 flex flex-col items-center justify-center text-zinc-400 p-6 text-center focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded"
+              tabIndex={isLocked ? -1 : 0}
+              onPaste={(e) => {
+                if (isLocked) return;
+                const items = e.clipboardData.items;
+                for (let i = 0; i < items.length; i++) {
+                  if (items[i].type.indexOf('image') !== -1) {
+                    const file = items[i].getAsFile();
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        updateBlock(block.id, { content: reader.result as string });
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                    break;
+                  }
+                }
+              }}
+            >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-3 opacity-50"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-              <span className="font-medium text-sm text-zinc-500 mb-1">Click to upload an image</span>
+              <span className="font-medium text-sm text-zinc-500 mb-1">Click to upload or Ctrl+V to paste</span>
               <span className="text-xs text-zinc-400">JPG, PNG, GIF (Max 5MB)</span>
               {!isLocked && (
                 <input 

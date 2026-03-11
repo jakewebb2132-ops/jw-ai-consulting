@@ -261,9 +261,29 @@ const CommandCenter: React.FC = () => {
                     placeholder="https://example.com/image.png"
                     disabled={isLocked}
                   />
-                  <div className="relative w-full text-sm border border-dashed border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center text-center hover:bg-zinc-50 transition-colors">
-                    <span className="text-zinc-500 font-medium">Or click to upload local file</span>
-                    <span className="text-[10px] text-zinc-400 mt-1">Accepts JPG, PNG, GIF, WebP</span>
+                  <div 
+                    className="relative w-full text-sm border border-dashed border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center text-center hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                    tabIndex={isLocked ? -1 : 0}
+                    onPaste={(e) => {
+                      if (isLocked) return;
+                      const items = e.clipboardData.items;
+                      for (let i = 0; i < items.length; i++) {
+                        if (items[i].type.indexOf('image') !== -1) {
+                          const file = items[i].getAsFile();
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              updateBlock(activeBlock.id, { content: reader.result as string });
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                          break;
+                        }
+                      }
+                    }}
+                  >
+                    <span className="text-zinc-500 font-medium pb-1">Click to upload or Ctrl+V to paste</span>
+                    <span className="text-[10px] text-zinc-400">Accepts JPG, PNG, GIF, WebP</span>
                     {!isLocked && (
                       <input 
                         type="file" 
