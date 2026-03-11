@@ -70,8 +70,10 @@ const ProposalPrint: React.FC = () => {
                     ) : null}
                 </div>
               )}
-              {block.type === 'IMAGE_UPLOAD' && (
-                <div className="w-full h-64 bg-slate-100 rounded-md border border-slate-200 flex items-center justify-center text-slate-400 font-medium tracking-wide">Image Asset</div>
+              {block.type === 'IMAGE_UPLOAD' && block.content && (
+                <div className="w-full mb-6 print-break-avoid flex justify-center">
+                   <img src={block.content} className="w-full max-h-[800px] object-contain rounded-md border border-slate-200 shadow-sm" alt="Proposal Graphic" />
+                </div>
               )}
               {block.type === 'PRICING_TABLE' && (
                 <div className="w-full p-6 bg-slate-50 rounded-md border border-slate-200">

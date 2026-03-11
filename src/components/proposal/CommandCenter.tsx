@@ -251,8 +251,37 @@ const CommandCenter: React.FC = () => {
               )}
 
               {activeBlock.type === 'IMAGE_UPLOAD' && (
-                <div className="text-xs text-zinc-500 italic p-2 bg-zinc-50 rounded border border-zinc-100">
-                  Image upload pipeline would integrate here.
+                <div className="flex flex-col gap-3">
+                  <label className="text-xs font-medium text-zinc-600">Image Source (URL or File)</label>
+                  <input 
+                    type="url"
+                    className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                    value={activeBlock.content.startsWith('data:') ? '' : activeBlock.content}
+                    onChange={(e) => updateBlock(activeBlock.id, { content: e.target.value })}
+                    placeholder="https://example.com/image.png"
+                    disabled={isLocked}
+                  />
+                  <div className="relative w-full text-sm border border-dashed border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center text-center hover:bg-zinc-50 transition-colors">
+                    <span className="text-zinc-500 font-medium">Or click to upload local file</span>
+                    <span className="text-[10px] text-zinc-400 mt-1">Accepts JPG, PNG, GIF, WebP</span>
+                    {!isLocked && (
+                      <input 
+                        type="file" 
+                        accept="image/png, image/jpeg, image/gif, image/webp"
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              updateBlock(activeBlock.id, { content: reader.result as string });
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
               )}
 

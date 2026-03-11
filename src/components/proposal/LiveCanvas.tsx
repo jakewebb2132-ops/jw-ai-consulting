@@ -91,7 +91,49 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
         </div>
       )}
       {block.type === 'IMAGE_UPLOAD' && (
-        <div className="w-full h-64 bg-zinc-100 rounded border border-zinc-200 flex items-center justify-center text-zinc-500">Image Placeholder</div>
+        <div 
+          className="w-full relative rounded border border-zinc-300 bg-zinc-50 overflow-hidden resize-y hover:border-blue-300 transition-colors flex items-center justify-center" 
+          style={{ height: block.content ? 'auto' : '300px', minHeight: '150px' }}
+        >
+          {block.content ? (
+            <>
+              <img 
+                src={block.content} 
+                alt="Uploaded block" 
+                className="w-full h-full object-contain pointer-events-none"
+              />
+              {/* Corner drag indicator */}
+              {!isLocked && (
+                <div className="absolute bottom-0 right-0 w-4 h-4 cursor-ns-resize pointer-events-none z-20 flex items-center justify-center opacity-50 bg-white/50 rounded-tl-md backdrop-blur-sm">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 15L15 21M21 8L8 21"/></svg>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-400 p-6 text-center">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-3 opacity-50"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <span className="font-medium text-sm text-zinc-500 mb-1">Click to upload an image</span>
+              <span className="text-xs text-zinc-400">JPG, PNG, GIF (Max 5MB)</span>
+              {!isLocked && (
+                <input 
+                  type="file" 
+                  accept="image/png, image/jpeg, image/gif, image/webp"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        updateBlock(block.id, { content: reader.result as string });
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+              )}
+            </div>
+          )}
+        </div>
       )}
       {block.type === 'PRICING_TABLE' && (
         <div className="w-full rounded-xl border border-zinc-200 overflow-hidden bg-white shadow-sm transition-all hover:shadow-md">

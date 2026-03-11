@@ -156,6 +156,12 @@ const ProposalPublic: React.FC = () => {
               />
             )}
 
+            {block.type === 'IMAGE_UPLOAD' && block.content && (
+              <div className="w-full relative rounded-xl border border-black/5 bg-zinc-50/50 overflow-hidden shadow-sm flex items-center justify-center">
+                <img src={block.content} alt="Document Graphic" className="w-full h-auto object-contain" />
+              </div>
+            )}
+
             {block.type === 'CANVA_EMBED' && (
               <div className="w-full relative rounded-xl overflow-hidden shadow-lg border border-black/10" style={{ paddingTop: '56.25%' }}>
                 {block.content ? (
