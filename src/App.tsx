@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
@@ -55,9 +55,17 @@ const HomePage = () => (
     </>
 );
 
-const AppLayout = () => (
-    <div className="flex min-h-screen flex-col bg-[#f0f4f8] text-[#0f172a] selection:bg-blue-400/30 font-sans">
-        <ScrollProgress />
+const AppLayout = () => {
+    // If the user visits the proposal subdomain but didn't hit a specific secure route,
+    // automatically bounce them to the admin dashboard instead of rendering the consumer marketing site.
+    const isProposalDomain = window.location.hostname.includes('proposal');
+    if (isProposalDomain) {
+        return <Navigate to="/admin/dashboard" replace />;
+    }
+
+    return (
+        <div className="flex min-h-screen flex-col bg-[#f0f4f8] text-[#0f172a] selection:bg-blue-400/30 font-sans">
+            <ScrollProgress />
         <Navbar />
         <main className="flex-1">
             <Routes>
@@ -79,8 +87,9 @@ const AppLayout = () => (
                 </div>
             </div>
         </footer>
-    </div>
-);
+        </div>
+    );
+};
 
 function App() {
     useEffect(() => {
