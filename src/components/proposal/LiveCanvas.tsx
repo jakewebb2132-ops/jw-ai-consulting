@@ -9,8 +9,6 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
   const updateBlock = useProposalStore(state => state.updateBlock);
   
   const {
-    attributes,
-    listeners,
     setNodeRef,
     transform,
     transition,
@@ -28,10 +26,8 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
     <div 
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       onClick={onSelect}
-      className={`group relative outline-none transition-colors border p-8 m-4 rounded-lg ${isLocked ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'} ${
+      className={`group relative outline-none transition-colors border p-8 m-4 rounded-lg ${isLocked ? 'cursor-default' : 'cursor-text'} ${
         isDragging ? 'border-indigo-400 bg-indigo-50/10' : isActive ? 'border-blue-400 bg-blue-50/50 shadow-sm' : `border-transparent ${!isLocked && 'hover:border-blue-200 hover:bg-blue-50/30'}`
       }`}
     >
