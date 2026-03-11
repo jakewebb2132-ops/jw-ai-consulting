@@ -3,6 +3,7 @@ import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-
 import { CSS } from '@dnd-kit/utilities';
 import { ContentBlock } from '../../types/proposal';
 import { jwTheme } from '../../theme/jwTheme';
+import RichTextEditor from './RichTextEditor';
 
 const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: ContentBlock, isActive: boolean, onSelect: () => void, isLocked?: boolean }) => {
   const proposal = useProposalStore(state => state.proposal);
@@ -32,60 +33,31 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
       }`}
     >
       {block.type === 'HEADING' && (
-        <textarea 
-          ref={(el) => {
-            if (el) {
-              // Auto-resize on initial mount to show full content
-              el.style.height = 'auto';
-              el.style.height = el.scrollHeight + 'px';
-            }
-          }}
-          className="text-3xl font-bold tracking-tight w-full bg-transparent border-none outline-none resize-y overflow-hidden block pb-1 placeholder:text-zinc-300"
-          style={{ color: block.designSettings?.theme === 'dark' ? jwTheme.colors.primary : jwTheme.colors.textHeading, minHeight: '1.2em' }}
-          value={block.content}
-          placeholder="Enter heading..."
-          onChange={(e) => {
-            e.target.style.height = 'auto';
-            e.target.style.height = e.target.scrollHeight + 'px';
-            updateBlock(block.id, { content: e.target.value });
-          }}
-          disabled={isLocked}
-          rows={1}
-          onFocus={(e) => {
-            e.target.style.height = 'auto';
-            e.target.style.height = e.target.scrollHeight + 'px';
-          }}
-        />
+        <div className="w-full pb-1">
+          <RichTextEditor 
+            content={block.content}
+            onChange={(html) => updateBlock(block.id, { content: html })}
+            isHeading={true}
+            disabled={isLocked}
+            theme={block.designSettings?.theme}
+            placeholder="Enter heading..."
+          />
+        </div>
       )}
       {block.type === 'TEXT' && (
-        <textarea 
-          ref={(el) => {
-            if (el) {
-              // Auto-resize on initial mount to show full content
-              el.style.height = 'auto';
-              el.style.height = el.scrollHeight + 'px';
-            }
-          }}
-          className="text-lg leading-relaxed whitespace-pre-wrap rounded-md p-4 w-full border border-transparent outline-none resize-y overflow-hidden block placeholder:text-zinc-300 focus:ring-1 focus:ring-blue-100 transition-shadow transition-colors hover:border-zinc-200"
-          style={{ 
-            color: jwTheme.colors.textBody,
-            backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}15` : 'transparent',
-            minHeight: '4em'
-          }}
-          value={block.content}
-          placeholder="Start typing your content..."
-          onChange={(e) => {
-            e.target.style.height = 'auto';
-            e.target.style.height = e.target.scrollHeight + 'px';
-            updateBlock(block.id, { content: e.target.value });
-          }}
-          disabled={isLocked}
-          rows={3}
-          onFocus={(e) => {
-            e.target.style.height = 'auto';
-            e.target.style.height = e.target.scrollHeight + 'px';
-          }}
-        />
+        <div 
+          className="w-full rounded-md p-4 transition-colors hover:bg-zinc-50/50"
+          style={{ backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}15` : 'transparent' }}
+        >
+          <RichTextEditor 
+            content={block.content}
+            onChange={(html) => updateBlock(block.id, { content: html })}
+            isHeading={false}
+            disabled={isLocked}
+            theme={block.designSettings?.theme}
+            placeholder="Start typing your content..."
+          />
+        </div>
       )}
       {block.type === 'CANVA_EMBED' && (
         <div 

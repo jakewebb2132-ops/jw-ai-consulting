@@ -4,6 +4,7 @@ import { ListDashes, TextT, Table, Image, PresentationChart, DotsSixVertical, Lo
 import { BlockType, ContentBlock } from '../../types/proposal';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import RichTextEditor from './RichTextEditor';
 
 const getIconForType = (type: BlockType) => {
   switch (type) {
@@ -221,13 +222,15 @@ const CommandCenter: React.FC = () => {
               {(activeBlock.type === 'HEADING' || activeBlock.type === 'TEXT') && (
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-zinc-600">Content</label>
-                  <textarea 
-                    className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none min-h-[100px]"
-                    value={activeBlock.content}
-                    onChange={(e) => updateBlock(activeBlock.id, { content: e.target.value })}
-                    placeholder="Enter text..."
-                    disabled={isLocked}
-                  />
+                  <div className={`w-full text-sm border border-zinc-300 rounded-md p-2 focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 bg-white min-h-[100px] overflow-y-auto ${isLocked ? 'opacity-50 cursor-not-allowed bg-zinc-50' : ''}`}>
+                    <RichTextEditor 
+                      content={activeBlock.content}
+                      onChange={(html) => updateBlock(activeBlock.id, { content: html })}
+                      isHeading={activeBlock.type === 'HEADING'}
+                      disabled={isLocked}
+                      placeholder="Enter text..."
+                    />
+                  </div>
                   <p className="text-[10px] text-zinc-500 mt-1">Hint: You can also click directly on the canvas to type!</p>
                 </div>
               )}

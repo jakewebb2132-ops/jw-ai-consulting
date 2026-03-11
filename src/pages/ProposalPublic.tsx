@@ -134,15 +134,14 @@ const ProposalPublic: React.FC = () => {
         {proposal.blocks.map((block) => (
           <div key={block.id} className="mb-8">
             {block.type === 'HEADING' && (
-              <h2 
-                className="text-4xl font-extrabold tracking-tight mb-4"
+              <div 
+                className="prose max-w-none text-4xl font-extrabold tracking-tight mb-4"
                 style={{ 
                   color: block.designSettings?.theme === 'dark' ? jwTheme.colors.primary : jwTheme.colors.textHeading,
                   fontFamily: jwTheme.typography.fontHeading
                 }}
-              >
-                {block.content}
-              </h2>
+                dangerouslySetInnerHTML={{ __html: block.content }}
+              />
             )}
 
             {block.type === 'TEXT' && (
@@ -153,12 +152,8 @@ const ProposalPublic: React.FC = () => {
                   backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}08` : 'transparent',
                   fontFamily: jwTheme.typography.fontBody
                 }}
-              >
-                {/* Parse basic markdown bolding for the text */}
-                <span dangerouslySetInnerHTML={{ 
-                  __html: block.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
-                }} />
-              </div>
+                dangerouslySetInnerHTML={{ __html: block.content }}
+              />
             )}
 
             {block.type === 'CANVA_EMBED' && (

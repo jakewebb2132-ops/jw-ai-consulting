@@ -46,10 +46,16 @@ const ProposalPrint: React.FC = () => {
               className="print-block-wrapper print-break-avoid w-full"
             >
               {block.type === 'HEADING' && (
-                <h2 className="text-3xl font-bold text-slate-900 tracking-tight pt-4 pb-2">{block.content}</h2>
+                <div 
+                  className="prose max-w-none text-3xl font-bold text-slate-900 tracking-tight pt-4 pb-2" 
+                  dangerouslySetInnerHTML={{ __html: block.content }} 
+                />
               )}
               {block.type === 'TEXT' && (
-                <p className="text-base text-slate-700 leading-relaxed whitespace-pre-wrap">{block.content}</p>
+                <div 
+                  className="prose max-w-none text-base text-slate-700 leading-relaxed whitespace-pre-wrap" 
+                  dangerouslySetInnerHTML={{ __html: block.content }} 
+                />
               )}
               {block.type === 'CANVA_EMBED' && (
                 <div className="w-full relative rounded-md overflow-hidden bg-slate-50 border border-slate-200" style={{ paddingTop: '56.25%' }}>

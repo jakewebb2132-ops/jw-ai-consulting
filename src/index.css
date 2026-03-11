@@ -19,6 +19,42 @@ body {
     @apply bg-[#f8fafc] text-[#0f172a] antialiased;
 }
 
+/* Tiptap Editor Global Styles */
+.tiptap-wrapper.is-empty::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #a1a1aa;
+    pointer-events: none;
+    height: 0;
+}
+
+.ProseMirror p {
+    margin: 0;
+    min-height: 1.5rem;
+}
+
+.ProseMirror ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.ProseMirror ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.ProseMirror strong {
+    font-weight: 700;
+}
+
+.ProseMirror em {
+    font-style: italic;
+}
+
 
 
 @keyframes fadeIn {
