@@ -31,10 +31,16 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
         isDragging ? 'border-indigo-400 bg-indigo-50/10' : isActive ? 'border-blue-400 bg-blue-50/50 shadow-sm' : `border-transparent ${!isLocked && 'hover:border-blue-200 hover:bg-blue-50/30'}`
       }`}
     >
-      {/* Block Render Logic */}
       {block.type === 'HEADING' && (
         <textarea 
-          className="text-3xl font-bold tracking-tight w-full bg-transparent border-none outline-none resize-none overflow-hidden block pb-1 placeholder:text-zinc-300"
+          ref={(el) => {
+            if (el) {
+              // Auto-resize on initial mount to show full content
+              el.style.height = 'auto';
+              el.style.height = el.scrollHeight + 'px';
+            }
+          }}
+          className="text-3xl font-bold tracking-tight w-full bg-transparent border-none outline-none resize-y overflow-hidden block pb-1 placeholder:text-zinc-300"
           style={{ color: block.designSettings?.theme === 'dark' ? jwTheme.colors.primary : jwTheme.colors.textHeading, minHeight: '1.2em' }}
           value={block.content}
           placeholder="Enter heading..."
@@ -53,7 +59,14 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
       )}
       {block.type === 'TEXT' && (
         <textarea 
-          className="text-lg leading-relaxed whitespace-pre-wrap rounded-md p-4 w-full border-none outline-none resize-none overflow-hidden block placeholder:text-zinc-300 focus:ring-1 focus:ring-blue-100 transition-shadow transition-colors"
+          ref={(el) => {
+            if (el) {
+              // Auto-resize on initial mount to show full content
+              el.style.height = 'auto';
+              el.style.height = el.scrollHeight + 'px';
+            }
+          }}
+          className="text-lg leading-relaxed whitespace-pre-wrap rounded-md p-4 w-full border border-transparent outline-none resize-y overflow-hidden block placeholder:text-zinc-300 focus:ring-1 focus:ring-blue-100 transition-shadow transition-colors hover:border-zinc-200"
           style={{ 
             color: jwTheme.colors.textBody,
             backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}15` : 'transparent',
@@ -75,19 +88,24 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
         />
       )}
       {block.type === 'CANVA_EMBED' && (
-        <div className="w-full relative rounded border border-zinc-200 bg-zinc-50 overflow-hidden" style={{ paddingTop: '56.25%' /* 16:9 Aspect Ratio */ }}>
+        <div 
+          className="w-full relative rounded border border-zinc-300 bg-zinc-50 overflow-hidden resize-y hover:border-blue-300 transition-colors" 
+          style={{ height: '600px', minHeight: '300px' }}
+        >
           {block.content ? (
             <>
               <iframe
                 title={`Canva Embed ${block.id}`}
                 src={block.content}
-                className="absolute top-0 left-0 w-full h-full border-none"
+                className="absolute top-0 left-0 w-full h-full border-none pointer-events-auto"
                 allow="fullscreen"
                 allowFullScreen
               />
-              {/* Canva Embed Protection Overlay: intercepts mouse events when dragging to prevent iframe swallowing */}
-              {isDragging && (
-                <div className="absolute inset-0 bg-transparent z-10" />
+              {/* Corner drag indicator */}
+              {!isLocked && (
+                <div className="absolute bottom-0 right-0 w-4 h-4 cursor-ns-resize pointer-events-none z-20 flex items-center justify-center opacity-50">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 15L15 21M21 8L8 21"/></svg>
+                </div>
               )}
             </>
           ) : (
