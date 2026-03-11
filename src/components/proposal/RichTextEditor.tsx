@@ -3,6 +3,9 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import { BubbleMenu } from '@tiptap/react/menus';
 import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
+import { TextStyle } from '@tiptap/extension-text-style';
+import { Color } from '@tiptap/extension-color';
+import { FontSize } from './extensions/FontSize';
 import { jwTheme } from '../../theme/jwTheme';
 import { 
   TextBolder, 
@@ -10,7 +13,8 @@ import {
   TextAlignLeft, 
   TextAlignCenter, 
   ListBullets, 
-  ListNumbers 
+  ListNumbers,
+  DropHalfBottom
 } from 'phosphor-react';
 
 interface RichTextEditorProps {
@@ -40,6 +44,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
+      TextStyle,
+      Color,
+      FontSize,
     ],
     content,
     editable: !disabled,
@@ -104,6 +111,39 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             <TextItalic size={18} weight={editor.isActive('italic') ? 'bold' : 'regular'} />
           </button>
           
+          {/* Advanced Formatting: Color & Size */}
+          <div className="w-[1px] h-5 bg-zinc-700 mx-1" />
+
+          {/* Color Picker Native Input styled conditionally */}
+          <div className="relative flex items-center justify-center p-1 hover:bg-zinc-800 rounded-md transition-colors group cursor-pointer" title="Text Color">
+            <DropHalfBottom size={18} className="text-zinc-300 group-hover:text-white" />
+            <input
+              type="color"
+              onInput={event => editor.chain().focus().setColor((event.target as HTMLInputElement).value).run()}
+              value={editor.getAttributes('textStyle').color || (isHeading && theme === 'dark' ? jwTheme.colors.primary : (isHeading ? jwTheme.colors.textHeading : jwTheme.colors.textBody))}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            />
+          </div>
+
+          {/* Font Size Dropdown */}
+          <select 
+            onChange={event => editor.chain().focus().setFontSize(event.target.value).run()}
+            className="bg-transparent text-zinc-300 hover:text-white hover:bg-zinc-800 border-none outline-none text-xs font-medium cursor-pointer rounded px-1 py-1 appearance-none text-center min-w-[3ch]"
+            value={editor.getAttributes('textStyle').fontSize || ''}
+            title="Text Size"
+          >
+            <option className="bg-zinc-900 text-white" value="">Aa</option>
+            <option className="bg-zinc-900 text-white" value="12px">12</option>
+            <option className="bg-zinc-900 text-white" value="14px">14</option>
+            <option className="bg-zinc-900 text-white" value="16px">16</option>
+            <option className="bg-zinc-900 text-white" value="18px">18</option>
+            <option className="bg-zinc-900 text-white" value="20px">20</option>
+            <option className="bg-zinc-900 text-white" value="24px">24</option>
+            <option className="bg-zinc-900 text-white" value="30px">30</option>
+            <option className="bg-zinc-900 text-white" value="36px">36</option>
+            <option className="bg-zinc-900 text-white" value="48px">48</option>
+          </select>
+
           <div className="w-[1px] h-5 bg-zinc-700 mx-1" />
 
           <button
