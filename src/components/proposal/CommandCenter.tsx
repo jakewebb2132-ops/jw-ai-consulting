@@ -67,7 +67,7 @@ const SortableSidebarItem = ({ block, isActive, onSelect, onRemove, isLocked }: 
             e.stopPropagation();
             onRemove();
           }}
-          className="opacity-0 group-hover:opacity-100 text-zinc-400 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-md transition-all shrink-0"
+          className="text-zinc-400 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-md transition-all shrink-0"
           title="Delete Section"
         >
           <Trash size={16} weight="bold" />
