@@ -13,7 +13,7 @@ interface ProposalState {
   // Actions
   initializeProposal: (proposal: Proposal) => void;
   saveProposal: () => Promise<void>;
-  updateProposalDetails: (updates: Partial<Pick<Proposal, 'title' | 'status' | 'expirationDate' | 'clientId'>>) => void;
+  updateProposalDetails: (updates: Partial<Pick<Proposal, 'title' | 'status' | 'expirationDate' | 'clientId' | 'companyLogo'>>) => void;
   setActiveBlockId: (id: string | null) => void;
   
   // Blocks
@@ -65,6 +65,7 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
         blocks: proposal.blocks,
         pricing: proposal.pricing,
         total_value: proposal.totalValue,
+        company_logo: proposal.companyLogo,
         // PostgREST will automatically set updated_at based on default schemas
       };
 

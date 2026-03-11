@@ -1,6 +1,6 @@
 import React from 'react';
 import { useProposalStore } from '../../store/proposalStore';
-import { ListDashes, TextT, Table, Image, PresentationChart, DotsSixVertical, LockKey } from 'phosphor-react';
+import { ListDashes, TextT, Table, Image, PresentationChart, DotsSixVertical, LockKey, Trash, GearSix } from 'phosphor-react';
 import { BlockType, ContentBlock } from '../../types/proposal';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -65,7 +65,7 @@ const SortableSidebarItem = ({ block, isActive, onSelect, isLocked }: { block: C
 };
 
 const CommandCenter: React.FC = () => {
-  const { proposal, activeBlockId, setActiveBlockId, addBlock, updateBlock } = useProposalStore();
+  const { proposal, activeBlockId, setActiveBlockId, addBlock, updateBlock, removeBlock, updateProposalDetails } = useProposalStore();
 
   const handleAddBlock = (type: BlockType) => {
     addBlock({
@@ -144,56 +144,102 @@ const CommandCenter: React.FC = () => {
         ) : null}
         
         {!activeBlock ? (
-          <div className="text-sm text-zinc-400 bg-white p-4 border border-zinc-200 rounded-lg text-center">
-            Select a block from the outline or canvas to edit its properties.
+          <div className={`bg-white p-4 border border-zinc-200 rounded-lg shadow-sm flex flex-col gap-4 ${isLocked ? 'opacity-70 pointer-events-none' : ''}`}>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-zinc-500"><GearSix size={18} /></span>
+              <span className="text-sm font-semibold text-zinc-800">Global Settings</span>
+            </div>
+            
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-medium text-zinc-600">Document Title</label>
+              <input 
+                type="text"
+                className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                value={proposal?.title || ''}
+                onChange={(e) => updateProposalDetails({ title: e.target.value })}
+                placeholder="e.g. Acme Corp Proposal"
+                disabled={isLocked}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-medium text-zinc-600">Brand Watermark (Logo URL)</label>
+              <input 
+                type="url"
+                className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                value={proposal?.companyLogo || ''}
+                onChange={(e) => updateProposalDetails({ companyLogo: e.target.value })}
+                placeholder="https://example.com/logo.png"
+                disabled={isLocked}
+              />
+              <p className="text-[10px] text-zinc-500 mt-1">Paste an image URL to embed it lightly in the top-right corner.</p>
+            </div>
           </div>
         ) : (
-          <div className={`bg-white p-4 border border-zinc-200 rounded-lg shadow-sm flex flex-col gap-4 ${isLocked ? 'opacity-70 pointer-events-none' : ''}`}>
-             <div className="flex items-center gap-2 mb-2">
-              <span className="text-indigo-500">{getIconForType(activeBlock.type)}</span>
-              <span className="text-sm font-semibold text-zinc-800">{activeBlock.type.replace('_', ' ')} Options</span>
+          <div className={`bg-white border border-zinc-200 rounded-lg shadow-sm flex flex-col ${isLocked ? 'opacity-70 pointer-events-none' : ''}`}>
+            
+            {/* Header & Delete Button */}
+            <div className="flex items-center justify-between p-4 border-b border-zinc-100 bg-zinc-50/50 rounded-t-lg">
+              <div className="flex items-center gap-2">
+                <span className="text-indigo-500">{getIconForType(activeBlock.type)}</span>
+                <span className="text-sm font-semibold text-zinc-800">{activeBlock.type.replace('_', ' ')}</span>
+              </div>
+              <button 
+                onClick={() => {
+                  removeBlock(activeBlock.id);
+                  setActiveBlockId(null);
+                }}
+                disabled={isLocked}
+                className="text-zinc-400 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-md transition-colors"
+                title="Delete block"
+              >
+                <Trash size={16} weight="bold" />
+              </button>
             </div>
 
             {/* Form Fields mapped by Type */}
-            {(activeBlock.type === 'HEADING' || activeBlock.type === 'TEXT') && (
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-medium text-zinc-600">Content</label>
-                <textarea 
-                  className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none min-h-[100px]"
-                  value={activeBlock.content}
-                  onChange={(e) => updateBlock(activeBlock.id, { content: e.target.value })}
-                  placeholder="Enter text..."
-                  disabled={isLocked}
-                />
-              </div>
-            )}
+            <div className="p-4 flex flex-col gap-4">
+              {(activeBlock.type === 'HEADING' || activeBlock.type === 'TEXT') && (
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-medium text-zinc-600">Content</label>
+                  <textarea 
+                    className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none min-h-[100px]"
+                    value={activeBlock.content}
+                    onChange={(e) => updateBlock(activeBlock.id, { content: e.target.value })}
+                    placeholder="Enter text..."
+                    disabled={isLocked}
+                  />
+                  <p className="text-[10px] text-zinc-500 mt-1">Hint: You can also click directly on the canvas to type!</p>
+                </div>
+              )}
 
-            {activeBlock.type === 'CANVA_EMBED' && (
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-medium text-zinc-600">Canva Smart Embed URL</label>
-                <input 
-                  type="url"
-                  className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
-                  value={activeBlock.content}
-                  onChange={(e) => updateBlock(activeBlock.id, { content: e.target.value })}
-                  placeholder="https://www.canva.com/design/..."
-                  disabled={isLocked}
-                />
-                <p className="text-[10px] text-zinc-500 mt-1">Paste the Smart Embed Link from Canva's Share menu.</p>
-              </div>
-            )}
+              {activeBlock.type === 'CANVA_EMBED' && (
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-medium text-zinc-600">Canva Smart Embed URL</label>
+                  <input 
+                    type="url"
+                    className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                    value={activeBlock.content}
+                    onChange={(e) => updateBlock(activeBlock.id, { content: e.target.value })}
+                    placeholder="https://www.canva.com/design/..."
+                    disabled={isLocked}
+                  />
+                  <p className="text-[10px] text-zinc-500 mt-1">Paste the Smart Embed Link from Canva's Share menu.</p>
+                </div>
+              )}
 
-            {activeBlock.type === 'IMAGE_UPLOAD' && (
-               <div className="text-xs text-zinc-500 italic p-2 bg-zinc-50 rounded border border-zinc-100">
-                 Image upload pipeline would integrate here.
-               </div>
-            )}
+              {activeBlock.type === 'IMAGE_UPLOAD' && (
+                <div className="text-xs text-zinc-500 italic p-2 bg-zinc-50 rounded border border-zinc-100">
+                  Image upload pipeline would integrate here.
+                </div>
+              )}
 
-            {activeBlock.type === 'PRICING_TABLE' && (
-               <div className="text-xs text-zinc-500 italic p-2 bg-zinc-50 rounded border border-zinc-100">
-                 Line items are managed via the pricing store engine.
-               </div>
-            )}
+              {activeBlock.type === 'PRICING_TABLE' && (
+                <div className="text-xs text-zinc-500 italic p-2 bg-zinc-50 rounded border border-zinc-100">
+                  Line items are managed via the pricing store engine.
+                </div>
+              )}
+            </div>
             
           </div>
         )}

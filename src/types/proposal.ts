@@ -45,4 +45,7 @@ export interface Proposal {
   acceptedAt?: Date;
   signatureName?: string;
   signatureTitle?: string;
+
+  // Global Branding
+  companyLogo?: string;
 }

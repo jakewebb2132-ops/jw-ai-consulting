@@ -109,6 +109,17 @@ const ProposalPublic: React.FC = () => {
       {/* The Paper Document */}
       <div className="w-full max-w-[816px] min-h-[1056px] bg-white shadow-2xl rounded-sm overflow-hidden relative p-8 md:p-16">
         
+        {/* Global Watermark */}
+        {proposal.companyLogo && (
+          <div className="absolute top-12 right-12 opacity-15 pointer-events-none z-0 mix-blend-multiply grayscale">
+            <img 
+              src={proposal.companyLogo} 
+              alt="Company Watermark" 
+              className="max-h-16 w-auto object-contain"
+            />
+          </div>
+        )}
+        
         {/* Document Freeze Badge */}
         {isAccepted && (
           <div className="mb-12 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 text-green-800">

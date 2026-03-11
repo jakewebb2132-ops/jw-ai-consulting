@@ -17,8 +17,20 @@ const ProposalPrint: React.FC = () => {
   }
 
   return (
-    <div className="w-full bg-white text-slate-900 min-h-screen">
-      <div className="w-full max-w-[21cm] mx-auto p-[2cm]">
+    <div className="w-full bg-white text-slate-900 min-h-screen relative">
+      
+      {/* Global Watermark (Print Mode) */}
+      {proposal.companyLogo && (
+        <div className="fixed top-8 right-8 opacity-15 pointer-events-none z-0 mix-blend-multiply grayscale">
+          <img 
+            src={proposal.companyLogo} 
+            alt="Company Watermark" 
+            className="max-h-12 w-auto object-contain"
+          />
+        </div>
+      )}
+
+      <div className="w-full max-w-[21cm] mx-auto p-[2cm] relative z-10">
         
         <div className="print-title-section mb-12 border-b-2 border-slate-900 pb-6 print-break-avoid">
           <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 mb-2">

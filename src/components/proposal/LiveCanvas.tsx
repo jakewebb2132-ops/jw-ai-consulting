@@ -6,6 +6,7 @@ import { jwTheme } from '../../theme/jwTheme';
 
 const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: ContentBlock, isActive: boolean, onSelect: () => void, isLocked?: boolean }) => {
   const proposal = useProposalStore(state => state.proposal);
+  const updateBlock = useProposalStore(state => state.updateBlock);
   
   const {
     attributes,
@@ -36,23 +37,46 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
     >
       {/* Block Render Logic */}
       {block.type === 'HEADING' && (
-        <h2 
-          className="text-3xl font-bold tracking-tight"
-          style={{ color: block.designSettings?.theme === 'dark' ? jwTheme.colors.primary : jwTheme.colors.textHeading }}
-        >
-          {block.content}
-        </h2>
+        <textarea 
+          className="text-3xl font-bold tracking-tight w-full bg-transparent border-none outline-none resize-none overflow-hidden block pb-1 placeholder:text-zinc-300"
+          style={{ color: block.designSettings?.theme === 'dark' ? jwTheme.colors.primary : jwTheme.colors.textHeading, minHeight: '1.2em' }}
+          value={block.content}
+          placeholder="Enter heading..."
+          onChange={(e) => {
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+            updateBlock(block.id, { content: e.target.value });
+          }}
+          disabled={isLocked}
+          rows={1}
+          onFocus={(e) => {
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+          }}
+        />
       )}
       {block.type === 'TEXT' && (
-        <div 
-          className="text-lg leading-relaxed whitespace-pre-wrap rounded-md p-4"
+        <textarea 
+          className="text-lg leading-relaxed whitespace-pre-wrap rounded-md p-4 w-full border-none outline-none resize-none overflow-hidden block placeholder:text-zinc-300 focus:ring-1 focus:ring-blue-100 transition-shadow transition-colors"
           style={{ 
             color: jwTheme.colors.textBody,
-            backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}15` : 'transparent' 
+            backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}15` : 'transparent',
+            minHeight: '4em'
           }}
-        >
-          {block.content}
-        </div>
+          value={block.content}
+          placeholder="Start typing your content..."
+          onChange={(e) => {
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+            updateBlock(block.id, { content: e.target.value });
+          }}
+          disabled={isLocked}
+          rows={3}
+          onFocus={(e) => {
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+          }}
+        />
       )}
       {block.type === 'CANVA_EMBED' && (
         <div className="w-full relative rounded border border-zinc-200 bg-zinc-50 overflow-hidden" style={{ paddingTop: '56.25%' /* 16:9 Aspect Ratio */ }}>
@@ -144,6 +168,16 @@ const LiveCanvas: React.FC = () => {
         className="w-full max-w-[816px] min-h-[1056px] bg-white shadow-xl rounded-sm ring-1 ring-black/5 overflow-hidden transition-all relative"
         onClick={(e) => e.stopPropagation()} // Prevent deselect when clicking paper
       >
+        {/* Global Watermark */}
+        {proposal?.companyLogo && (
+          <div className="absolute top-12 right-12 opacity-15 pointer-events-none z-0 mix-blend-multiply grayscale">
+            <img 
+              src={proposal.companyLogo} 
+              alt="Company Watermark" 
+              className="max-h-16 w-auto object-contain"
+            />
+          </div>
+        )}
         
         {(!proposal?.blocks || proposal.blocks.length === 0) ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-400 gap-4 p-12 text-center">
