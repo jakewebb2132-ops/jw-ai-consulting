@@ -134,8 +134,9 @@ const LiveCanvas: React.FC = () => {
 
   return (
     <main 
-      className="flex-1 h-[calc(100vh-4rem)] overflow-y-auto bg-zinc-200/50 p-8 md:p-12 flex justify-center items-start"
+      className="flex-1 h-[calc(100vh-4rem)] overflow-y-auto p-8 md:p-12 flex justify-center items-start bg-transparent"
       onClick={() => setActiveBlockId(null)} // Click outside to deselect
+      data-lenis-prevent="true"
     >
       
       {/* The Paper Document (US Letter/A4 aspect ratio approximate constraints) */}

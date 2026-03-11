@@ -50,7 +50,7 @@ const ProposalGenerator: React.FC = () => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="h-screen w-full flex flex-col overflow-hidden bg-white text-slate-900">
+      <div className="h-screen w-full flex flex-col overflow-hidden bg-[#f0f4f8] text-[#0f172a]">
         <TopNav />
         <div className="flex-1 flex w-full h-[calc(100vh-4rem)]">
           <CommandCenter />

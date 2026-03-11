@@ -104,7 +104,7 @@ const ProposalPublic: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-100 flex justify-center py-12 px-4 selection:bg-blue-100 pb-32">
+    <div className="min-h-screen bg-[#f0f4f8] text-[#0f172a] font-sans flex justify-center py-12 px-4 selection:bg-blue-400/30 pb-32">
       
       {/* The Paper Document */}
       <div className="w-full max-w-[816px] min-h-[1056px] bg-white shadow-2xl rounded-sm overflow-hidden relative p-8 md:p-16">

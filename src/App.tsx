@@ -23,9 +23,10 @@ const Portfolio = lazy(() => import('./components/Portfolio'));
 const Contact = lazy(() => import('./components/Contact'));
 const ServicePage = lazy(() => import('./pages/ServicePage'));
 
-const ScrollToTop = () => {
+const ScrollManager = () => {
     const { pathname, hash } = useLocation();
 
+    // Reset scroll position on route change
     useEffect(() => {
         if (!hash) {
             window.scrollTo(0, 0);
@@ -36,6 +37,26 @@ const ScrollToTop = () => {
             }
         }
     }, [pathname, hash]);
+
+    // Handle Lenis Smooth Scrolling logic
+    useEffect(() => {
+        // We only want smooth scrolling on the public marketing pages / read-only proposals.
+        // The Proposal Generator and Admin Dashboard use fixed heights with internal scrolling containers,
+        // so we must destroy the global Lenis instance to prevent it from swallowing the native scroll events.
+        const isInternalApp = pathname.startsWith('/admin') || pathname.startsWith('/proposal-generator');
+        
+        let lenis: Lenis | null = null;
+        
+        if (!isInternalApp) {
+            lenis = new Lenis({
+                autoRaf: true,
+            });
+        }
+
+        return () => {
+            if (lenis) lenis.destroy();
+        };
+    }, [pathname]);
 
     return null;
 };
@@ -64,7 +85,7 @@ const AppLayout = () => {
     }
 
     return (
-        <div className="flex min-h-screen flex-col bg-[#f0f4f8] text-[#0f172a] selection:bg-blue-400/30 font-sans">
+        <div className="flex min-h-screen flex-col bg-[#f0f4f8] text-[#0f172a] selection:bg-blue-400/30 font-sans overflow-x-hidden">
             <ScrollProgress />
         <Navbar />
         <main className="flex-1">
@@ -92,19 +113,9 @@ const AppLayout = () => {
 };
 
 function App() {
-    useEffect(() => {
-        const lenis = new Lenis({
-            autoRaf: true,
-        });
-
-        return () => {
-            lenis.destroy();
-        };
-    }, []);
-
     return (
         <Router>
-            <ScrollToTop />
+            <ScrollManager />
             <Routes>
                 {/* The Public Authentication Gate */}
                 <Route path="/login" element={<Login />} />

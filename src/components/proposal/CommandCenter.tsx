@@ -79,7 +79,10 @@ const CommandCenter: React.FC = () => {
   const isLocked = proposal?.status === 'ACCEPTED';
 
   return (
-    <aside className="w-1/3 max-w-sm h-[calc(100vh-4rem)] overflow-y-auto border-r border-zinc-200 bg-zinc-50 p-6 flex flex-col gap-8 shrink-0">
+    <aside 
+      className="w-1/3 max-w-sm h-[calc(100vh-4rem)] overflow-y-auto border-r border-blue-100 bg-white/70 backdrop-blur-xl shadow-[2px_0_15px_-3px_rgba(0,0,0,0.05)] p-6 flex flex-col gap-8 shrink-0 z-10 relative"
+      data-lenis-prevent="true"
+    >
       
       {/* Section: Block Library */}
       <div>

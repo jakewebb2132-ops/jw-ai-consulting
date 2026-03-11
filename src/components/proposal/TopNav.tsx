@@ -54,7 +54,7 @@ const TopNav: React.FC = () => {
   };
 
   return (
-    <header className="h-16 w-full flex items-center justify-between px-6 border-b border-zinc-200 bg-white shrink-0">
+    <header className="h-16 w-full flex items-center justify-between px-6 border-b border-blue-100 bg-white/70 backdrop-blur-xl shadow-sm shrink-0 z-10 relative">
       {/* Left: Branding & Title */}
       <div className="flex items-center gap-4">
         <div className="font-bold text-lg tracking-tight">JW AI</div>

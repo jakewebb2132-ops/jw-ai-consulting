@@ -16,7 +16,7 @@
 }
 
 body {
-    @apply bg-[#f8fafc] text-[#0f172a] antialiased overflow-x-hidden;
+    @apply bg-[#f8fafc] text-[#0f172a] antialiased;
 }
 
 
