@@ -1,6 +1,6 @@
 import React from 'react';
 import { useProposalStore } from '../../store/proposalStore';
-import { ListDashes, TextT, Table, Image, PresentationChart, DotsSixVertical, LockKey, Trash, GearSix } from 'phosphor-react';
+import { ListDashes, TextT, Table, Image, PresentationChart, DotsSixVertical, LockKey, Trash } from 'phosphor-react';
 import { BlockType, ContentBlock } from '../../types/proposal';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -15,7 +15,7 @@ const getIconForType = (type: BlockType) => {
   }
 };
 
-const SortableSidebarItem = ({ block, isActive, onSelect, isLocked }: { block: ContentBlock, isActive: boolean, onSelect: () => void, isLocked?: boolean }) => {
+const SortableSidebarItem = ({ block, isActive, onSelect, onRemove, isLocked }: { block: ContentBlock, isActive: boolean, onSelect: () => void, onRemove: () => void, isLocked?: boolean }) => {
   const {
     attributes,
     listeners,
@@ -60,6 +60,19 @@ const SortableSidebarItem = ({ block, isActive, onSelect, isLocked }: { block: C
             : block.type.replace('_', ' ')}
         </span>
       </div>
+      
+      {!isLocked && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
+          }}
+          className="opacity-0 group-hover:opacity-100 text-zinc-400 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-md transition-all shrink-0"
+          title="Delete Section"
+        >
+          <Trash size={16} weight="bold" />
+        </button>
+      )}
     </div>
   );
 };
@@ -84,6 +97,36 @@ const CommandCenter: React.FC = () => {
       data-lenis-prevent="true"
     >
       
+      {/* Section: Global Settings */}
+      <div>
+        <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Document Settings</h2>
+        <div className={`bg-white p-4 border border-zinc-200 rounded-lg shadow-sm flex flex-col gap-4 ${isLocked ? 'opacity-70 pointer-events-none' : ''}`}>
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-medium text-zinc-600">Document Title</label>
+            <input 
+              type="text"
+              className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+              value={proposal?.title || ''}
+              onChange={(e) => updateProposalDetails({ title: e.target.value })}
+              placeholder="e.g. Acme Corp Proposal"
+              disabled={isLocked}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-medium text-zinc-600">Company Logo (Watermark)</label>
+            <input 
+              type="url"
+              className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+              value={proposal?.companyLogo || ''}
+              onChange={(e) => updateProposalDetails({ companyLogo: e.target.value })}
+              placeholder="https://example.com/logo.png"
+              disabled={isLocked}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Section: Block Library */}
       <div>
         <h2 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Add Section</h2>
@@ -124,6 +167,10 @@ const CommandCenter: React.FC = () => {
                   block={block} 
                   isActive={block.id === activeBlockId}
                   onSelect={() => setActiveBlockId(block.id)}
+                  onRemove={() => {
+                    removeBlock(block.id);
+                    if (activeBlockId === block.id) setActiveBlockId(null);
+                  }}
                   isLocked={isLocked}
                 />
               ))}
@@ -144,36 +191,8 @@ const CommandCenter: React.FC = () => {
         ) : null}
         
         {!activeBlock ? (
-          <div className={`bg-white p-4 border border-zinc-200 rounded-lg shadow-sm flex flex-col gap-4 ${isLocked ? 'opacity-70 pointer-events-none' : ''}`}>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-zinc-500"><GearSix size={18} /></span>
-              <span className="text-sm font-semibold text-zinc-800">Global Settings</span>
-            </div>
-            
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-medium text-zinc-600">Document Title</label>
-              <input 
-                type="text"
-                className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
-                value={proposal?.title || ''}
-                onChange={(e) => updateProposalDetails({ title: e.target.value })}
-                placeholder="e.g. Acme Corp Proposal"
-                disabled={isLocked}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-medium text-zinc-600">Brand Watermark (Logo URL)</label>
-              <input 
-                type="url"
-                className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
-                value={proposal?.companyLogo || ''}
-                onChange={(e) => updateProposalDetails({ companyLogo: e.target.value })}
-                placeholder="https://example.com/logo.png"
-                disabled={isLocked}
-              />
-              <p className="text-[10px] text-zinc-500 mt-1">Paste an image URL to embed it lightly in the top-right corner.</p>
-            </div>
+          <div className="text-sm text-zinc-400 bg-white p-4 border border-zinc-200 rounded-lg text-center">
+            Select a block from the outline or canvas to edit its properties.
           </div>
         ) : (
           <div className={`bg-white border border-zinc-200 rounded-lg shadow-sm flex flex-col ${isLocked ? 'opacity-70 pointer-events-none' : ''}`}>
