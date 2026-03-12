@@ -73,8 +73,7 @@ export const useProposalStore = create<ProposalState>()(
         blocks: proposal.blocks,
         pricing: proposal.pricing,
         total_value: proposal.totalValue,
-        company_logo: proposal.companyLogo,
-        // PostgREST will automatically set updated_at based on default schemas
+        // Note: company_logo stored client-side only (not in DB schema)
       };
 
       const { error } = await supabase

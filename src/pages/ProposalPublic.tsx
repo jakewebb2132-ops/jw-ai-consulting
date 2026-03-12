@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useProposalStore } from '../store/proposalStore';
 import { jwTheme } from '../theme/jwTheme';
 import { CheckCircle, X, CircleNotch } from 'phosphor-react';
+import CoverBlock from '../components/proposal/CoverBlock';
 
 const ProposalPublic: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -132,17 +133,25 @@ const ProposalPublic: React.FC = () => {
         )}
 
         {proposal.blocks.map((block) => (
-          <div key={block.id} className="mb-8">
-            {block.type === 'HEADING' && (
+          <div key={block.id} className={block.type === 'HEADING' && block.orderIndex === 0 ? 'mb-8 -mx-8 md:-mx-16 -mt-8 md:-mt-16' : 'mb-8'}>
+            {block.type === 'HEADING' && block.orderIndex === 0 ? (
+              // First heading → premium cover page
+              <CoverBlock
+                title={block.content.replace(/<[^>]*>/g, '').trim() || 'PROPOSAL'}
+                companyLogo={proposal.companyLogo}
+                isLocked={true}
+              />
+            ) : block.type === 'HEADING' ? (
               <div 
-                className="prose max-w-none text-4xl font-extrabold tracking-tight mb-4"
+                className="prose max-w-none text-4xl font-extrabold tracking-tight mb-4 border-l-4 pl-4"
                 style={{ 
-                  color: block.designSettings?.theme === 'dark' ? jwTheme.colors.primary : jwTheme.colors.textHeading,
+                  color: jwTheme.colors.textHeading,
+                  borderColor: jwTheme.colors.secondary,
                   fontFamily: jwTheme.typography.fontHeading
                 }}
                 dangerouslySetInnerHTML={{ __html: block.content }}
               />
-            )}
+            ) : null}
 
             {block.type === 'TEXT' && (
               <div 
