@@ -28,9 +28,18 @@ body {
     height: 0;
 }
 
-.ProseMirror p {
-    min-height: 1.5rem;
-    margin-bottom: 1.25em; /* Explicitly add space between paragraphs in the editor */
+/* Sync paragraph spacing across editor and outputs */
+.ProseMirror p,
+.proposal-content p {
+    margin-top: 0;
+    margin-bottom: 1.5em !important;
+    min-height: 1rem;
+}
+
+/* Remove extra bottom margin on the last paragraph */
+.ProseMirror p:last-child,
+.proposal-content p:last-child {
+    margin-bottom: 0 !important;
 }
 
 .ProseMirror ul {
