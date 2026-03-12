@@ -29,15 +29,45 @@ const TopNav: React.FC = () => {
     updateProposalDetails({ title: e.target.value });
   };
 
-  const handleExportPDF = () => {
+  const handleExportPDF = async () => {
     if (!proposal) return;
     setIsExporting(true);
-    // Open the hidden print route in a new tab — the browser's native print-to-PDF dialog appears.
-    const printWindow = window.open('/proposal-generator/print', '_blank');
-    // Give the tab a moment to load & auto-print before resetting the button state
-    setTimeout(() => setIsExporting(false), 2000);
-    if (!printWindow) {
-      alert('Please allow pop-ups for this site to export PDF.');
+
+    try {
+      // 1. Ensure the proposal is saved to the DB first so the PDF engine can fetch it
+      await saveProposal();
+      if (saveError) {
+        alert('Please save the proposal successfully before exporting.');
+        setIsExporting(false);
+        return;
+      }
+
+      // 2. Call our server-side PDF generator targeting the print route
+      const printUrl = `${window.location.origin}/proposal-generator/print/${proposal.id}`;
+      
+      const response = await fetch('/api/export-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: printUrl }),
+      });
+
+      if (!response.ok) throw new Error('PDF generation failed');
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${proposal.title || 'proposal'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+    } catch (err) {
+      console.error('PDF Export Error:', err);
+      // Fallback: Open the print tab if the API fails (e.g., local development restriction)
+      window.open(`/proposal-generator/print/${proposal.id}`, '_blank');
+    } finally {
       setIsExporting(false);
     }
   };
@@ -150,7 +180,7 @@ const TopNav: React.FC = () => {
           {isExporting ? (
             <>
               <CircleNotch weight="bold" className="animate-spin" size={14} />
-              Opening...
+              Generating...
             </>
           ) : (
             <>

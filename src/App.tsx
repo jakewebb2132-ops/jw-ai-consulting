@@ -122,7 +122,7 @@ function App() {
 
                 {/* Secure Internal Proposal Generator (Requires Auth) */}
                 <Route path="/proposal-generator" element={<ProtectedRoute><ProposalGenerator /></ProtectedRoute>} />
-                <Route path="/proposal-generator/print" element={<ProtectedRoute><ProposalPrint /></ProtectedRoute>} />
+                <Route path="/proposal-generator/print/:id" element={<ProtectedRoute><ProposalPrint /></ProtectedRoute>} />
                 
                 {/* Secure Internal Admin Dashboard (Requires Auth) */}
                 <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
