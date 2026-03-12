@@ -1,9 +1,11 @@
+import React from 'react';
 import { useProposalStore } from '../../store/proposalStore';
 import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ContentBlock } from '../../types/proposal';
 import { jwTheme } from '../../theme/jwTheme';
 import RichTextEditor from './RichTextEditor';
+import CoverBlock from './CoverBlock';
 import { Trash, Plus } from 'phosphor-react';
 
 const CanvasBlock: React.FC<{ block: ContentBlock; isActive: boolean; isLocked: boolean; onSelect: () => void }> = ({ block, isActive, isLocked, onSelect }) => {
@@ -32,8 +34,19 @@ const CanvasBlock: React.FC<{ block: ContentBlock; isActive: boolean; isLocked: 
         isDragging ? 'border-indigo-400 bg-indigo-50/10' : isActive ? 'border-blue-400 bg-blue-50/50 shadow-sm' : `border-transparent ${!isLocked && 'hover:border-blue-200 hover:bg-blue-50/30'}`
       }`}
     >
-      {block.type === 'HEADING' && (
-        <div className="w-full pb-1">
+      {block.type === 'HEADING' && block.orderIndex === 0 ? (
+        // First heading block → render as the premium cover page
+        <div className="w-full rounded-none overflow-hidden shadow-sm">
+          <CoverBlock
+            title={block.content.replace(/<[^>]*>/g, '').trim() || 'PROPOSAL'}
+            companyLogo={proposal?.companyLogo}
+            onTitleChange={(val) => updateBlock(block.id, { content: val })}
+            isLocked={isLocked}
+          />
+        </div>
+      ) : block.type === 'HEADING' ? (
+        // Subsequent heading blocks — styled with navy accent border
+        <div className="w-full pb-1 border-l-4 pl-4" style={{ borderColor: jwTheme.colors.secondary }}>
           <RichTextEditor 
             content={block.content}
             onChange={(html) => updateBlock(block.id, { content: html })}
@@ -43,11 +56,19 @@ const CanvasBlock: React.FC<{ block: ContentBlock; isActive: boolean; isLocked: 
             placeholder="Enter heading..."
           />
         </div>
-      )}
+      ) : null}
       {block.type === 'TEXT' && (
         <div 
-          className="w-full rounded-md p-4 transition-colors hover:bg-zinc-50/50"
-          style={{ backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}15` : 'transparent' }}
+          className="w-full rounded-md transition-colors"
+          style={{ 
+            backgroundColor: block.designSettings?.theme === 'secondary-tint' 
+              ? `${jwTheme.colors.accent}60` 
+              : 'transparent',
+            borderLeft: block.designSettings?.theme === 'secondary-tint' 
+              ? `3px solid ${jwTheme.colors.secondary}60` 
+              : 'none',
+            paddingLeft: block.designSettings?.theme === 'secondary-tint' ? '1.25rem' : '0',
+          }}
         >
           <RichTextEditor 
             content={block.content}
