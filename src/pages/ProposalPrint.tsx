@@ -19,7 +19,16 @@ const ProposalPrint: React.FC = () => {
   }
 
   return (
-    <div className="w-full bg-white text-slate-900 min-h-screen relative">
+    <div className="w-full bg-[#f8fafc] text-slate-900 min-h-screen relative font-sans">
+      
+      {/* Document-wide Grid Background (Print) */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-[0.02]"
+        style={{ 
+          backgroundImage: `url('/grid.svg')`,
+          backgroundPosition: 'center',
+        }}
+      />
       
       {/* Global Watermark (Print Mode) */}
       {proposal.companyLogo && (

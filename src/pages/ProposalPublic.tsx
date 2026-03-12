@@ -108,7 +108,20 @@ const ProposalPublic: React.FC = () => {
     <div className="min-h-screen bg-[#f0f4f8] text-[#0f172a] font-sans flex justify-center py-12 px-4 selection:bg-blue-400/30 pb-32">
       
       {/* The Paper Document */}
-      <div className="w-full max-w-[816px] min-h-[1056px] bg-white shadow-2xl rounded-sm overflow-hidden relative p-8 md:p-16">
+      <div 
+        className="w-full max-w-[816px] min-h-[1056px] shadow-2xl rounded-sm overflow-hidden relative p-8 md:p-16 transition-all"
+        style={{ 
+          background: `linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)`,
+        }}
+      >
+        {/* Document-wide Grid Background */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
+          style={{ 
+            backgroundImage: `url('/grid.svg')`,
+            backgroundPosition: 'center',
+          }}
+        />
         
         {/* Global Watermark */}
         {proposal.companyLogo && (

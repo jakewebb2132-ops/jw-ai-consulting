@@ -30,8 +30,8 @@ const CanvasBlock: React.FC<{ block: ContentBlock; isActive: boolean; isLocked: 
       ref={setNodeRef}
       style={style}
       onClick={onSelect}
-      className={`group relative outline-none transition-colors border p-8 m-4 rounded-lg ${isLocked ? 'cursor-default' : 'cursor-text'} ${
-        isDragging ? 'border-indigo-400 bg-indigo-50/10' : isActive ? 'border-blue-400 bg-blue-50/50 shadow-sm' : `border-transparent ${!isLocked && 'hover:border-blue-200 hover:bg-blue-50/30'}`
+      className={`group relative outline-none transition-all border-l-4 p-8 m-4 rounded-r-lg ${isLocked ? 'cursor-default' : 'cursor-text'} ${
+        isDragging ? 'border-indigo-400 bg-indigo-50/10' : isActive ? 'border-blue-500 bg-blue-50/30 shadow-sm' : `border-transparent ${!isLocked && 'hover:border-blue-200 hover:bg-blue-50/10'}`
       }`}
     >
       {block.type === 'HEADING' && block.orderIndex === 0 ? (
@@ -279,9 +279,21 @@ const LiveCanvas: React.FC = () => {
       
       {/* The Paper Document (US Letter/A4 aspect ratio approximate constraints) */}
       <div 
-        className="w-full max-w-[816px] min-h-[1056px] bg-white shadow-xl rounded-sm ring-1 ring-black/5 overflow-hidden transition-all relative"
+        className="w-full max-w-[816px] min-h-[1056px] shadow-xl rounded-sm ring-1 ring-black/5 overflow-hidden transition-all relative"
+        style={{ 
+          background: `linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)`,
+        }}
         onClick={(e) => e.stopPropagation()} // Prevent deselect when clicking paper
       >
+        {/* Document-wide Grid Background */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
+          style={{ 
+            backgroundImage: `url('/grid.svg')`,
+            backgroundPosition: 'center',
+          }}
+        />
+
         {/* Global Watermark */}
         {proposal?.companyLogo && (
           <div className="absolute top-10 right-10 opacity-20 pointer-events-none z-0 mix-blend-multiply grayscale">
