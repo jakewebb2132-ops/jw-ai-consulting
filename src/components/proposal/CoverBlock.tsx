@@ -147,29 +147,17 @@ const CoverBlock: React.FC<CoverBlockProps> = ({
             style={{ background: `linear-gradient(90deg, ${jwTheme.colors.secondary}, ${jwTheme.colors.accent})` }}
           />
 
-          {/* Subtext */}
-          <p
-            className="max-w-md leading-relaxed text-base"
-            style={{ color: jwTheme.colors.textMuted }}
+          {/* Editable subtext */}
+          <div
+            contentEditable={!isLocked}
+            suppressContentEditableWarning
+            className="max-w-md leading-relaxed text-base focus:outline-none"
+            style={{ color: jwTheme.colors.textMuted, cursor: isLocked ? 'default' : 'text' }}
           >
             A comprehensive AI consulting engagement proposal prepared exclusively for your organization.
-          </p>
-
-          {/* CTA-style info pill — mirrors the rounded-full button aesthetic */}
-          <div className="mt-8 flex items-center gap-3">
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white shadow-lg"
-              style={{
-                background: `linear-gradient(135deg, ${jwTheme.colors.secondary}, ${jwTheme.colors.secondaryDark})`,
-                boxShadow: `0 8px 24px rgba(37,99,235,0.3)`,
-              }}
-            >
-              Confidential
-            </div>
-            <span className="text-sm" style={{ color: jwTheme.colors.textMuted }}>
-              {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </span>
           </div>
+
+
         </div>
 
         {/* Footer — clean glass card border, mirrors navbar glass */}
@@ -181,17 +169,18 @@ const CoverBlock: React.FC<CoverBlockProps> = ({
         >
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: jwTheme.colors.textMuted }}>Prepared by</p>
-            <p className="text-sm font-bold" style={{ color: jwTheme.colors.primary }}>JW AI Consulting</p>
-            <p className="text-xs" style={{ color: jwTheme.colors.textMuted }}>jwaiconsulting.com</p>
-          </div>
-          <div className="text-right">
-            <p className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: jwTheme.colors.textMuted }}>Proposal Status</p>
-            <span
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold"
-              style={{ background: 'rgba(219,234,254,0.8)', color: jwTheme.colors.secondaryDark }}
-            >
-              Draft
-            </span>
+            <div
+              contentEditable={!isLocked}
+              suppressContentEditableWarning
+              className="text-sm font-bold focus:outline-none"
+              style={{ color: jwTheme.colors.primary, cursor: isLocked ? 'default' : 'text' }}
+            >JW AI Consulting</div>
+            <div
+              contentEditable={!isLocked}
+              suppressContentEditableWarning
+              className="text-xs focus:outline-none"
+              style={{ color: jwTheme.colors.textMuted, cursor: isLocked ? 'default' : 'text' }}
+            >jwaiconsulting.com</div>
           </div>
         </div>
       </div>
