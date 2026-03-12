@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useProposalStore } from '../../store/proposalStore';
-import { FilePdf, LinkSimple, CircleNotch, Database, FloppyDisk, Check, Warning } from 'phosphor-react';
+import { FilePdf, LinkSimple, CircleNotch, Database, FloppyDisk, Check, Warning, SquaresFour } from 'phosphor-react';
+import { useNavigate } from 'react-router-dom';
 
 const TopNav: React.FC = () => {
+  const navigate = useNavigate();
   const { proposal, updateProposalDetails, saveProposal, isSaving, saveError, lastLocalSave } = useProposalStore();
   const [isExporting, setIsExporting] = useState(false);
   const [saveAge, setSaveAge] = useState<string>('');
@@ -67,6 +69,14 @@ const TopNav: React.FC = () => {
     <header className="h-16 w-full flex items-center justify-between px-6 border-b border-blue-100 bg-white/70 backdrop-blur-xl shadow-sm shrink-0 z-10 relative">
       {/* Left: Branding & Title */}
       <div className="flex items-center gap-4">
+        <button 
+          onClick={() => navigate('/admin/dashboard')}
+          className="flex items-center justify-center p-2 rounded-lg hover:bg-zinc-100 text-zinc-600 transition-colors group"
+          title="Back to Dashboard"
+        >
+          <SquaresFour weight="fill" size={20} className="group-hover:text-blue-600 transition-colors" />
+        </button>
+        <div className="h-6 w-px bg-zinc-200" />
         <div className="font-bold text-lg tracking-tight">JW AI</div>
         <div className="h-6 w-px bg-zinc-300 rounded-full" />
         <input
