@@ -82,7 +82,7 @@ const ProposalPrint: React.FC = () => {
             ) : null}
               {block.type === 'TEXT' && (
                 <div 
-                  className="prose max-w-none proposal-content text-base text-slate-700 leading-relaxed" 
+                  className="prose max-w-none proposal-render text-lg text-slate-700 leading-relaxed" 
                   dangerouslySetInnerHTML={{ __html: block.content }} 
                 />
               )}

@@ -176,7 +176,7 @@ const ProposalPublic: React.FC = () => {
 
             {block.type === 'TEXT' && (
               <div 
-                className="prose max-w-none proposal-content text-lg leading-relaxed rounded-xl p-6 shadow-sm border border-black/5"
+                className="prose max-w-none proposal-render text-lg leading-relaxed rounded-xl p-6 shadow-sm border border-black/5"
                 style={{ 
                   color: jwTheme.colors.textBody,
                   backgroundColor: block.designSettings?.theme === 'secondary-tint' ? `${jwTheme.colors.secondary}08` : 'transparent',
