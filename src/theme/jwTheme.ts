@@ -1,27 +1,38 @@
 // src/theme/jwTheme.ts
-// JW AI Consulting Centralized Brand Constants — Premium Proposal Edition
+// JW AI Consulting Centralized Brand Constants
+// Matches: jwaiconsulting.com
 
 export const jwTheme = {
   colors: {
-    // Dark navy/teal — primary brand anchor (used in headings, borders, strong text)
-    primary: '#0d2d3d',        // Deep ocean navy used on cover title
+    // Deep navy — primary brand anchor (slate-900, used for main text and logo bg)
+    primary: '#0f172a',
 
-    // Vivid sky blue — geometric accent used in shapes and highlights
-    secondary: '#2e9fd4',      // Bright electric blue from reference image shapes
+    // Active electric blue — gradient start (blue-600)
+    secondary: '#2563eb',
 
-    // Light azure — secondary geometric tint used for subtle block backgrounds
-    accent: '#b8dff0',         // Very light blue-sky, used for tinted section backgrounds
+    // Richer blue — gradient end (blue-800)
+    secondaryDark: '#1e40af',
 
-    // Paper white for the main canvas
-    paper: '#ffffff',
+    // Sky accent (blue-500 ↔ sky-400 gradient midpoint)
+    accent: '#0ea5e9',
+
+    // Soft blue border used on glass cards (blue-100)
+    border: '#dbeafe',
+
+    // Light slate-blue page background (#f0f4f8 from Hero section)
+    paper: '#f8fafc',
+
+    // Canvas block paper (pure white)
+    blockPaper: '#ffffff',
 
     // Text colors
-    textHeading: '#0d2d3d',    // Dark navy
-    textBody: '#2c4a5a',       // Muted teal-navy body text (lighter than headings)
-    textMuted: '#6b8fa3',      // Soft blue-grey for descriptions
+    textHeading: '#0f172a',   // slate-900
+    textBody: '#334155',      // slate-700
+    textMuted: '#64748b',     // slate-500
 
-    // Cover-only label color (the "BUSINESS PROJECT" style subtitle text)
-    coverLabel: '#2e9fd4',
+    // Glow blur colors for decorative orbs
+    glowBlue: 'rgba(147,197,253,0.3)',   // blue-300/30
+    glowSky: 'rgba(125,211,252,0.3)',    // sky-300/30
   },
   typography: {
     fontHeading: "'Inter', sans-serif",
