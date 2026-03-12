@@ -79,7 +79,10 @@ const SortableSidebarItem = ({ block, isActive, onSelect, onRemove, isLocked }: 
 };
 
 const CommandCenter: React.FC = () => {
-  const { proposal, activeBlockId, setActiveBlockId, addBlock, updateBlock, removeBlock, updateProposalDetails } = useProposalStore();
+  const { 
+    proposal, activeBlockId, setActiveBlockId, addBlock, updateBlock, removeBlock, updateProposalDetails,
+    addPricingItem, updatePricingItem, removePricingItem
+  } = useProposalStore();
 
   const handleAddBlock = (type: BlockType) => {
     addBlock({
@@ -306,8 +309,107 @@ const CommandCenter: React.FC = () => {
               )}
 
               {activeBlock.type === 'PRICING_TABLE' && (
-                <div className="text-xs text-zinc-500 italic p-2 bg-zinc-50 rounded border border-zinc-100">
-                  Line items are managed via the pricing store engine.
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-medium text-zinc-600">Line Items</label>
+                    <button
+                      onClick={() => addPricingItem({
+                        id: crypto.randomUUID(),
+                        deliverable: 'New Service',
+                        description: '',
+                        quantity: 1,
+                        unitPrice: 0,
+                        isOptional: false,
+                      })}
+                      disabled={isLocked}
+                      className="text-xs flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium disabled:opacity-40"
+                    >
+                      + Add Item
+                    </button>
+                  </div>
+
+                  {(!proposal?.pricing || proposal.pricing.length === 0) && (
+                    <p className="text-xs text-zinc-400 italic text-center py-2">No line items yet. Click "+ Add Item" to start.</p>
+                  )}
+
+                  <div className="flex flex-col divide-y divide-zinc-100">
+                    {proposal?.pricing.map((item) => (
+                      <div key={item.id} className="py-3 flex flex-col gap-2">
+                        {/* Row 1: Deliverable name + remove */}
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="text"
+                            className="flex-1 text-sm border border-zinc-200 rounded px-2 py-1 outline-none focus:border-indigo-400"
+                            value={item.deliverable}
+                            onChange={(e) => updatePricingItem(item.id, { deliverable: e.target.value })}
+                            placeholder="Service name"
+                          />
+                          <button
+                            onClick={() => removePricingItem(item.id)}
+                            className="text-zinc-300 hover:text-red-500 transition-colors shrink-0"
+                            title="Remove item"
+                          >
+                            <Trash size={14} weight="bold" />
+                          </button>
+                        </div>
+                        {/* Row 2: Description */}
+                        <input
+                          type="text"
+                          className="w-full text-xs border border-zinc-200 rounded px-2 py-1 outline-none focus:border-indigo-400 text-zinc-500"
+                          value={item.description}
+                          onChange={(e) => updatePricingItem(item.id, { description: e.target.value })}
+                          placeholder="Brief description (optional)"
+                        />
+                        {/* Row 3: Qty × Price + Optional toggle */}
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1 text-xs text-zinc-500">
+                            <span className="shrink-0">Qty</span>
+                            <input
+                              type="number"
+                              min={1}
+                              className="w-12 text-xs border border-zinc-200 rounded px-1.5 py-1 outline-none focus:border-indigo-400 text-center"
+                              value={item.quantity}
+                              onChange={(e) => updatePricingItem(item.id, { quantity: Math.max(1, parseInt(e.target.value) || 1) })}
+                            />
+                          </div>
+                          <div className="flex items-center gap-1 text-xs text-zinc-500">
+                            <span className="shrink-0">$</span>
+                            <input
+                              type="number"
+                              min={0}
+                              className="w-20 text-xs border border-zinc-200 rounded px-1.5 py-1 outline-none focus:border-indigo-400"
+                              value={item.unitPrice}
+                              onChange={(e) => updatePricingItem(item.id, { unitPrice: parseFloat(e.target.value) || 0 })}
+                              placeholder="0.00"
+                            />
+                          </div>
+                          <label className="flex items-center gap-1 text-xs text-zinc-500 ml-auto cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={item.isOptional}
+                              onChange={(e) => updatePricingItem(item.id, { isOptional: e.target.checked })}
+                              className="rounded accent-indigo-500"
+                            />
+                            Optional
+                          </label>
+                        </div>
+                        {/* Row 4: Line total */}
+                        <div className="text-xs text-right text-zinc-500">
+                          Subtotal: <span className="font-semibold text-zinc-700">${(item.quantity * item.unitPrice).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Grand Total Summary */}
+                  {(proposal?.pricing?.length ?? 0) > 0 && (
+                    <div className="mt-2 pt-3 border-t border-zinc-200 flex items-center justify-between">
+                      <span className="text-sm font-semibold text-zinc-700">Total Value</span>
+                      <span className="text-base font-bold text-indigo-700">
+                        ${proposal!.totalValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      </span>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
