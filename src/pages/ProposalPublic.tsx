@@ -119,7 +119,7 @@ const ProposalPublic: React.FC = () => {
       <div 
         className="w-full max-w-[816px] min-h-[1056px] shadow-2xl rounded-sm overflow-hidden relative p-8 md:p-16 transition-all"
         style={{ 
-          background: `linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)`,
+          background: `linear-gradient(160deg, #f0f4f8 0%, #e8f0fe 50%, #f0f4f8 100%)`,
         }}
       >
         {/* Document-wide Grid Background */}

@@ -26,7 +26,12 @@ const ProposalPrint: React.FC = () => {
   }
 
   return (
-    <div className="w-full bg-[#f8fafc] text-slate-900 min-h-screen relative font-sans">
+    <div 
+      className="w-full text-slate-900 min-h-screen relative font-sans"
+      style={{ 
+        background: `linear-gradient(160deg, #f0f4f8 0%, #e8f0fe 50%, #f0f4f8 100%)`,
+      }}
+    >
       
       {/* Document-wide Grid Background (Print) */}
       <div 

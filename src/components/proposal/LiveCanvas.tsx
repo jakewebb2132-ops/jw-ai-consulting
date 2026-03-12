@@ -281,7 +281,7 @@ const LiveCanvas: React.FC = () => {
       <div 
         className="w-full max-w-[816px] min-h-[1056px] shadow-xl rounded-sm ring-1 ring-black/5 overflow-hidden transition-all relative"
         style={{ 
-          background: `linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)`,
+          background: `linear-gradient(160deg, #f0f4f8 0%, #e8f0fe 50%, #f0f4f8 100%)`,
         }}
         onClick={(e) => e.stopPropagation()} // Prevent deselect when clicking paper
       >
