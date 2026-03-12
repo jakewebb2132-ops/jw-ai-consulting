@@ -8,8 +8,8 @@ import CoverBlock from '../components/proposal/CoverBlock';
 const ProposalPublic: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   // In a real app, you would fetch the proposal by ID from the database here.
-  // For this local demo, we read from the Zustand store.
-  const { proposal } = useProposalStore();
+  const { fetchProposal, proposal } = useProposalStore();
+  const [loading, setLoading] = useState(true);
 
   // Check our mock telemetry cache to see if the document was signed across tabs
   const [isAccepted, setIsAccepted] = useState(false);
@@ -46,13 +46,21 @@ const ProposalPublic: React.FC = () => {
       }
     };
 
-    trackView();
-  }, [id]);
+    const loadData = async () => {
+      setLoading(true);
+      await fetchProposal(id);
+      setLoading(false);
+      trackView();
+    };
 
-  if (!proposal) {
+    loadData();
+  }, [id, fetchProposal]);
+
+  if (loading || !proposal) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-zinc-50 text-zinc-500">
-        Loading document...
+        <CircleNotch size={32} className="animate-spin text-blue-600 mb-4" />
+        <span className="ml-3 text-lg font-medium">Loading document...</span>
       </div>
     );
   }

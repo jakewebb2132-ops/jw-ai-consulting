@@ -29,6 +29,9 @@ interface ProposalState {
   addPricingItem: (item: PricingItem) => void;
   updatePricingItem: (id: string, updates: Partial<Omit<PricingItem, 'id'>>) => void;
   removePricingItem: (id: string) => void;
+  
+  // Fetching
+  fetchProposal: (id: string) => Promise<void>;
 }
 
 const calculateTotalValue = (pricing: PricingItem[]): number => {
@@ -230,6 +233,38 @@ export const useProposalStore = create<ProposalState>()(
       lastLocalSave: new Date(),
     };
   }),
+
+  fetchProposal: async (id: string) => {
+    try {
+      const { supabase } = await import('../lib/supabase');
+      const { data, error } = await supabase
+        .from('proposals')
+        .select('*')
+        .eq('id', id)
+        .single();
+      
+      if (error) throw error;
+      if (data) {
+        set({ 
+          proposal: {
+            id: data.id,
+            title: data.title,
+            status: data.status,
+            clientId: data.client_id,
+            blocks: data.blocks,
+            pricing: data.pricing,
+            totalValue: data.total_value,
+            companyLogo: data.company_logo || null,
+            createdAt: new Date(data.created_at),
+            updatedAt: new Date(data.updated_at),
+          },
+          lastLocalSave: new Date()
+        });
+      }
+    } catch (err) {
+      console.error('Error fetching proposal:', err);
+    }
+  },
 }),
     {
       name: 'jw-proposal-draft',

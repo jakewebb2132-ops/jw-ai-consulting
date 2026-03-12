@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useProposalStore } from '../store/proposalStore';
 import { jwTheme } from '../theme/jwTheme';
 import CoverBlock from '../components/proposal/CoverBlock';
 
 const ProposalPrint: React.FC = () => {
-  const { proposal } = useProposalStore();
+  const { id } = useParams<{ id: string }>();
+  const { fetchProposal, proposal } = useProposalStore();
 
   useEffect(() => {
     // A helpful signal flag for the puppeteer engine if we needed programmatic verification
     window.document.documentElement.classList.add('is-print-mode');
+    
+    if (id) {
+      fetchProposal(id);
+    }
+
     return () => {
       window.document.documentElement.classList.remove('is-print-mode');
     };
-  }, []);
+  }, [id, fetchProposal]);
 
   if (!proposal) {
     return <div className="p-8">Loading proposal...</div>;
