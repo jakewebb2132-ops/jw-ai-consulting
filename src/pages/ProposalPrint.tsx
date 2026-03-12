@@ -21,11 +21,11 @@ const ProposalPrint: React.FC = () => {
       
       {/* Global Watermark (Print Mode) */}
       {proposal.companyLogo && (
-        <div className="fixed top-8 right-8 opacity-15 pointer-events-none z-0 mix-blend-multiply grayscale">
+        <div className="fixed top-8 right-8 opacity-20 pointer-events-none z-0 mix-blend-multiply grayscale">
           <img 
             src={proposal.companyLogo} 
             alt="Company Watermark" 
-            className="max-h-12 w-auto object-contain"
+            className="max-h-36 w-auto object-contain"
           />
         </div>
       )}

@@ -78,7 +78,7 @@ export const defaultPricing: PricingItem[] = [
 
 export const generateDefaultProposal = (): Proposal => ({
   id: crypto.randomUUID(),
-  title: 'Strategic AI Consulting Proposal',
+  title: 'Consulting Proposal',
   status: 'DRAFT',
   createdAt: new Date(),
   updatedAt: new Date(),

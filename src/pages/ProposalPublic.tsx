@@ -111,11 +111,11 @@ const ProposalPublic: React.FC = () => {
         
         {/* Global Watermark */}
         {proposal.companyLogo && (
-          <div className="absolute top-12 right-12 opacity-15 pointer-events-none z-0 mix-blend-multiply grayscale">
+          <div className="absolute top-10 right-10 opacity-20 pointer-events-none z-0 mix-blend-multiply grayscale">
             <img 
               src={proposal.companyLogo} 
               alt="Company Watermark" 
-              className="max-h-16 w-auto object-contain"
+              className="max-h-40 w-auto object-contain"
             />
           </div>
         )}
