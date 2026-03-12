@@ -1,10 +1,12 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { Proposal, ContentBlock, PricingItem } from '../types/proposal';
 import { generateDefaultProposal } from '../utils/defaultProposal';
 
 interface ProposalState {
   proposal: Proposal | null;
   activeBlockId: string | null;
+  lastLocalSave: Date | null;
   
   // Supabase Sync States
   isSaving: boolean;
@@ -15,6 +17,7 @@ interface ProposalState {
   saveProposal: () => Promise<void>;
   updateProposalDetails: (updates: Partial<Pick<Proposal, 'title' | 'status' | 'expirationDate' | 'clientId' | 'companyLogo'>>) => void;
   setActiveBlockId: (id: string | null) => void;
+  clearDraft: () => void;
   
   // Blocks
   addBlock: (block: Omit<ContentBlock, 'orderIndex'>) => void;
@@ -37,15 +40,20 @@ const calculateTotalValue = (pricing: PricingItem[]): number => {
   }, 0);
 };
 
-export const useProposalStore = create<ProposalState>((set, get) => ({
+export const useProposalStore = create<ProposalState>()(
+  persist(
+    (set, get) => ({
   proposal: generateDefaultProposal(),
   activeBlockId: null,
+  lastLocalSave: null,
   isSaving: false,
   saveError: null,
 
   setActiveBlockId: (id) => set({ activeBlockId: id }),
 
-  initializeProposal: (proposal) => set({ proposal }),
+  initializeProposal: (proposal) => set({ proposal, lastLocalSave: new Date() }),
+
+  clearDraft: () => set({ proposal: generateDefaultProposal(), lastLocalSave: null }),
 
   saveProposal: async () => {
     const { proposal } = get();
@@ -74,6 +82,8 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
         .upsert(payload, { onConflict: 'id' });
         
       if (error) throw error;
+      // On successful DB save, also update the local save timestamp
+      set({ lastLocalSave: new Date() });
       
     } catch (err: any) {
       console.error('Failed to save to Supabase:', err);
@@ -90,7 +100,8 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
         ...state.proposal,
         ...updates,
         updatedAt: new Date(),
-      }
+      },
+      lastLocalSave: new Date(),
     };
   }),
 
@@ -111,7 +122,8 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
         ...state.proposal,
         blocks: [...state.proposal.blocks, newBlock].sort((a, b) => a.orderIndex - b.orderIndex),
         updatedAt: new Date(),
-      }
+      },
+      lastLocalSave: new Date(),
     };
   }),
 
@@ -127,7 +139,8 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
         ...state.proposal,
         blocks: updatedBlocks,
         updatedAt: new Date(),
-      }
+      },
+      lastLocalSave: new Date(),
     };
   }),
 
@@ -146,7 +159,8 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
         ...state.proposal,
         blocks: recalcedBlocks,
         updatedAt: new Date(),
-      }
+      },
+      lastLocalSave: new Date(),
     };
   }),
 
@@ -213,7 +227,16 @@ export const useProposalStore = create<ProposalState>((set, get) => ({
         pricing: newPricing,
         totalValue: calculateTotalValue(newPricing),
         updatedAt: new Date(),
-      }
+      },
+      lastLocalSave: new Date(),
     };
   }),
-}));
+}),
+    {
+      name: 'jw-proposal-draft',
+      storage: createJSONStorage(() => localStorage),
+      // Only persist the proposal data, not transient UI state
+      partialize: (state) => ({ proposal: state.proposal, lastLocalSave: state.lastLocalSave }),
+    }
+  )
+);

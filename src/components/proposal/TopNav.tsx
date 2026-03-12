@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useProposalStore } from '../../store/proposalStore';
-import { CloudCheck, FilePdf, LinkSimple, CircleNotch, Database } from 'phosphor-react';
+import { CloudCheck, FilePdf, LinkSimple, CircleNotch, Database, FloppyDisk } from 'phosphor-react';
 
 const TopNav: React.FC = () => {
-  const { proposal, updateProposalDetails, saveProposal, isSaving, saveError } = useProposalStore();
+  const { proposal, updateProposalDetails, saveProposal, isSaving, saveError, lastLocalSave } = useProposalStore();
   const [isExporting, setIsExporting] = useState(false);
+  const [saveAge, setSaveAge] = useState<string>('');
+
+  // Live-update the "X ago" label every 30s so it never goes stale
+  useEffect(() => {
+    const formatAge = () => {
+      if (!lastLocalSave) return;
+      const diffMs = Date.now() - new Date(lastLocalSave).getTime();
+      const diffSec = Math.floor(diffMs / 1000);
+      if (diffSec < 60) setSaveAge('just now');
+      else if (diffSec < 3600) setSaveAge(`${Math.floor(diffSec / 60)}m ago`);
+      else setSaveAge(`${Math.floor(diffSec / 3600)}h ago`);
+    };
+    formatAge();
+    const interval = setInterval(formatAge, 30_000);
+    return () => clearInterval(interval);
+  }, [lastLocalSave]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateProposalDetails({ title: e.target.value });
@@ -68,10 +84,19 @@ const TopNav: React.FC = () => {
         />
       </div>
 
-      {/* Center: Status Indicator */}
-      <div className="flex items-center gap-2 text-sm text-zinc-500 font-medium">
-        <CloudCheck weight="fill" className="text-zinc-400" size={18} />
-        {proposal ? `Saved as ${proposal.status.toLowerCase()}` : 'Draft'}
+      {/* Center: Auto-Save Status Indicator */}
+      <div className="flex items-center gap-2 text-sm font-medium">
+        {lastLocalSave ? (
+          <>
+            <FloppyDisk weight="fill" className="text-emerald-500" size={16} />
+            <span className="text-emerald-600">Draft auto-saved {saveAge}</span>
+          </>
+        ) : (
+          <>
+            <CloudCheck weight="fill" className="text-zinc-400" size={16} />
+            <span className="text-zinc-400">Not yet saved</span>
+          </>
+        )}
       </div>
 
       {/* Right: Actions */}
