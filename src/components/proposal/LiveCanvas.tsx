@@ -4,10 +4,10 @@ import { CSS } from '@dnd-kit/utilities';
 import { ContentBlock } from '../../types/proposal';
 import { jwTheme } from '../../theme/jwTheme';
 import RichTextEditor from './RichTextEditor';
+import { Trash, Plus } from 'phosphor-react';
 
-const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: ContentBlock, isActive: boolean, onSelect: () => void, isLocked?: boolean }) => {
-  const proposal = useProposalStore(state => state.proposal);
-  const updateBlock = useProposalStore(state => state.updateBlock);
+const CanvasBlock: React.FC<{ block: ContentBlock; isActive: boolean; isLocked: boolean; onSelect: () => void }> = ({ block, isActive, isLocked, onSelect }) => {
+  const { updateBlock, updatePricingItem, removePricingItem, addPricingItem, proposal } = useProposalStore();
   
   const {
     setNodeRef,
@@ -162,35 +162,80 @@ const SortableCanvasBlock = ({ block, isActive, onSelect, isLocked }: { block: C
               Investment Summary
             </h3>
           </div>
-          <div className="p-6 flex flex-col gap-4">
+          <div className="p-6 flex flex-col gap-3">
             {proposal?.pricing?.map((item) => (
-              <div key={item.id} className="flex items-start justify-between p-4 rounded-lg bg-zinc-50/50 border border-zinc-100 hover:border-blue-100 transition-colors">
-                 <div className="flex-1 pr-8">
-                   <div className="flex items-center gap-3 mb-1">
-                     {item.isOptional && (
-                       <input 
-                         type="checkbox" 
-                         className="w-4 h-4 text-blue-600 rounded border-gray-300 pointer-events-none opacity-60"
-                         defaultChecked={false}
-                         disabled
-                       />
-                     )}
-                     <h4 className="font-semibold text-slate-900">{item.deliverable}</h4>
-                     {item.isOptional && <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">Optional Add-on</span>}
-                   </div>
-                   <p className="text-sm text-slate-500 leading-relaxed ml-7">{item.description}</p>
-                 </div>
-                 <div className="text-right font-medium text-slate-900">
-                   {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.unitPrice)}
-                 </div>
+              <div key={item.id} className="flex items-start justify-between p-4 rounded-lg bg-zinc-50/50 border border-zinc-100 hover:border-blue-200 transition-colors group">
+                <div className="flex-1 pr-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    {item.isOptional && (
+                      <input 
+                        type="checkbox" 
+                        className="w-4 h-4 text-blue-600 rounded border-gray-300 pointer-events-none opacity-60 shrink-0"
+                        defaultChecked={false}
+                        disabled
+                      />
+                    )}
+                    {/* Editable service name */}
+                    <input
+                      type="text"
+                      className="flex-1 font-semibold text-slate-900 bg-transparent border-none outline-none focus:ring-0 focus:bg-zinc-100 rounded px-1 -ml-1 transition-colors"
+                      value={item.deliverable}
+                      onChange={(e) => updatePricingItem(item.id, { deliverable: e.target.value })}
+                      disabled={isLocked}
+                      placeholder="Service name"
+                    />
+                    {item.isOptional && <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium shrink-0">Optional Add-on</span>}
+                    {/* Remove button */}
+                    {!isLocked && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); removePricingItem(item.id); }}
+                        className="opacity-0 group-hover:opacity-100 text-zinc-300 hover:text-red-500 transition-all shrink-0"
+                      >
+                        <Trash size={14} weight="bold" />
+                      </button>
+                    )}
+                  </div>
+                  {/* Editable description */}
+                  <input
+                    type="text"
+                    className="w-full text-sm text-slate-500 bg-transparent border-none outline-none focus:ring-0 focus:bg-zinc-100 rounded px-1 ml-6 transition-colors"
+                    value={item.description}
+                    onChange={(e) => updatePricingItem(item.id, { description: e.target.value })}
+                    disabled={isLocked}
+                    placeholder="Description..."
+                  />
+                </div>
+                {/* Editable price */}
+                <div className="flex items-center gap-1 shrink-0">
+                  <span className="text-slate-400 text-sm">$</span>
+                  <input
+                    type="number"
+                    className="w-24 text-right font-semibold text-slate-900 bg-transparent border-none outline-none focus:ring-0 focus:bg-zinc-100 rounded px-1 transition-colors"
+                    value={item.unitPrice}
+                    onChange={(e) => updatePricingItem(item.id, { unitPrice: parseFloat(e.target.value) || 0 })}
+                    disabled={isLocked}
+                    min={0}
+                  />
+                </div>
               </div>
             ))}
 
+            {/* Add item button */}
+            {!isLocked && (
+              <button
+                onClick={(e) => { e.stopPropagation(); addPricingItem({ id: crypto.randomUUID(), deliverable: 'New Service', description: '', quantity: 1, unitPrice: 0, isOptional: false }); }}
+                className="flex items-center gap-2 text-sm text-zinc-400 hover:text-indigo-600 transition-colors py-2 px-4 rounded-lg hover:bg-zinc-50 w-full"
+              >
+                <Plus size={14} weight="bold" />
+                Add line item
+              </button>
+            )}
+
             {/* Total Readout */}
-            <div className="mt-4 pt-4 border-t border-zinc-200 flex justify-between items-center px-4">
+            <div className="mt-2 pt-4 border-t border-zinc-200 flex justify-between items-center px-4">
               <span className="text-slate-500 font-medium">Estimated Total</span>
-              <span className="text-2xl font-bold text-slate-900" style={{ color: jwTheme.colors.primary }}>
-                 {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(proposal?.totalValue || 0)}
+              <span className="text-2xl font-bold" style={{ color: jwTheme.colors.primary }}>
+                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(proposal?.totalValue || 0)}
               </span>
             </div>
           </div>
@@ -247,7 +292,7 @@ const LiveCanvas: React.FC = () => {
               strategy={verticalListSortingStrategy}
             >
               {proposal.blocks.map((block) => (
-                <SortableCanvasBlock 
+                <CanvasBlock 
                   key={block.id} 
                   block={block} 
                   isActive={block.id === activeBlockId}
