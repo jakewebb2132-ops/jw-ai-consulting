@@ -21,8 +21,26 @@ const ProposalPrint: React.FC = () => {
     };
   }, [id, fetchProposal]);
 
+  useEffect(() => {
+    if (proposal) {
+      // Give it a moment for fonts/images to settle
+      const timer = setTimeout(() => {
+        window.print();
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+  }, [proposal]);
+
   if (!proposal) {
-    return <div className="p-8">Loading proposal...</div>;
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-50 text-zinc-500 font-sans p-8 text-center">
+        <div className="animate-spin mb-6">
+           <svg className="w-10 h-10 text-blue-600" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+        </div>
+        <h2 className="text-xl font-bold text-slate-900 mb-2">Preparing Your Document</h2>
+        <p className="text-zinc-500 max-w-xs">Connecting to the secure proposal engine and generating your high-fidelity PDF...</p>
+      </div>
+    );
   }
 
   return (
