@@ -65,7 +65,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       attributes: {
         class: [
           'prose max-w-none focus:outline-none w-full break-words',
-          isHeading ? 'text-3xl font-bold tracking-tight' : 'text-lg leading-relaxed whitespace-pre-wrap',
+          isHeading ? 'text-3xl font-bold tracking-tight' : 'text-lg leading-relaxed',
           !content ? 'is-empty' : ''
         ].join(' '),
         style: `

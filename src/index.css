@@ -29,8 +29,8 @@ body {
 }
 
 .ProseMirror p {
-    margin: 0;
     min-height: 1.5rem;
+    margin-bottom: 1.25em; /* Explicitly add space between paragraphs in the editor */
 }
 
 .ProseMirror ul {
