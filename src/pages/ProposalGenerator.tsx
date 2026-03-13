@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TopNav from '../components/proposal/TopNav';
 import CommandCenter from '../components/proposal/CommandCenter';
 import LiveCanvas from '../components/proposal/LiveCanvas';
@@ -8,8 +8,19 @@ import { useProposalStore } from '../store/proposalStore';
 import { useState } from 'react';
 
 const ProposalGenerator: React.FC = () => {
-  const { proposal, reorderBlocks } = useProposalStore();
+  const { proposal, reorderBlocks, updateProposalDetails } = useProposalStore();
   const [activeId, setActiveId] = useState<string | null>(null);
+
+  // Migration: If the user has the old "Strategic AI..." title from local storage,
+  // automatically clean it up to "Strategic Proposal" as requested.
+  useEffect(() => {
+    if (proposal?.title && (
+        proposal.title.includes('Strategic AI Consulting') || 
+        proposal.title === 'Consulting Proposal'
+    )) {
+      updateProposalDetails({ title: 'Strategic Proposal' });
+    }
+  }, [proposal?.title, updateProposalDetails]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {

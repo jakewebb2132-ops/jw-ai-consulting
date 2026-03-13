@@ -9,7 +9,7 @@ export const defaultBlocks: ContentBlock[] = [
     id: 'block-1-hero',
     orderIndex: 0,
     type: 'HEADING',
-    content: 'Consulting Proposal',
+    content: 'Strategic Proposal',
     designSettings: {
       theme: 'dark' // Suggests high-contrast hero
     }
@@ -78,7 +78,7 @@ export const defaultPricing: PricingItem[] = [
 
 export const generateDefaultProposal = (): Proposal => ({
   id: crypto.randomUUID(),
-  title: 'Consulting Proposal',
+  title: 'Strategic Proposal',
   status: 'DRAFT',
   createdAt: new Date(),
   updatedAt: new Date(),
