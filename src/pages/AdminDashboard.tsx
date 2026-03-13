@@ -56,6 +56,7 @@ const AdminDashboard: React.FC = () => {
               <thead className="bg-zinc-50/50 border-b border-zinc-200">
                 <tr>
                   <th className="px-6 py-4 text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Document Name</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Client / Company</th>
                   <th className="px-6 py-4 text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Status</th>
                   <th className="px-6 py-4 text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Estimated Value</th>
                   <th className="px-6 py-4 text-[11px] font-bold text-zinc-400 uppercase tracking-widest text-center">Views</th>
@@ -81,6 +82,9 @@ const AdminDashboard: React.FC = () => {
                       <tr key={p.id} className="hover:bg-zinc-50/50 transition-colors group">
                         <td className="px-6 py-5 font-semibold text-zinc-900">
                           {p.title || 'Untitled Proposal'}
+                        </td>
+                        <td className="px-6 py-5 text-zinc-500 font-medium">
+                          {p.companyName || 'Untitled Company'}
                         </td>
                         <td className="px-6 py-5">
                           <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase ${
@@ -114,11 +118,22 @@ const AdminDashboard: React.FC = () => {
                           )}
                         </td>
                         <td className="px-6 py-5">
-                          <div className="flex items-center justify-end gap-3 opacity-40 group-hover:opacity-100 transition-all text-zinc-400">
-                            <Link to="/proposal-generator" onClick={() => useProposalStore.getState().initializeProposal(p)} className="hover:text-blue-600 transition-colors" title="Edit">
-                              <FileText size={20} />
+                          <div className="flex items-center justify-end gap-3 opacity-40 group-hover:opacity-100 transition-all">
+                            <Link 
+                              to="/proposal-generator" 
+                              onClick={() => useProposalStore.getState().initializeProposal(p)} 
+                              className="px-3 py-1.5 bg-zinc-100 hover:bg-blue-600 hover:text-white text-zinc-600 text-xs font-bold rounded flex items-center gap-2 transition-all"
+                            >
+                              <FileText size={14} />
+                              Edit Document
                             </Link>
-                            <Link to={`/p/${p.id}`} target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition-colors" title="View Magic Link">
+                            <Link 
+                              to={`/p/${p.id}`} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="p-1.5 text-zinc-400 hover:text-green-600 transition-colors" 
+                              title="View Magic Link"
+                            >
                               <Eye size={20} />
                             </Link>
                           </div>

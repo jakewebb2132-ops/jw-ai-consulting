@@ -118,6 +118,18 @@ const CommandCenter: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-2">
+            <label className="text-xs font-medium text-zinc-600">Client / Company Name</label>
+            <input 
+              type="text"
+              className="w-full text-sm border border-zinc-300 rounded-md p-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+              value={proposal?.companyName || ''}
+              onChange={(e) => updateProposalDetails({ companyName: e.target.value })}
+              placeholder="e.g. Acme Corp"
+              disabled={isLocked}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
             <label className="text-xs font-medium text-zinc-600">Company Logo (Watermark)</label>
             <input 
               type="url"

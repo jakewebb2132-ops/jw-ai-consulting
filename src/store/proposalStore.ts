@@ -16,7 +16,7 @@ interface ProposalState {
   // Actions
   initializeProposal: (proposal: Proposal) => void;
   saveProposal: () => Promise<void>;
-  updateProposalDetails: (updates: Partial<Pick<Proposal, 'title' | 'status' | 'expirationDate' | 'clientId' | 'companyLogo'>>) => void;
+  updateProposalDetails: (updates: Partial<Pick<Proposal, 'title' | 'status' | 'expirationDate' | 'clientId' | 'companyLogo' | 'companyName'>>) => void;
   setActiveBlockId: (id: string | null) => void;
   clearDraft: () => void;
   
@@ -79,7 +79,9 @@ export const useProposalStore = create<ProposalState>()(
         blocks: proposal.blocks,
         pricing: proposal.pricing,
         total_value: proposal.totalValue,
-        // Note: company_logo stored client-side only (not in DB schema)
+        company_name: proposal.companyName,
+        company_logo: proposal.companyLogo,
+        updated_at: new Date().toISOString(),
       };
 
       const { error } = await supabase
@@ -258,6 +260,7 @@ export const useProposalStore = create<ProposalState>()(
             pricing: data.pricing,
             totalValue: data.total_value,
             viewCount: data.view_count || 0,
+            companyName: data.company_name || 'Untitled Company',
             companyLogo: data.company_logo || null,
             createdAt: new Date(data.created_at),
             updatedAt: new Date(data.updated_at),
@@ -289,6 +292,7 @@ export const useProposalStore = create<ProposalState>()(
             pricing: p.pricing,
             totalValue: p.total_value,
             viewCount: p.view_count || 0,
+            companyName: p.company_name || 'Untitled Company',
             companyLogo: p.company_logo || null,
             createdAt: new Date(p.created_at),
             updatedAt: new Date(p.updated_at),

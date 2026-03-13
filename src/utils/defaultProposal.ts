@@ -87,5 +87,6 @@ export const generateDefaultProposal = (): Proposal => ({
   blocks: defaultBlocks,
   pricing: defaultPricing,
   totalValue: defaultPricing.reduce((acc, item) => !item.isOptional ? acc + (item.quantity * item.unitPrice) : acc, 0),
-  viewCount: 0
+  viewCount: 0,
+  companyName: 'Untitled Company',
 });

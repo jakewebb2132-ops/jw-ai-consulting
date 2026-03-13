@@ -49,4 +49,5 @@ export interface Proposal {
 
   // Global Branding
   companyLogo?: string;
+  companyName: string;
 }
