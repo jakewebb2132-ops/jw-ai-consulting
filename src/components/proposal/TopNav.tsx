@@ -107,7 +107,12 @@ const TopNav: React.FC = () => {
           <SquaresFour weight="fill" size={20} className="group-hover:text-blue-600 transition-colors" />
         </button>
         <div className="h-6 w-px bg-zinc-200" />
-        <div className="font-bold text-lg tracking-tight">JW AI</div>
+        <button 
+          onClick={() => navigate('/admin/dashboard')}
+          className="font-bold text-lg tracking-tight hover:text-blue-600 transition-colors"
+        >
+          JW AI
+        </button>
         <div className="h-6 w-px bg-zinc-300 rounded-full" />
         <input
           type="text"

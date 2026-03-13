@@ -9,7 +9,7 @@ export const defaultBlocks: ContentBlock[] = [
     id: 'block-1-hero',
     orderIndex: 0,
     type: 'HEADING',
-    content: 'Strategic AI Implementation Proposal for [Client Company Name]',
+    content: 'Consulting Proposal',
     designSettings: {
       theme: 'dark' // Suggests high-contrast hero
     }
