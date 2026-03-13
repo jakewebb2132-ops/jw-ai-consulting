@@ -86,5 +86,6 @@ export const generateDefaultProposal = (): Proposal => ({
   clientId: 'new-client',
   blocks: defaultBlocks,
   pricing: defaultPricing,
-  totalValue: defaultPricing.reduce((acc, item) => !item.isOptional ? acc + (item.quantity * item.unitPrice) : acc, 0)
+  totalValue: defaultPricing.reduce((acc, item) => !item.isOptional ? acc + (item.quantity * item.unitPrice) : acc, 0),
+  viewCount: 0
 });

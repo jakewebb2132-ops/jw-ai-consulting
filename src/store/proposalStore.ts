@@ -5,6 +5,7 @@ import { generateDefaultProposal } from '../utils/defaultProposal';
 
 interface ProposalState {
   proposal: Proposal | null;
+  proposals: Proposal[];
   activeBlockId: string | null;
   lastLocalSave: Date | null;
   
@@ -32,6 +33,7 @@ interface ProposalState {
   
   // Fetching
   fetchProposal: (id: string) => Promise<void>;
+  fetchAllProposals: () => Promise<void>;
 }
 
 const calculateTotalValue = (pricing: PricingItem[]): number => {
@@ -47,6 +49,7 @@ export const useProposalStore = create<ProposalState>()(
   persist(
     (set, get) => ({
   proposal: generateDefaultProposal(),
+  proposals: [],
   activeBlockId: null,
   lastLocalSave: null,
   isSaving: false,
@@ -254,6 +257,7 @@ export const useProposalStore = create<ProposalState>()(
             blocks: data.blocks,
             pricing: data.pricing,
             totalValue: data.total_value,
+            viewCount: data.view_count || 0,
             companyLogo: data.company_logo || null,
             createdAt: new Date(data.created_at),
             updatedAt: new Date(data.updated_at),
@@ -263,6 +267,36 @@ export const useProposalStore = create<ProposalState>()(
       }
     } catch (err) {
       console.error('Error fetching proposal:', err);
+    }
+  },
+
+  fetchAllProposals: async () => {
+    try {
+      const { supabase } = await import('../lib/supabase');
+      const { data, error } = await supabase
+        .from('proposals')
+        .select('*')
+        .order('updated_at', { ascending: false });
+      
+      if (error) throw error;
+      if (data) {
+        const mappedProposals: Proposal[] = data.map(p => ({
+            id: p.id,
+            title: p.title,
+            status: p.status,
+            clientId: p.client_id,
+            blocks: p.blocks,
+            pricing: p.pricing,
+            totalValue: p.total_value,
+            viewCount: p.view_count || 0,
+            companyLogo: p.company_logo || null,
+            createdAt: new Date(p.created_at),
+            updatedAt: new Date(p.updated_at),
+        }));
+        set({ proposals: mappedProposals });
+      }
+    } catch (err) {
+      console.error('Error fetching all proposals:', err);
     }
   },
 }),

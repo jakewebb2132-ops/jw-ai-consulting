@@ -40,6 +40,7 @@ export interface Proposal {
   blocks: ContentBlock[]; // Array of dynamic sections
   pricing: PricingItem[]; // Array of deliverables
   totalValue: number; // Auto-calculated field
+  viewCount: number; // Tracks number of times the magic link was opened
 
   // Sign-off tracking elements
   acceptedAt?: Date;

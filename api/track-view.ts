@@ -18,15 +18,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Missing proposalId' });
     }
 
-    // Telemetry Engine: Update Supabase last_viewed_at
-    // We only update the status to VIEWED if it's currently DRAFT or SENT, avoiding reverting ACCEPTED.
-    // However, for simplicity of the query, we will just update the timestamp. If you want complex status logic, 
-    // it's best to fetch first or use a Postgres function.
+    // Telemetry Engine: Increment view_count and update last_viewed_at
+    const { data: current } = await supabase
+      .from('proposals')
+      .select('status, view_count')
+      .eq('id', proposalId)
+      .single();
+
+    const updatePayload: any = { 
+      last_viewed_at: new Date().toISOString(),
+      view_count: (current?.view_count || 0) + 1
+    };
     
-    // We update last_viewed_at unconditionally when tracking views
-    const updatePayload: any = { last_viewed_at: new Date().toISOString() };
-    if (event === 'VIEW') {
-        // Only mark it viewed if they are just opening it
+    if (event === 'VIEW' && current?.status !== 'ACCEPTED') {
         updatePayload.status = 'VIEWED'; 
     }
 
@@ -34,7 +38,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .from('proposals')
       .update(updatePayload)
       .eq('id', proposalId)
-      .select('status, last_viewed_at, accepted_at, signature_name')
+      .select('status, last_viewed_at, accepted_at, signature_name, view_count')
       .single();
 
     if (error) {
