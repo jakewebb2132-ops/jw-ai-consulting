@@ -11,16 +11,24 @@ const ProposalGenerator: React.FC = () => {
   const { proposal, reorderBlocks, updateProposalDetails } = useProposalStore();
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  // Migration: If the user has the old "Strategic AI..." title from local storage,
-  // automatically clean it up to "Strategic Proposal" as requested.
+  // Migration: rename old proposal titles exactly once per browser.
+  // The localStorage flag prevents this from re-running if something else
+  // sets the title to one of the legacy values in a future session.
   useEffect(() => {
+    const migrated = localStorage.getItem('title-migration-v1');
+    if (migrated) return;
+
     if (proposal?.title && (
-        proposal.title.includes('Strategic AI Consulting') || 
-        proposal.title === 'Consulting Proposal'
+      proposal.title.includes('Strategic AI Consulting') ||
+      proposal.title === 'Consulting Proposal'
     )) {
       updateProposalDetails({ title: 'Strategic Proposal' });
     }
-  }, [proposal?.title, updateProposalDetails]);
+
+    localStorage.setItem('title-migration-v1', 'done');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Run once on mount only
+
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
