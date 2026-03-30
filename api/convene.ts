@@ -28,7 +28,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     // Launch all agent generation calls simultaneously
     const streams = await Promise.all(advisors.map(async (advisor) => {
-      const formattingDirective = "\n\nFORMATTING RULE: Be extremely concise. Cap your response at a maximum of 3 short paragraphs. If a list is appropriate, include a high-impact list (e.g. 'Top 3 Pros and Cons') with clear bullet points. Avoid filler and excessive preamble.";
+      const formattingDirective = "\n\nFORMATTING RULE: Use significant whitespace. Every major thought or sentence should be separated by a double line break to create a very clean, spaced-out appearance. Do not use markdown bullet symbols like '*' or '-'. Instead, put every list item on its own group of lines with a double line break before and after. Be extremely concise. Avoid filler.";
       
       const debateInjection = "\n\nCRITICAL DIRECTIVE: You are in DEBATE MODE. Do not merely agree or synthesize. Actively find flaws in standard assumptions. Challenge the premise of the challenge. Be highly contrarian, assertive, and directly point out where typical groupthink is wrong. Speak firmly and provocatively from your specific worldview." + formattingDirective;
       
