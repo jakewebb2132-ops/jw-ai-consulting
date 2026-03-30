@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Sparkle, Brain, RocketLaunch, Network, ChartBar, GlobeHemisphereWest } from 'phosphor-react';
+import { ArrowRight, Sparkle, Brain, RocketLaunch, Network, GlobeHemisphereWest } from 'phosphor-react';
 
 const PremiumShell: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
