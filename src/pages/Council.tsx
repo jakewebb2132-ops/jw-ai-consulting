@@ -339,7 +339,7 @@ const Council: React.FC = () => {
                           <p className="text-[9px] text-[#c9a96e] font-bold tracking-widest uppercase mt-0.5">{a.lens}</p>
                        </div>
                     </div>
-                    <div className={`px-10 py-10 text-sm leading-relaxed text-zinc-400 font-light ${responses[a.id].isStreaming ? 'animate-pulse opacity-50' : ''}`}>
+                    <div className={`px-10 py-10 text-sm leading-relaxed text-zinc-400 font-light whitespace-pre-line ${responses[a.id].isStreaming ? 'animate-pulse opacity-50' : ''}`}>
                        {responses[a.id].text}
                     </div>
                  </div>

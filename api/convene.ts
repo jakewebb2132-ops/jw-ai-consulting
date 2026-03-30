@@ -28,7 +28,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     // Launch all agent generation calls simultaneously
     const streams = await Promise.all(advisors.map(async (advisor) => {
-      const formattingDirective = "\n\nFORMATTING RULE: Use significant whitespace. Every major thought or sentence should be separated by a double line break to create a very clean, spaced-out appearance. Do not use markdown bullet symbols like '*' or '-'. Instead, put every list item on its own group of lines with a double line break before and after. Be extremely concise. Avoid filler.";
+      const formattingDirective = "\n\nFORMATTING RULE: Use extreme whitespace. You MUST put a double line break (\\n\\n) between EVERY single strategic thought or sentence. Every list item must be isolated with double line breaks. Do NOT use bullet points or dashes. Ensure the output is very spaced out and clean. Be concise.";
       
       const debateInjection = "\n\nCRITICAL DIRECTIVE: You are in DEBATE MODE. Do not merely agree or synthesize. Actively find flaws in standard assumptions. Challenge the premise of the challenge. Be highly contrarian, assertive, and directly point out where typical groupthink is wrong. Speak firmly and provocatively from your specific worldview." + formattingDirective;
       
