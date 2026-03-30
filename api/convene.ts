@@ -28,8 +28,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     // Launch all agent generation calls simultaneously
     const streams = await Promise.all(advisors.map(async (advisor) => {
-      const debateInjection = "\n\nCRITICAL DIRECTIVE: You are in DEBATE MODE. Do not merely agree or synthesize. Actively find flaws in standard assumptions. Challenge the premise of the challenge. Be highly contrarian, assertive, and directly point out where typical groupthink is wrong. Speak firmly and provocatively from your specific worldview.";
-      const consensusInjection = "\n\nCRITICAL DIRECTIVE: You are in CONSENSUS MODE. Frame your analysis constructively. Work to synthesize the best possible path forward, finding common ground and focusing on actionable, optimized solutions.";
+      const formattingDirective = "\n\nFORMATTING RULE: Be extremely concise. Cap your response at a maximum of 3 short paragraphs. If a list is appropriate, include a high-impact list (e.g. 'Top 3 Pros and Cons') with clear bullet points. Avoid filler and excessive preamble.";
+      
+      const debateInjection = "\n\nCRITICAL DIRECTIVE: You are in DEBATE MODE. Do not merely agree or synthesize. Actively find flaws in standard assumptions. Challenge the premise of the challenge. Be highly contrarian, assertive, and directly point out where typical groupthink is wrong. Speak firmly and provocatively from your specific worldview." + formattingDirective;
+      
+      const consensusInjection = "\n\nCRITICAL DIRECTIVE: You are in CONSENSUS MODE. Frame your analysis constructively. Work to synthesize the best possible path forward, finding common ground and focusing on actionable, optimized solutions." + formattingDirective;
       
       const finalPersona = advisor.persona + (mode === 'debate' ? debateInjection : consensusInjection);
 
