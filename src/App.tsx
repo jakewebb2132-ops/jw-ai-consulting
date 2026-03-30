@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Sparkle, Brain, RocketLaunch, Network, GlobeHemisphereWest } from 'phosphor-react';
+import { ArrowRight, Sparkle, Brain, RocketLaunch, Graph, GlobeHemisphereWest } from 'phosphor-react';
 
 const PremiumShell: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -94,7 +94,7 @@ const PremiumShell: React.FC = () => {
 
           {/* Small Card 2 */}
           <div className="glass-panel rounded-3xl p-10 flex flex-col justify-between hover:border-[#c9a96e]/30 transition-colors">
-             <Network size={32} className="text-zinc-600 mb-6" />
+             <Graph size={24} className="text-zinc-600 mb-6" />
              <div>
                 <h4 className="text-lg font-bold text-white mb-2">Live Nodes</h4>
                 <p className="text-xs text-zinc-500 font-light leading-relaxed">Monitor real-time agent chains and asynchronous worker pools.</p>
