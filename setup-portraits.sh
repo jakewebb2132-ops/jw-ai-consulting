@@ -1,0 +1,11 @@
+#!/bin/bash
+BRAIN="/Users/jake/.gemini/antigravity/brain/91e238fc-5abc-4d88-ba7a-8d99a92766cc"
+DEST="/Users/jake/.gemini/antigravity/scratch/jw-ai-consulting/public/portraits"
+mkdir -p "$DEST"
+cp "$BRAIN/cartoon_dario_amodei_1774860766007.png"    "$DEST/dario_amodei.png"
+cp "$BRAIN/cartoon_andrej_karpathy_1774860776783.png" "$DEST/andrej_karpathy.png"
+cp "$BRAIN/cartoon_elon_musk_1774860790405.png"       "$DEST/elon_musk.png"
+cp "$BRAIN/cartoon_jensen_huang_1774860807273.png"    "$DEST/jensen_huang.png"
+cp "$BRAIN/cartoon_feifei_li_1774860822979.png"       "$DEST/feifei_li.png"
+cp "$BRAIN/cartoon_geoffrey_hinton_1774860838422.png" "$DEST/geoffrey_hinton.png"
+echo "✅ All 6 portraits ready:" && ls "$DEST"

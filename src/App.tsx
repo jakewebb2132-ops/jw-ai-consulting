@@ -12,6 +12,7 @@ import ProposalGenerator from './pages/ProposalGenerator';
 import ProposalPrint from './pages/ProposalPrint';
 import ProposalPublic from './pages/ProposalPublic';
 import AdminDashboard from './pages/AdminDashboard';
+import Council from './pages/Council';
 import Login from './pages/Login';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
@@ -79,8 +80,8 @@ const HomePage = () => (
 const AppLayout = () => {
     // If the user visits the proposal subdomain but didn't hit a specific secure route,
     // automatically bounce them to the admin dashboard instead of rendering the consumer marketing site.
-    const isProposalDomain = window.location.hostname.includes('proposal');
-    if (isProposalDomain) {
+    const isBoardroomDomain = window.location.hostname.includes('boardroom') || window.location.hostname.includes('proposal');
+    if (isBoardroomDomain) {
         return <Navigate to="/admin/dashboard" replace />;
     }
 
@@ -126,6 +127,7 @@ function App() {
                 
                 {/* Secure Internal Admin Dashboard (Requires Auth) */}
                 <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+                <Route path="/admin/council" element={<ProtectedRoute><Council /></ProtectedRoute>} />
 
                 {/* Secure Magic Link Public Route (Does NOT require Auth) */}
                 <Route path="/p/:id" element={<ProposalPublic />} />
