@@ -127,7 +127,7 @@ function App() {
                 
                 {/* Secure Internal Admin Dashboard (Requires Auth) */}
                 <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-                <Route path="/admin/council" element={<ProtectedRoute><Council /></ProtectedRoute>} />
+                <Route path="/admin/council" element={<Council />} />
 
                 {/* Secure Magic Link Public Route (Does NOT require Auth) */}
                 <Route path="/p/:id" element={<ProposalPublic />} />
