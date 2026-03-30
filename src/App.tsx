@@ -5,7 +5,7 @@ const PremiumShell: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
   return (
-    <div className="min-h-screen bg-[#05060A] text-[#F4F4F5] font-sans relative overflow-hidden selected-none">
+    <div className="min-h-screen bg-[#05060A] text-[#F4F4F5] font-sans relative overflow-hidden select-none">
       
       {/* Background Ambience */}
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-[#1a150b] to-transparent opacity-80 z-0"></div>
