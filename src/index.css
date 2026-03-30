@@ -1,145 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    html {
-        scroll-padding-top: 5rem;
-        /* Offsets anchor links so the fixed navbar doesn't cover content */
-    }
-}
-
-@layer utilities {
-    .glass-card {
-        @apply bg-white/70 backdrop-blur-xl border border-blue-100 shadow-xl shadow-blue-900/5 rounded-2xl;
-    }
+:root {
+  --bg-dark: #05060A;
+  --bg-panel: #0E0F16;
+  --gold-accent: #c9a96e;
+  --gold-glow: rgba(201, 169, 110, 0.15);
+  --text-primary: #F4F4F5;
+  --text-muted: #A1A1AA;
 }
 
 body {
-    @apply bg-[#f8fafc] text-[#0f172a] antialiased;
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Unified Proposal Typography Engine (Final Parity) ─── */
-/* This targets both the Tiptap editor AND the public/PDF outputs */
-
-.ProseMirror,
-.proposal-render {
-  font-variant-ligatures: common-ligatures;
-  line-height: 1.6;
+.glass-panel {
+  background: rgba(14, 15, 22, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Explicit Paragraph Spacing */
-.ProseMirror p,
-.proposal-render p {
-  margin-top: 0 !important;
-  margin-bottom: 1.25rem !important;
-  min-height: 1.25rem;
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFEAB5 0%, #c9a96e 50%, #9F8246 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Headings within text blocks */
-.ProseMirror h2, .proposal-render h2,
-.ProseMirror h3, .proposal-render h3 {
-  margin-top: 2rem !important;
-  margin-bottom: 1rem !important;
-  font-weight: 800 !important;
-  line-height: 1.2 !important;
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #FFEAB5 0%, #c9a96e 50%, #9F8246 100%);
 }
 
-/* List Spacing */
-.ProseMirror ul, .proposal-render ul,
-.ProseMirror ol, .proposal-render ol {
-  padding-left: 1.5rem !important;
-  margin-top: 0 !important;
-  margin-bottom: 1.25rem !important;
+.hero-glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60vw;
+  height: 60vh;
+  background: var(--gold-accent);
+  filter: blur(140px);
+  opacity: 0.1;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.ProseMirror li, .proposal-render li {
-  margin-bottom: 0.5rem !important;
+/* Micro-animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-.ProseMirror li > p, .proposal-render li > p {
-  margin-bottom: 0 !important;
-  min-height: auto;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-/* Font Consistency */
-.ProseMirror strong, .proposal-render strong {
-  font-weight: 700;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
-
-.ProseMirror em, .proposal-render em {
-  font-style: italic;
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
 }
-
-/* Remove bottom margin on last element to prevent container swelling */
-.ProseMirror > *:last-child,
-.proposal-render > *:last-child {
-  margin-bottom: 0 !important;
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
 }
-
-/* Tiptap Placeholder */
-.tiptap-wrapper.is-empty::before {
-    content: attr(data-placeholder);
-    float: left;
-    color: #a1a1aa;
-    pointer-events: none;
-    height: 0;
-}
-
-
-
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@layer utilities {
-    .animate-fade-in {
-        animation: fadeIn 0.5s ease-out forwards;
-    }
-
-    .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .glass-shine {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .glass-shine::after {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg,
-                transparent,
-                rgba(255, 255, 255, 0.03),
-                transparent);
-        transform: rotate(45deg);
-        transition: 0.5s;
-        pointer-events: none;
-    }
-
-    .glass-shine:hover::after {
-        left: 100%;
-        top: 100%;
-    }
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
