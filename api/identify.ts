@@ -58,18 +58,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 profile_image_url: null
             };
 
-            // DEMO MODE if no API Key
-            if (!APOLLO_API_KEY) {
-                console.log('[REVEAL] No Apollo API Key found. Using DEMO DATA.');
-                enrichedData = {
-                    full_name: 'John Doe (Demo)',
-                    job_title: 'VP of Product',
-                    company_name: 'Aether Insights',
-                    company_domain: 'aether.io',
-                    linkedin_url: 'https://www.linkedin.com/in/johndoe',
-                    profile_image_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John'
-                };
-            } else {
+            // Live Enrichment via Apollo.io
+            if (APOLLO_API_KEY) {
                 try {
                     // Apollo.io Enrichment via IP
                     const apolloResponse = await fetch(`https://api.apollo.io/v1/organizations/enrich?ip=${ipAddress}`, {
