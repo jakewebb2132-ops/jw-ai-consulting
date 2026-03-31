@@ -12,15 +12,16 @@ import {
   ChevronRight,
   ShieldCheck,
   Bell,
-  Sparkles,
   ArrowRight
 } from 'lucide-react'
-import { Simulator, type Lead } from './components/Simulator'
+import { SignalsFeed } from './components/SignalsFeed'
+import { Simulator, type Lead, type Signal } from './components/Simulator'
 
-type TabType = 'Overview' | 'Revealed' | 'Activity' | 'Intelligence';
+type TabType = 'Overview' | 'Revealed' | 'Activity' | 'Signals';
 
 function App() {
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [signals, setSignals] = useState<Signal[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<TabType>('Overview');
   const [searchQuery, setSearchQuery] = useState('');
@@ -92,9 +93,9 @@ function App() {
           />
           <NavItem 
             icon={<ShieldCheck size={20} />} 
-            label="Intelligence" 
-            active={activeTab === 'Intelligence'} 
-            onClick={() => setActiveTab('Intelligence')}
+            label="Signals Feed" 
+            active={activeTab === 'Signals'} 
+            onClick={() => setActiveTab('Signals')}
           />
         </nav>
 
@@ -193,38 +194,15 @@ function App() {
           </div>
         )}
 
-        {activeTab === 'Intelligence' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in">
-            <div className="glass-card p-8 border-blue-100 bg-blue-50/30">
-              <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-blue-600/20">
-                <Sparkles className="text-white w-6 h-6" />
-              </div>
-              <h2 className="text-xl font-bold text-blue-900 mb-2">AI Intent Engine</h2>
-              <p className="text-blue-800/60 font-medium mb-6">We've identified 3 high-probability conversion patterns in your current traffic.</p>
-              <button className="px-6 py-3 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition-shadow">Generate Insights</button>
-            </div>
-            <div className="glass-card p-8 border-slate-200">
-              <h3 className="font-bold text-slate-800 mb-4">Top Company Targets</h3>
-              <div className="space-y-4">
-                {leads.slice(0, 3).map((lead, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center font-bold text-xs">{lead.company_name[0]}</div>
-                      <div>
-                        <div className="text-sm font-bold text-slate-900">{lead.company_name}</div>
-                        <div className="text-[10px] font-bold text-slate-400">SCORE: {lead.intent_score}</div>
-                      </div>
-                    </div>
-                    <ChevronRight size={16} className="text-slate-300" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        {activeTab === 'Signals' && (
+          <SignalsFeed signals={signals} />
         )}
       </main>
 
-      <Simulator onNewLead={(newLead) => setLeads(prev => [newLead, ...prev])} />
+      <Simulator 
+        onNewLead={(newLead) => setLeads(prev => [newLead, ...prev])} 
+        onNewSignal={(newSignal) => setSignals(prev => [newSignal, ...prev])}
+      />
     </div>
   )
 }
