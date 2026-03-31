@@ -1,13 +1,13 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase (Ensure these are in your Vercel Environment Variables)
+// Initialize Supabase
 const supabaseUrl = process.env.SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// PDL API Key (Ensure this is in your Vercel Environment Variables)
-const PDL_API_KEY = process.env.PDL_API_KEY || '';
+// Apollo.io API Key (Required for live de-anonymization)
+const APOLLO_API_KEY = process.env.APOLLO_API_KEY || '';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Enable CORS
@@ -24,7 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const { visitor_id, url, referrer, event } = req.body;
-    const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const ipAddress = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '127.0.0.1';
 
     try {
         console.log(`[REVEAL] Pulse from ${visitor_id} at ${ipAddress} (${event})`);
@@ -37,7 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             .single();
 
         if (existingLead) {
-            // Update the visit count and last seen
+            // Update activity
             await supabase
                 .from('visitor_leads')
                 .update({ 
@@ -48,31 +48,54 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 })
                 .eq('id', existingLead.id);
         } else {
-            // New Visitor - Enrich via People Data Labs
-            let enrichedData = {
-                full_name: 'Anonymous Visitor',
-                job_title: 'Unknown',
-                company_name: 'Unknown',
-                linkedin_url: null
+            // New Visitor - Enrich via Apollo.io
+            let enrichedData: any = {
+                full_name: 'Visitor from ' + ipAddress,
+                job_title: 'Identifying...',
+                company_name: 'Scanning...',
+                company_domain: null,
+                linkedin_url: null,
+                profile_image_url: null
             };
 
-            if (PDL_API_KEY && ipAddress) {
+            // DEMO MODE if no API Key
+            if (!APOLLO_API_KEY) {
+                console.log('[REVEAL] No Apollo API Key found. Using DEMO DATA.');
+                enrichedData = {
+                    full_name: 'John Doe (Demo)',
+                    job_title: 'VP of Product',
+                    company_name: 'Aether Insights',
+                    company_domain: 'aether.io',
+                    linkedin_url: 'https://www.linkedin.com/in/johndoe',
+                    profile_image_url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John'
+                };
+            } else {
                 try {
-                    // Step 1: Identify Company via IP
-                    const pdlResponse = await fetch(`https://api.peopledatalabs.com/v5/ip/enrich?ip=${ipAddress}&api_key=${PDL_API_KEY}`);
-                    const pdlData = await pdlResponse.json();
-
-                    if (pdlData.status === 200 && pdlData.data) {
-                        const company = pdlData.data.company;
-                        enrichedData = {
-                            full_name: 'Individual from ' + (company?.name || 'Unknown Company'),
-                            job_title: 'Likely Decision Maker',
-                            company_name: company?.name || 'Unknown',
-                            linkedin_url: company?.linkedin_url || null
-                        };
+                    // Apollo.io Enrichment via IP
+                    const apolloResponse = await fetch(`https://api.apollo.io/v1/organizations/enrich?ip=${ipAddress}`, {
+                        headers: {
+                            'Cache-Control': 'no-cache',
+                            'Content-Type': 'application/json',
+                            'X-Api-Key': APOLLO_API_KEY
+                        }
+                    });
+                    
+                    if (apolloResponse.ok) {
+                        const apolloData = await apolloResponse.json();
+                        if (apolloData.organization) {
+                            const org = apolloData.organization;
+                            enrichedData = {
+                                full_name: 'Exec from ' + org.name,
+                                job_title: 'Decision Maker',
+                                company_name: org.name,
+                                company_domain: org.primary_domain,
+                                linkedin_url: org.linkedin_url,
+                                profile_image_url: org.logo_url
+                            };
+                        }
                     }
-                } catch (pdlErr) {
-                    console.error('[REVEAL] PDL Enrichment Error:', pdlErr);
+                } catch (apolloErr) {
+                    console.error('[REVEAL] Apollo Enrichment Error:', apolloErr);
                 }
             }
 
@@ -81,9 +104,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 .from('visitor_leads')
                 .insert({
                     visitor_id,
-                    ip_address: typeof ipAddress === 'string' ? ipAddress : JSON.stringify(ipAddress),
+                    ip_address: ipAddress,
                     last_page_viewed: url,
-                    ...enrichedData
+                    ...enrichedData,
+                    intent_score: 10
                 });
         }
 
