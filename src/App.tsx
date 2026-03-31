@@ -14,6 +14,7 @@ import ProposalPublic from './pages/ProposalPublic';
 import AdminDashboard from './pages/AdminDashboard';
 import Council from './pages/Council';
 import Login from './pages/Login';
+import VisitorInsights from './pages/VisitorInsights';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
 import LazySection from './components/LazySection';
@@ -128,6 +129,7 @@ function App() {
                 {/* Secure Internal Admin Dashboard (Requires Auth) */}
                 <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
                 <Route path="/admin/council" element={<Council />} />
+                <Route path="/admin/leads" element={<ProtectedRoute><VisitorInsights /></ProtectedRoute>} />
 
                 {/* Secure Magic Link Public Route (Does NOT require Auth) */}
                 <Route path="/p/:id" element={<ProposalPublic />} />
