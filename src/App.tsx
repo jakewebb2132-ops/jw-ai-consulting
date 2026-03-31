@@ -114,7 +114,10 @@ const AppLayout = () => {
     );
 };
 
+import { useVisitorTracking } from './hooks/useVisitorTracking';
+
 function App() {
+    useVisitorTracking(); // Enable real-time visitor tracking
     return (
         <Router>
             <ScrollManager />

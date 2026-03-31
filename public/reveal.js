@@ -4,7 +4,10 @@
  */
 (function() {
     // Configuration
-    const API_ENDPOINT = '/api/identify';
+    // Use the script's origin as the base for the API if we're on a different domain.
+    const SCRIPT_URL = document.currentScript ? document.currentScript.src : '';
+    const SCRIPT_ORIGIN = SCRIPT_URL ? new URL(SCRIPT_URL).origin : '';
+    const API_ENDPOINT = SCRIPT_ORIGIN ? `${SCRIPT_ORIGIN}/api/identify` : '/api/identify';
     const HEARTBEAT_INTERVAL = 30000; // 30 seconds
 
     // Simple Fingerprinting
