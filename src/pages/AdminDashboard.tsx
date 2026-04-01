@@ -1,25 +1,30 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useProposalStore } from '../store/proposalStore';
+import { useInteractionStore } from '../store/interactionStore';
 import { Link } from 'react-router-dom';
-import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart } from 'phosphor-react';
+import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise } from 'phosphor-react';
 import { Proposal } from '../types/proposal';
 
 const AdminDashboard: React.FC = () => {
   const { proposals, fetchAllProposals } = useProposalStore();
+  const { interactions, fetchInteractions, isLoading: isInteractionsLoading } = useInteractionStore();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
-      await fetchAllProposals();
+      await Promise.all([fetchAllProposals(), fetchInteractions()]);
       setIsLoading(false);
     };
     loadData();
 
     // Refresh every 30 seconds for live updates
-    const interval = setInterval(fetchAllProposals, 30000);
+    const interval = setInterval(() => {
+      fetchAllProposals();
+      fetchInteractions();
+    }, 30000);
     return () => clearInterval(interval);
-  }, [fetchAllProposals]);
+  }, [fetchAllProposals, fetchInteractions]);
 
   const stats = useMemo(() => {
     const totalValue = proposals.reduce((sum: number, p: Proposal) => sum + (p.totalValue || 0), 0);
@@ -30,9 +35,10 @@ const AdminDashboard: React.FC = () => {
       totalValue,
       activeViewers,
       acceptedCount,
-      totalCount: proposals.length
+      totalCount: proposals.length,
+      interactionCount: interactions.length
     };
-  }, [proposals]);
+  }, [proposals, interactions]);
 
   return (
     <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100">
@@ -119,12 +125,83 @@ const AdminDashboard: React.FC = () => {
 
             <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-lg">
-                  <Users size={24} weight="bold" />
+                <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-lg">
+                  <ChatCenteredDots size={24} weight="bold" />
                 </div>
               </div>
-              <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Successful Closes</p>
-              <h3 className="text-2xl font-black text-zinc-900 tracking-tight">{stats.acceptedCount}</h3>
+              <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Council Activity</p>
+              <h3 className="text-2xl font-black text-zinc-900 tracking-tight">{stats.interactionCount} <span className="text-xs text-zinc-400 font-medium">Queries</span></h3>
+            </div>
+          </div>
+
+          {/* Strategic Consultation Feed */}
+          <div className="bg-white rounded-3xl shadow-xl shadow-zinc-200/50 border border-zinc-200 overflow-hidden mb-12">
+            <div className="px-8 py-5 border-b border-zinc-100 flex items-center justify-between bg-zinc-50/50">
+              <div className="flex items-center gap-2">
+                <ClockCounterClockwise size={16} weight="bold" className="text-zinc-400" />
+                <h4 className="text-xs font-black text-zinc-400 uppercase tracking-[0.2em]">Boardroom Strategic Consultation Feed</h4>
+              </div>
+              {isInteractionsLoading && <CircleNotch size={14} className="animate-spin text-indigo-600" />}
+            </div>
+            <div className="max-h-[400px] overflow-y-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-white">
+                    <th className="px-8 py-4 text-[11px] font-black text-zinc-400 uppercase tracking-widest border-b border-zinc-100">Timestamp</th>
+                    <th className="px-8 py-4 text-[11px] font-black text-zinc-400 uppercase tracking-widest border-b border-zinc-100">Strategic Challenge (Question)</th>
+                    <th className="px-8 py-4 text-[11px] font-black text-zinc-400 uppercase tracking-widest border-b border-zinc-100">Mode</th>
+                    <th className="px-8 py-4 text-[11px] font-black text-zinc-400 uppercase tracking-widest text-right border-b border-zinc-100">Advisory Board</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-100">
+                  {interactions.length > 0 ? (
+                    interactions.map((it) => (
+                      <tr key={it.id} className="hover:bg-[#f8faff] transition-colors group">
+                        <td className="px-8 py-6 text-[11px] font-bold text-zinc-400 font-mono">
+                          {new Date(it.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                        </td>
+                        <td className="px-8 py-6">
+                           <p className="text-zinc-900 font-bold text-sm line-clamp-1">{it.question}</p>
+                        </td>
+                        <td className="px-8 py-6">
+                          <div className="flex items-center gap-2">
+                             {it.mode === 'debate' ? (
+                               <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-rose-600 bg-rose-50 px-2 py-1 rounded-md border border-rose-100">
+                                 <Sword size={10} weight="fill" /> Debate
+                               </span>
+                             ) : (
+                               <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md border border-indigo-100">
+                                 <Handshake size={10} weight="fill" /> Consensus
+                               </span>
+                             )}
+                          </div>
+                        </td>
+                        <td className="px-8 py-6 text-right">
+                           <div className="flex items-center justify-end -space-x-2">
+                              {it.advisors.map(adv => (
+                                <div key={adv} className="w-6 h-6 rounded-full bg-zinc-100 border-2 border-white flex items-center justify-center text-[8px] font-bold text-zinc-500 uppercase" title={adv}>
+                                  {adv.charAt(0)}
+                                </div>
+                              ))}
+                              <span className="ml-3 text-[10px] font-black text-zinc-400 uppercase tracking-tighter">
+                                {it.advisors.length} Members
+                              </span>
+                           </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={4} className="px-8 py-20 text-center text-zinc-400">
+                         <div className="flex flex-col items-center gap-2">
+                            <ChatCenteredDots size={32} weight="thin" className="opacity-20" />
+                            <p className="text-xs font-bold uppercase tracking-widest">No recent strategic activity</p>
+                         </div>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
           </div>
 
@@ -149,8 +226,8 @@ const AdminDashboard: React.FC = () => {
                    <tr>
                      <td colSpan={6} className="px-8 py-20 text-center">
                         <div className="flex flex-col items-center gap-3">
-                          <CircleNotch size={40} className="animate-spin text-blue-600" />
-                          <span className="text-zinc-900 font-bold tracking-tight">Synchronizing Boardroom Data...</span>
+                           <CircleNotch size={40} className="animate-spin text-blue-600" />
+                           <span className="text-zinc-900 font-bold tracking-tight">Synchronizing Boardroom Data...</span>
                         </div>
                      </td>
                    </tr>

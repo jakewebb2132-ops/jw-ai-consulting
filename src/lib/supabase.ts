@@ -7,8 +7,18 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || process.env.VITE_SUPABA
 // @ts-ignore
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn("⚠️ Supabase credentials missing. The application will not be able to save data persistently until VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are provided in the environment variables.");
+export const isSupabaseConfigured = 
+  !!supabaseUrl && 
+  !!supabaseAnonKey && 
+  supabaseUrl.includes('supabase.co') && 
+  !supabaseUrl.includes('placeholder') &&
+  !supabaseAnonKey.includes('placeholder');
+
+if (!isSupabaseConfigured) {
+  console.warn("⚠️ Supabase credentials missing or placeholders detected. The application will use Developer Bypass mode only.");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(
+  isSupabaseConfigured ? supabaseUrl : 'https://placeholder-project.supabase.co', 
+  isSupabaseConfigured ? supabaseAnonKey : 'placeholder-key'
+);

@@ -4,10 +4,14 @@
  */
 (function() {
     // Configuration
-    // Use the script's origin as the base for the API if we're on a different domain.
-    const SCRIPT_URL = document.currentScript ? document.currentScript.src : '';
+    const currentScript = document.currentScript;
+    const SCRIPT_URL = currentScript ? currentScript.src : '';
     const SCRIPT_ORIGIN = SCRIPT_URL ? new URL(SCRIPT_URL).origin : '';
-    const API_ENDPOINT = SCRIPT_ORIGIN ? `${SCRIPT_ORIGIN}/api/identify` : '/api/identify';
+    
+    // Allow manual override via data-api attribute
+    const OVERRIDE_ENDPOINT = currentScript ? currentScript.getAttribute('data-api') : null;
+    const API_ENDPOINT = OVERRIDE_ENDPOINT || (SCRIPT_ORIGIN ? `${SCRIPT_ORIGIN}/api/identify` : '/api/identify');
+    
     const HEARTBEAT_INTERVAL = 30000; // 30 seconds
 
     // Simple Fingerprinting

@@ -1,4 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.VITE_SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const API_KEY = process.env.GOOGLE_API_KEY;
 
@@ -25,14 +30,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // which works seamlessly and cleanly inside a Vercel serverless function.
   const apiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${API_KEY}`;
 
+  // Log the interaction to Supabase for monitoring (Reliable Await)
+  try {
+    await supabase.from('boardroom_interactions').insert([{
+      question,
+      mode,
+      advisors: advisors.map(a => a.id)
+    }]);
+  } catch (logError) {
+    console.error('[MONITOR] Logging Error:', logError);
+  }
+
   try {
     // Launch all agent generation calls simultaneously
     const streams = await Promise.all(advisors.map(async (advisor) => {
-      const formattingDirective = "\n\nFORMATTING RULE: Use extreme whitespace. You MUST put a double line break (\\n\\n) between EVERY single strategic thought or sentence. Every list item must be isolated with double line breaks. Do NOT use bullet points or dashes. Ensure the output is very spaced out and clean. Be concise.";
+      const formattingDirective = "\n\nFORMATTING RULE: Be concise and structural. Use numbered lists (1., 2., 3.) for your primary strategic points. Each point MUST start with a **Bold Summary Header** followed by a direct explanation. Avoid excessive whitespace—one blank line between major blocks is sufficient. No fluff, no generic introductory filler.";
       
-      const debateInjection = "\n\nCRITICAL DIRECTIVE: You are in DEBATE MODE. Do not merely agree or synthesize. Actively find flaws in standard assumptions. Challenge the premise of the challenge. Be highly contrarian, assertive, and directly point out where typical groupthink is wrong. Speak firmly and provocatively from your specific worldview." + formattingDirective;
+      const debateInjection = "\n\nCRITICAL DIRECTIVE: You are in DEBATE MODE. Be provocatively contrarian. Focus on the 'dark side' or the vital risks others ignore. Challenge assumptions directly and firmly. " + formattingDirective;
       
-      const consensusInjection = "\n\nCRITICAL DIRECTIVE: You are in CONSENSUS MODE. Frame your analysis constructively. Work to synthesize the best possible path forward, finding common ground and focusing on actionable, optimized solutions." + formattingDirective;
+      const consensusInjection = "\n\nCRITICAL DIRECTIVE: You are in CONSENSUS MODE. Frame your analysis constructively to find the most optimized, high-leverage path forward through synthesis. " + formattingDirective;
       
       const finalPersona = advisor.persona + (mode === 'debate' ? debateInjection : consensusInjection);
 

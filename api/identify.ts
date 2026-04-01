@@ -15,8 +15,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
+    if (req.method === 'GET') {
+        const hasApollo = !!process.env.APOLLO_API_KEY;
+        return res.status(200).json({ 
+            status: 'Healthy', 
+            service: 'Executive Reveal API',
+            apollo_configured: hasApollo,
+            timestamp: new Date().toISOString()
+        });
     }
 
     if (req.method !== 'POST') {
@@ -24,10 +30,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const { visitor_id, url, referrer, event } = req.body;
-    const ipAddress = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '127.0.0.1';
+    const ipAddress = (req.headers['x-forwarded-for'] as string)?.split(',')[0].trim() || 
+                      (req.headers['x-real-ip'] as string) || 
+                      req.socket.remoteAddress || 
+                      '127.0.0.1';
 
     try {
-        console.log(`[REVEAL] Pulse from ${visitor_id} at ${ipAddress} (${event})`);
+        console.log(`[REVEAL] Pulse: ID=${visitor_id} IP=${ipAddress} Event=${event} URL=${url}`);
 
         // Check if we already have this visitor
         const { data: existingLead } = await supabase
@@ -37,6 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             .single();
 
         if (existingLead) {
+            console.log(`[REVEAL] Existing visitor recognized: ${existingLead.full_name} (${existingLead.visit_count} views)`);
             // Update activity
             await supabase
                 .from('visitor_leads')
@@ -44,11 +54,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     last_seen: new Date().toISOString(),
                     last_page_viewed: url,
                     visit_count: (existingLead.visit_count || 1) + 1,
-                    intent_score: (existingLead.intent_score || 0) + (event === 'heartbeat' ? 5 : 0)
+                    intent_score: (existingLead.intent_score || 0) + (event === 'heartbeat' ? 2 : 5)
                 })
                 .eq('id', existingLead.id);
         } else {
             // New Visitor - Enrich via Apollo.io
+            console.log(`[REVEAL] New visitor detected. Starting enrichment...`);
             let enrichedData: any = {
                 full_name: 'Visitor from ' + ipAddress,
                 job_title: 'Identifying...',
@@ -60,13 +71,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
             // Live Enrichment via Apollo.io
             if (!APOLLO_API_KEY) {
-                console.warn('[REVEAL] Apollo API Key is missing. Skipping enrichment.');
-            } else if (!ipAddress || ipAddress === '127.0.0.1') {
-                console.warn('[REVEAL] Skipping enrichment for local/missing IP:', ipAddress);
+                console.warn('[REVEAL] Apollo API Key is missing. Check your environment variables.');
+            } else if (!ipAddress || ipAddress === '127.0.0.1' || ipAddress.startsWith('192.168.') || ipAddress.startsWith('10.')) {
+                console.warn(`[REVEAL] Skipping enrichment for internal/local IP: ${ipAddress}`);
             } else {
                 try {
-                    console.log(`[REVEAL] Attempting Apollo enrichment for IP: ${ipAddress}`);
-                    // Apollo.io Enrichment via IP
+                    console.log(`[REVEAL] Enrichment: Fetching company data for IP ${ipAddress}`);
                     const apolloResponse = await fetch(`https://api.apollo.io/v1/organizations/enrich?ip=${ipAddress}`, {
                         headers: {
                             'Cache-Control': 'no-cache',
@@ -79,8 +89,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         const apolloData = await apolloResponse.json();
                         if (apolloData.organization) {
                             const org = apolloData.organization;
+                            console.log(`[REVEAL] Enrichment: Found Organization: ${org.name}`);
                             
-                            // Initialize with company data
                             enrichedData = {
                                 full_name: 'Exec from ' + org.name,
                                 job_title: 'Decision Maker',
@@ -92,6 +102,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
                             // PERSON UPGRADE: Search for a top contact at this company
                             try {
+                                console.log(`[REVEAL] Enrichment: Searching for key contacts at ${org.primary_domain}`);
                                 const peopleResponse = await fetch(`https://api.apollo.io/v1/mixed_people/search`, {
                                     method: 'POST',
                                     headers: {
@@ -103,7 +114,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                         prospected_by_current_team: [false],
                                         page: 1,
                                         per_page: 1,
-                                        person_titles: ['CEO', 'Founder', 'President', 'Owner', 'Head of Marketing', 'VP of Sales']
+                                        person_titles: ['CEO', 'Founder', 'President', 'Owner', 'Head of Marketing', 'VP of Sales', 'Director of Engineering']
                                     })
                                 });
 
@@ -111,6 +122,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                     const peopleData = await peopleResponse.json();
                                     if (peopleData.people && peopleData.people.length > 0) {
                                         const person = peopleData.people[0];
+                                        console.log(`[REVEAL] Enrichment: Identified Person: ${person.name} (${person.title})`);
                                         enrichedData.full_name = person.name;
                                         enrichedData.job_title = person.title;
                                         enrichedData.linkedin_url = person.linkedin_url;
@@ -120,15 +132,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             } catch (peopleErr) {
                                 console.error('[REVEAL] Person Search Error:', peopleErr);
                             }
+                        } else {
+                            console.log(`[REVEAL] Enrichment: No organization found for IP ${ipAddress}`);
                         }
+                    } else {
+                        const errText = await apolloResponse.text();
+                        console.error(`[REVEAL] Apollo API Error (${apolloResponse.status}):`, errText);
                     }
                 } catch (apolloErr) {
-                    console.error('[REVEAL] Apollo Enrichment Error:', apolloErr);
+                    console.error('[REVEAL] Apollo Enrichment Network Error:', apolloErr);
                 }
             }
 
             // Store the initial lead
-            await supabase
+            console.log(`[REVEAL] Saving new lead to Supabase: ${enrichedData.full_name}`);
+            const { error: insertError } = await supabase
                 .from('visitor_leads')
                 .insert({
                     visitor_id,
@@ -137,8 +155,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     ...enrichedData,
                     intent_score: 10
                 });
+            
+            if (insertError) {
+                console.error('[REVEAL] Supabase Insert Error:', insertError.message);
+            }
         }
         return res.status(200).json({ status: 'ok' });
+
     } catch (err) {
         if (err instanceof Error) {
             console.error('[REVEAL] Handler Error:', err.message, err.stack);

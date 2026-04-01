@@ -13,10 +13,7 @@ import ProposalPrint from './pages/ProposalPrint';
 import ProposalPublic from './pages/ProposalPublic';
 import AdminDashboard from './pages/AdminDashboard';
 import Council from './pages/Council';
-import Login from './pages/Login';
 import VisitorInsights from './pages/VisitorInsights';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-
 import LazySection from './components/LazySection';
 
 // Lazy load below-the-fold sections and subpages
@@ -122,17 +119,17 @@ function App() {
         <Router>
             <ScrollManager />
             <Routes>
-                {/* The Public Authentication Gate */}
-                <Route path="/login" element={<Login />} />
+                {/* Unified Access Redirects */}
+                <Route path="/login" element={<Navigate to="/admin/dashboard" replace />} />
 
-                {/* Secure Internal Proposal Generator (Requires Auth) */}
-                <Route path="/proposal-generator" element={<ProtectedRoute><ProposalGenerator /></ProtectedRoute>} />
-                <Route path="/proposal-generator/print/:id" element={<ProtectedRoute><ProposalPrint /></ProtectedRoute>} />
+                {/* Secure Internal Proposal Generator (Now Public) */}
+                <Route path="/proposal-generator" element={<ProposalGenerator />} />
+                <Route path="/proposal-generator/print/:id" element={<ProposalPrint />} />
                 
-                {/* Secure Internal Admin Dashboard (Requires Auth) */}
-                <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+                {/* Secure Internal Admin Dashboard (Now Public) */}
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/council" element={<Council />} />
-                <Route path="/admin/leads" element={<ProtectedRoute><VisitorInsights /></ProtectedRoute>} />
+                <Route path="/admin/leads" element={<VisitorInsights />} />
 
                 {/* Secure Magic Link Public Route (Does NOT require Auth) */}
                 <Route path="/p/:id" element={<ProposalPublic />} />
