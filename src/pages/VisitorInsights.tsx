@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useVisitorStore } from '../store/visitorStore';
 import { useSignalStore } from '../store/signalStore';
 import { Link } from 'react-router-dom';
-import { Users, ExternalLink, Activity, ArrowUpRight, Shield, Globe, LinkedinLogo, Eye, ChartLineUp, Broadcast, ArrowLeft, Clock } from 'phosphor-react';
+import { Users, ArrowSquareOut, Activity, ArrowUpRight, Shield, Globe, LinkedinLogo, Eye, ChartLineUp, Broadcast, ArrowLeft, Clock } from 'phosphor-react';
 import { supabase } from '../lib/supabase';
 
 const SalesIntelligence = () => {
@@ -131,7 +131,7 @@ const SalesIntelligence = () => {
                                     <div className="flex items-center gap-4">
                                         {lead.linkedin_url ? (
                                             <a href={lead.linkedin_url} target="_blank" rel="noopener noreferrer" className="flex-1 px-4 py-3 rounded-xl bg-[#0a66c2] text-white text-[11px] font-black text-center hover:bg-[#004182] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#0a66c2]/20">
-                                                LinkedIn Profile <ExternalLink className="w-3 h-3" />
+                                                LinkedIn Profile <ArrowSquareOut className="w-3 h-3" />
                                             </a>
                                         ) : (
                                             <button className="flex-1 px-4 py-3 rounded-xl bg-zinc-100 text-zinc-400 text-[11px] font-black cursor-not-allowed">

@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft, CircleNotch, Broadcast, ChartLineUp, Users,
-  LinkedinLogo, MetaLogo, TiktokLogo, XLogo,
+  LinkedinLogo, FacebookLogo, TiktokLogo, TwitterLogo,
   CheckCircle, Clock, Warning,
 } from 'phosphor-react';
 import { useCAPIStore, LeadSummary } from '../store/capiStore';
 
 const CHANNEL_CONFIG: Record<string, { icon: React.ReactNode; label: string; color: string }> = {
   linkedin: { icon: <LinkedinLogo size={11} weight="fill" />, label: 'LI', color: 'bg-[#0a66c2]/10 text-[#0a66c2]' },
-  meta:     { icon: <MetaLogo size={11} weight="fill" />,     label: 'Meta', color: 'bg-blue-50 text-blue-600' },
+  meta:     { icon: <FacebookLogo size={11} weight="fill" />, label: 'Meta', color: 'bg-blue-50 text-blue-600' },
   tiktok:   { icon: <TiktokLogo size={11} weight="fill" />,  label: 'TT', color: 'bg-zinc-100 text-zinc-700' },
-  x:        { icon: <XLogo size={11} weight="fill" />,       label: 'X', color: 'bg-zinc-900/10 text-zinc-800' },
+  x:        { icon: <TwitterLogo size={11} weight="fill" />, label: 'X', color: 'bg-zinc-900/10 text-zinc-800' },
 };
 
 function ScoreBar({ score }: { score: number }) {

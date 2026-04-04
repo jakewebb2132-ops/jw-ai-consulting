@@ -17,7 +17,7 @@ const Navbar = () => {
     const navLinks = [
         { name: "Services", href: "/#services" },
         { name: "Portfolio", href: "/#portfolio" },
-        { name: "Strategy", href: "/#contact" },
+        { name: "Discovery", href: "https://calendar.app.google/jfu9ejCAa4fAnrVF9", isExternal: true },
     ];
 
     const navigate = useNavigate();
@@ -66,18 +66,21 @@ const Navbar = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            onClick={(e) => handleLinkClick(e, link.href)}
+                            target={link.isExternal ? "_blank" : undefined}
+                            rel={link.isExternal ? "noopener noreferrer" : undefined}
+                            onClick={link.isExternal ? undefined : (e) => handleLinkClick(e, link.href)}
                             className="text-sm font-bold text-slate-900 hover:text-blue-600 transition-colors"
                         >
                             {link.name}
                         </a>
                     ))}
                     <a
-                        href="/#contact"
-                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, '/#contact')}
+                        href="https://calendar.app.google/jfu9ejCAa4fAnrVF9"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-5 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-slate-800 transition-colors shadow-sm"
                     >
-                        Contact
+                        Book a Call
                     </a>
                 </div>
 
@@ -97,18 +100,21 @@ const Navbar = () => {
                         <a
                             key={link.name}
                             href={link.href}
+                            target={link.isExternal ? "_blank" : undefined}
+                            rel={link.isExternal ? "noopener noreferrer" : undefined}
                             className="text-lg font-bold text-slate-800 hover:text-blue-600 transition-colors"
-                            onClick={(e) => handleLinkClick(e, link.href)}
+                            onClick={link.isExternal ? undefined : (e) => handleLinkClick(e, link.href)}
                         >
                             {link.name}
                         </a>
                     ))}
                     <a
-                        href="/#contact"
-                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleLinkClick(e, '/#contact')}
+                        href="https://calendar.app.google/jfu9ejCAa4fAnrVF9"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="w-full flex items-center justify-center py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
                     >
-                        Contact
+                        Book a Call
                     </a>
                 </div>
             )}
