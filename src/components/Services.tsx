@@ -1,26 +1,32 @@
-import { Strategy, Cpu, TreeStructure, Database } from "phosphor-react";
+import { GraduationCap, Plug, Zap, Bot } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const services = [
     {
-        title: "Strategic AI Roadmap",
-        description: "Beyond the hype, into the architecture. We audit your technical landscape to design a multi-year AI integration roadmap.",
-        icon: <Strategy size={32} weight="thin" />,
+        title: "AI 101",
+        content: "Learning to prompt like a pro is like learning to talk to a teenager — once you crack the code, they'll do almost anything you ask.",
+        icon: <GraduationCap size={24} strokeWidth={1.5} />,
     },
     {
-        title: "Bespoke LLM Engineering",
-        description: "Your data is your moat. We build and deploy custom Large Language Models tailored to your specific security requirements.",
-        icon: <Cpu size={32} weight="thin" />,
+        title: "AI Into Your Business",
+        content: "You've got the basics. Now let's plug AI into the tools you already use — your CRM, your inbox, your workflows. No rip-and-replace required.",
+        icon: <Plug size={24} strokeWidth={1.5} />,
     },
     {
-        title: "Intelligent Process Automation",
-        description: "Scaling without the friction. We transform manual workflows into autonomous operations with Human-in-the-Loop systems.",
-        icon: <TreeStructure size={32} weight="thin" />,
+        title: "Autonomous Workflows",
+        content: "What if your business ran while you slept? We map your most repetitive processes and hand them off to AI that executes, decides, and escalates — only when it needs you.",
+        icon: <Zap size={24} strokeWidth={1.5} />,
     },
     {
-        title: "Enterprise Data Synthesis",
-        description: "Building the bridge between fragmented data and actionable intelligence through custom skills and a bespoke \"Agent Brain\" data architecture.",
-        icon: <Database size={32} weight="thin" />,
+        title: "Custom Agent Build",
+        content: [
+            "Connecting to YOUR data",
+            "Short + long term memory",
+            "Tool use",
+            "Computer use",
+            "Control from your phone",
+        ],
+        icon: <Bot size={24} strokeWidth={1.5} />,
     },
 ];
 
@@ -45,9 +51,20 @@ const ServicesSection = () => {
                                     {service.icon}
                                 </div>
                                 <h3 className="text-xl font-bold mb-3 text-slate-800">{service.title}</h3>
-                                <p className="text-slate-600 text-sm leading-relaxed">
-                                    {service.description}
-                                </p>
+                                {Array.isArray(service.content) ? (
+                                    <ul className="text-slate-600 text-sm leading-relaxed space-y-1.5">
+                                        {service.content.map((item) => (
+                                            <li key={item} className="flex items-start gap-2">
+                                                <span className="mt-1.5 w-1 h-1 rounded-full bg-blue-400 shrink-0" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        {service.content}
+                                    </p>
+                                )}
                             </div>
                         </ScrollReveal>
                     ))}
