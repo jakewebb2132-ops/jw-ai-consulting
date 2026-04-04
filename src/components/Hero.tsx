@@ -76,16 +76,18 @@ const Hero = () => {
                     </div>
                 </ScrollReveal>
 
-                <ScrollReveal delay={300}>
-                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-20">
-                        <MagneticHover className="relative z-30">
-                            <button
-                                onClick={() => window.open("https://calendar.app.google/jfu9ejCAa4fAnrVF9", "_blank")}
-                                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-full hover:from-blue-600 hover:to-blue-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 active:scale-95 cursor-pointer"
+                <ScrollReveal delay={300} className="relative z-50">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-20 pointer-events-auto">
+                        <MagneticHover className="relative z-[100]">
+                            <a
+                                href="https://calendar.app.google/jfu9ejCAa4fAnrVF9"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-full hover:from-blue-600 hover:to-blue-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 active:scale-95 cursor-pointer relative z-[101]"
                             >
                                 Book a Discovery Call
                                 <ArrowRight size={20} weight="bold" className="group-hover:translate-x-1 transition-transform" />
-                            </button>
+                            </a>
                         </MagneticHover>
 
                         <MagneticHover>
