@@ -14,6 +14,7 @@ import ProposalPublic from './pages/ProposalPublic';
 import AdminDashboard from './pages/AdminDashboard';
 import Council from './pages/Council';
 import VisitorInsights from './pages/VisitorInsights';
+import CAPIPipeline from './pages/CAPIPipeline';
 import LazySection from './components/LazySection';
 
 // Lazy load below-the-fold sections and subpages
@@ -130,6 +131,7 @@ function App() {
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/council" element={<Council />} />
                 <Route path="/admin/leads" element={<VisitorInsights />} />
+                <Route path="/admin/pipeline" element={<CAPIPipeline />} />
 
                 {/* Secure Magic Link Public Route (Does NOT require Auth) */}
                 <Route path="/p/:id" element={<ProposalPublic />} />

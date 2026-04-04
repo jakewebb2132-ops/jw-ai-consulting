@@ -78,10 +78,10 @@ const Hero = () => {
 
                 <ScrollReveal delay={300}>
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-20">
-                        <MagneticHover>
+                        <MagneticHover className="relative z-30">
                             <button
-                                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-full hover:from-blue-600 hover:to-blue-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 active:scale-95"
+                                onClick={() => window.open("https://calendar.app.google/jfu9ejCAa4fAnrVF9", "_blank")}
+                                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-full hover:from-blue-600 hover:to-blue-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 active:scale-95 cursor-pointer"
                             >
                                 Book a Discovery Call
                                 <ArrowRight size={20} weight="bold" className="group-hover:translate-x-1 transition-transform" />

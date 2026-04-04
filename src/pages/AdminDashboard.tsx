@@ -1,19 +1,28 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useProposalStore } from '../store/proposalStore';
 import { useInteractionStore } from '../store/interactionStore';
+import { useSignalStore } from '../store/signalStore';
+import { useVisitorStore } from '../store/visitorStore';
 import { Link } from 'react-router-dom';
-import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise } from 'phosphor-react';
+import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise, ShieldCheck, LinkedinLogo, MagnifyingGlass, Broadcast, Funnel } from 'phosphor-react';
 import { Proposal } from '../types/proposal';
 
 const AdminDashboard: React.FC = () => {
   const { proposals, fetchAllProposals } = useProposalStore();
   const { interactions, fetchInteractions, isLoading: isInteractionsLoading } = useInteractionStore();
+  const { signals, fetchSignals } = useSignalStore();
+  const { leads, fetchLeads } = useVisitorStore();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
-      await Promise.all([fetchAllProposals(), fetchInteractions()]);
+      await Promise.all([
+        fetchAllProposals(), 
+        fetchInteractions(),
+        fetchSignals(),
+        fetchLeads()
+      ]);
       setIsLoading(false);
     };
     loadData();
@@ -22,9 +31,11 @@ const AdminDashboard: React.FC = () => {
     const interval = setInterval(() => {
       fetchAllProposals();
       fetchInteractions();
+      fetchSignals();
+      fetchLeads();
     }, 30000);
     return () => clearInterval(interval);
-  }, [fetchAllProposals, fetchInteractions]);
+  }, [fetchAllProposals, fetchInteractions, fetchSignals, fetchLeads]);
 
   const stats = useMemo(() => {
     const totalValue = proposals.reduce((sum: number, p: Proposal) => sum + (p.totalValue || 0), 0);
@@ -36,9 +47,11 @@ const AdminDashboard: React.FC = () => {
       activeViewers,
       acceptedCount,
       totalCount: proposals.length,
-      interactionCount: interactions.length
+      interactionCount: interactions.length,
+      signalCount: signals.length,
+      revealCount: leads.length
     };
-  }, [proposals, interactions]);
+  }, [proposals, interactions, signals, leads]);
 
   return (
     <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100">
@@ -58,8 +71,14 @@ const AdminDashboard: React.FC = () => {
 
         <nav className="flex flex-col gap-1">
           <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-2 px-2">Main Menu</p>
-          <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 bg-white/5 text-white rounded-xl transition-all font-semibold shadow-sm border border-white/5">
-            <Briefcase weight="fill" className="text-blue-400" /> Strategic Documents
+          <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
+            <Briefcase weight="fill" /> Documents
+          </Link>
+          <Link to="/admin/leads" className="flex items-center gap-3 px-4 py-3 bg-white/5 text-white rounded-xl transition-all font-semibold shadow-sm border border-white/5">
+            <ShieldCheck weight="fill" className="text-blue-400" /> Sales Intelligence
+          </Link>
+          <Link to="/admin/pipeline" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
+            <Funnel weight="fill" className="text-emerald-400" size={20} /> CAPI Pipeline
           </Link>
           <Link to="/admin/council" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold break-words">
             <Users size={20} /> The Council
@@ -89,16 +108,16 @@ const AdminDashboard: React.FC = () => {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-5 gap-6 mb-12">
             <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2.5 bg-blue-50 text-blue-600 rounded-lg">
                   <ChartLineUp size={24} weight="bold" />
                 </div>
-                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full uppercase tracking-wider">Potential Revenue</span>
+                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full uppercase tracking-wider">Revenue</span>
               </div>
-              <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Pipeline Value</p>
-              <h3 className="text-2xl font-black text-zinc-900 tracking-tight">
+              <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">Pipeline</p>
+              <h3 className="text-xl font-black text-zinc-900 tracking-tight">
                 {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(stats.totalValue)}
               </h3>
             </div>
@@ -109,28 +128,39 @@ const AdminDashboard: React.FC = () => {
                   <FileText size={24} weight="bold" />
                 </div>
               </div>
-              <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Active Strategies</p>
-              <h3 className="text-2xl font-black text-zinc-900 tracking-tight">{stats.totalCount}</h3>
+              <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">Strategies</p>
+              <h3 className="text-xl font-black text-zinc-900 tracking-tight">{stats.totalCount}</h3>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-2.5 bg-[#0a66c2]/10 text-[#0a66c2] rounded-lg">
+                  <LinkedinLogo size={24} weight="fill" />
+                </div>
+                <span className="text-[9px] font-bold text-[#0a66c2] animate-pulse">Live</span>
+              </div>
+              <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">LI Signals</p>
+              <h3 className="text-xl font-black text-zinc-900 tracking-tight">{stats.signalCount}</h3>
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2.5 bg-amber-50 text-amber-600 rounded-lg">
-                  <Eye size={24} weight="bold" />
+                  <MagnifyingGlass size={24} weight="bold" />
                 </div>
               </div>
-              <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Client Interest</p>
-              <h3 className="text-2xl font-black text-zinc-900 tracking-tight">{stats.activeViewers} <span className="text-xs text-zinc-400 font-medium">Views</span></h3>
+              <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">Site Reveals</p>
+              <h3 className="text-xl font-black text-zinc-900 tracking-tight">{stats.revealCount}</h3>
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-lg">
-                  <ChatCenteredDots size={24} weight="bold" />
+                  <Broadcast size={24} weight="bold" />
                 </div>
               </div>
-              <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Council Activity</p>
-              <h3 className="text-2xl font-black text-zinc-900 tracking-tight">{stats.interactionCount} <span className="text-xs text-zinc-400 font-medium">Queries</span></h3>
+              <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">Consults</p>
+              <h3 className="text-xl font-black text-zinc-900 tracking-tight">{stats.interactionCount}</h3>
             </div>
           </div>
 
@@ -233,8 +263,6 @@ const AdminDashboard: React.FC = () => {
                    </tr>
                 ) : proposals.length > 0 ? (
                   proposals.map((p) => {
-                    const isLive = p.updatedAt && (Date.now() - new Date(p.updatedAt).getTime()) < 5 * 60 * 1000;
-                    
                     return (
                       <tr key={p.id} className="hover:bg-[#f8faff] transition-colors group">
                         <td className="px-8 py-6 font-bold text-zinc-900">

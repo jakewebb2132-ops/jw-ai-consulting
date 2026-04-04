@@ -174,9 +174,12 @@ const CaseStudy = () => {
                                 <div className="relative z-10">
                                     <h3 className="text-3xl font-bold mb-4">Ready to Architect Your Success?</h3>
                                     <p className="text-blue-100 mb-8 max-w-lg">Let's discuss how we can apply similar architectures to your organization.</p>
-                                    <Link to="/#contact" className="inline-block px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-slate-50 transition-colors uppercase tracking-widest text-xs shadow-sm shadow-blue-900/10">
+                                    <button 
+                                        onClick={() => window.open("https://calendar.app.google/jfu9ejCAa4fAnrVF9", "_blank")} 
+                                        className="inline-block px-8 py-4 bg-white text-blue-900 font-bold rounded-full hover:bg-slate-50 transition-colors uppercase tracking-widest text-xs shadow-sm shadow-blue-900/10 cursor-pointer"
+                                    >
                                         Initiate Discovery Call
-                                    </Link>
+                                    </button>
                                 </div>
                             </div>
                         </ScrollReveal>
