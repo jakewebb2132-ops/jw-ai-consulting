@@ -12,3 +12,12 @@ This project uses **Gstack** by Garry Tan to enhance strategic review and securi
 ## Skills Location
 Gstack is installed at `/Users/jake/.claude/skills/gstack`.
 Refer to the official repository for documentation on individual skills: [garrytan/gstack](https://github.com/garrytan/gstack).
+
+## Skill routing
+
+- **Checkpoint / compile / save progress / new session** → invoke `/checkpoint`, but ALWAYS ask the user first: "Ready to save a checkpoint so you can resume in a fresh session?" and wait for confirmation before running the skill.
+- **Bugs, errors, "why is this broken"** → invoke `/investigate`
+- **Ship, deploy, push, create PR** → invoke `/ship`
+- **QA, test the site, find bugs** → invoke `/qa`
+- **Code review, check my diff** → invoke `/review`
+- **Design audit, visual polish** → invoke `/design-review`
