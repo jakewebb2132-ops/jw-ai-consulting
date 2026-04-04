@@ -1,4 +1,4 @@
-import { ArrowUpRight, Bank, Megaphone, FilmStrip } from "phosphor-react";
+import { ArrowUpRight, Bank, Megaphone, FilmStrip, Robot } from "phosphor-react";
 import ScrollReveal from "./ScrollReveal";
 import { Link } from "react-router-dom";
 
@@ -32,6 +32,16 @@ const caseStudies = [
         icon: <FilmStrip size={32} weight="thin" />,
         color: "from-amber-300/30 to-amber-100/50",
         borderHover: "hover:border-amber-300 hover:shadow-amber-900/5"
+    },
+    {
+        id: "claude-code-agents",
+        client: "Use Case · Autonomous AI",
+        title: "Production Claude Code Agents",
+        description: "A 10-step framework for deploying self-improving, memory-enabled agent systems — combining Claude Code, Obsidian.ai long-term memory, and the Karpathy self-learning loop.",
+        impact: "Agents that execute, evaluate, reflect, and revise their own skills continuously — closing the loop from instruction to improvement without human intervention.",
+        icon: <Robot size={32} weight="thin" />,
+        color: "from-violet-300/30 to-violet-100/50",
+        borderHover: "hover:border-violet-300 hover:shadow-violet-900/5"
     }
 ];
 
@@ -56,7 +66,7 @@ const Portfolio = () => {
                     </div>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {caseStudies.map((study, index) => (
                         <ScrollReveal key={index} delay={index * 150}>
                             <Link

@@ -3,6 +3,7 @@ import { ArrowLeft, CheckCircle, Clock, ChartBar, Rocket, ArrowUpRight } from "p
 import ScrollReveal from '../components/ScrollReveal';
 import ContentEngineDiagram from '../components/ContentEngineDiagram';
 import AgentBrainDiagram from '../components/AgentBrainDiagram';
+import UseCaseAgents from '../components/UseCaseAgents';
 
 interface CaseStudyMetric {
     label: string;
@@ -52,6 +53,18 @@ const caseStudyData: Record<string, CaseStudyInfo> = {
             { label: "Brand Consistency", value: "100%", icon: <CheckCircle weight="thin" /> }
         ],
         diagram: <ContentEngineDiagram />
+    },
+    "claude-code-agents": {
+        client: "Use Case · Autonomous AI",
+        title: "Production Claude Code Agents",
+        overview: "Most teams treating AI as a chat tool are leaving 90% of its value on the table. The opportunity is in agents that don't just answer questions — they execute tasks, remember outcomes, improve their own playbooks, and escalate only when they need you.",
+        solution: "We deploy a 10-step framework that turns Claude Code into a production-grade autonomous system. Each agent gets a defined role, tool access, and memory via Obsidian.ai's MCP bridge. The Karpathy self-learning loop closes the gap between execution and improvement — agents evaluate their own outputs, reflect on failures, and rewrite their own skills.",
+        metrics: [
+            { label: "Steps to Production", value: "10", icon: <Rocket /> },
+            { label: "Memory Persistence", value: "∞", icon: <CheckCircle weight="thin" /> },
+            { label: "Improvement Loop", value: "Auto", icon: <ChartBar /> }
+        ],
+        diagram: <UseCaseAgents />
     },
     "hollywood-screenwriter": {
         client: "Hollywood Screenwriter",
