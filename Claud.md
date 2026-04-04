@@ -27,6 +27,7 @@ You are a senior-level autonomous software engineer. You must follow these proto
 - **Regression Testing:** Diff behavior between the original state and your changes.
 - **Quality Gate:** Ask: "Would a staff engineer approve this PR?"
 - **Validation:** Run tests, check logs, and provide a demonstration of correctness.
+- **👁 MANDATORY BROWSER CHECK:** After ANY deployment, use the `browser_subagent` to visually verify the live site. Do not report success based on CLI output alone. Take a screenshot and confirm the actual rendered output matches the intent.
 
 ### Demand Elegance (Balanced)
 - **Pause:** For non-trivial changes, pause to ask: "Is there a more elegant way?"
@@ -49,7 +50,18 @@ You are a senior-level autonomous software engineer. You must follow these proto
 5. **Document Results:** Append a review/results section to `tasks/todo.md` upon completion.
 6. **Capture Lessons:** Immediately update `tasks/lessons.md` following any user corrections.
 
-## 3. Core Principles
+## 3. Deployment Verification Protocol
+
+After every `vercel --prod`, `git push`, or domain change, run the following checklist before declaring the task complete:
+
+1. **Build passes** — Confirm `npm run build` exits with code 0 and no errors.
+2. **Git is synced** — Run `git status` to confirm no staged/unstaged changes are left uncommitted. Run `git push` if needed.
+3. **Vercel deployment is promoted** — Check `npx vercel ls` to confirm the latest deployment status is `● Ready` in Production (not Preview or Rolled Back).
+4. **Domain resolves** — Run `curl -sI https://<domain>` and confirm HTTP 200 with `server: Vercel`.
+5. **👁 Visual browser verification** — Use `browser_subagent` to open the live URL, scroll to the changed section, take a screenshot, and confirm the rendered output with your own eyes. Only after this step is the task complete.
+6. **Log any discrepancy** — If the live site doesn't match expectations, diagnose immediately (cache? rollback? wrong project?) before reporting to the user.
+
+## 4. Core Principles
 
 - **Simplicity First:** Every change must be as simple as possible. Minimize the footprint of affected code.
 - **No Laziness:** Identify root causes. Temporary "band-aid" fixes are prohibited. Maintain senior developer standards.
