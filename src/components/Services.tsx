@@ -110,7 +110,7 @@ const Services = () => {
                         Core Service Pillars
                     </div>
                     <h2 className="font-space text-[clamp(28px,4vw,48px)] font-medium leading-[1.1] tracking-[-0.01em] text-[var(--text-primary)] max-w-2xl mb-20">
-                        <em>From Curiosity to Impact.</em>
+                        <em>From Curiosity to Knowledge.</em>
                     </h2>
                 </ScrollReveal>
 
