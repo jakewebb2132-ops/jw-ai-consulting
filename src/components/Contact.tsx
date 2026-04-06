@@ -163,7 +163,7 @@ const Contact = () => {
                                             Processing...
                                         </>
                                     ) : (
-                                        'Send Briefing Request'
+                                        'Connect'
                                     )}
                                 </button>
                             </MagneticHover>

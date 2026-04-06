@@ -1,5 +1,6 @@
 import { lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import MeshCanvas from './components/MeshCanvas';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
@@ -85,10 +86,11 @@ const AppLayout = () => {
     }
 
     return (
-        <div className="flex min-h-screen flex-col bg-[#f0f4f8] text-[#0f172a] selection:bg-blue-400/30 font-sans overflow-x-hidden">
+        <div className="flex min-h-screen flex-col font-sans overflow-x-hidden relative">
+            <MeshCanvas />
             <ScrollProgress />
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-1 relative z-10">
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/services/:slug" element={

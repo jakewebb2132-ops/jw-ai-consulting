@@ -11,7 +11,7 @@ const caseStudies = [
         impact: "Transformed scattered repositories and docs into an intelligent context structure utilizing BM25, vector search, and GraphRAG.",
         icon: <Bank size={32} weight="thin" />,
         color: "from-emerald-300/30 to-emerald-100/50",
-        borderHover: "hover:border-emerald-300 hover:shadow-emerald-900/5"
+        accent: "emerald"
     },
     {
         id: "dusted-pixels",
@@ -21,7 +21,7 @@ const caseStudies = [
         impact: "Scaled monthly output from under 100 to over 800 and reduced content creation time from days to minutes",
         icon: <Megaphone size={32} weight="thin" />,
         color: "from-blue-300/30 to-blue-100/50",
-        borderHover: "hover:border-blue-300 hover:shadow-blue-900/5"
+        accent: "blue"
     },
     {
         id: "hollywood-screenwriter",
@@ -31,7 +31,7 @@ const caseStudies = [
         impact: "Brainstorm anywhere hands-free, switch between 3 active projects instantly, and document ideations automatically while maintaining authentic voice.",
         icon: <FilmStrip size={32} weight="thin" />,
         color: "from-amber-300/30 to-amber-100/50",
-        borderHover: "hover:border-amber-300 hover:shadow-amber-900/5"
+        accent: "amber"
     },
     {
         id: "claude-code-agents",
@@ -41,79 +41,101 @@ const caseStudies = [
         impact: "Agents that execute, evaluate, reflect, and revise their own skills continuously — closing the loop from instruction to improvement without human intervention.",
         icon: <Robot size={32} weight="thin" />,
         color: "from-violet-300/30 to-violet-100/50",
-        borderHover: "hover:border-violet-300 hover:shadow-violet-900/5"
+        accent: "violet"
     }
 ];
 
 const Portfolio = () => {
     return (
-        <section id="portfolio" className="py-24 bg-[#f0f4f8] text-slate-900 border-t border-slate-200/50 z-10 relative">
-            {/* Decorative Glows */}
-            <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-300/20 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 -translate-x-1/2" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-sky-300/20 blur-[120px] rounded-full pointer-events-none translate-y-1/2 translate-x-1/2" />
-
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <section id="portfolio" className="py-[120px] relative z-10">
+            <div className="max-w-7xl mx-auto px-6 lg:px-[60px] relative z-10">
                 <ScrollReveal>
-                    <div className="mb-16 md:flex md:items-end md:justify-between">
+                    <div className="mb-20 md:flex md:items-end md:justify-between">
                         <div className="max-w-2xl">
-                            <h2 className="text-4xl font-bold tracking-tight mb-4 text-slate-900">The Proof</h2>
-                            <p className="text-slate-500 text-lg">Real-world impact of our bespoke AI architectures across enterprise and agency environments.</p>
+                            <div className="font-space text-[12px] font-bold tracking-[0.2em] uppercase text-[var(--accent-cyan)] mb-6 flex items-center gap-4 before:content-[''] before:w-12 before:h-[1px] before:bg-[var(--accent-cyan)]">
+                                Architectural Proof
+                            </div>
+                            <h2 className="font-space text-[clamp(28px,4vw,48px)] font-medium leading-[1.1] tracking-[-0.01em] text-[var(--text-primary)]">
+                                From Curiosity to Impact.
+                            </h2>
                         </div>
-                        <button className="hidden md:flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors group mt-6 md:mt-0">
+                        <button className="hidden md:flex items-center gap-2 font-space text-[12px] font-bold uppercase tracking-[0.15em] text-[var(--accent-cyan)] hover:text-[var(--accent-hover)] transition-colors group mt-6 md:mt-0">
                             View All Case Studies
                             <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </button>
                     </div>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {caseStudies.map((study, index) => (
-                        <ScrollReveal key={index} delay={index * 150}>
-                            <Link
-                                to={`/case-study/${study.id}`}
-                                className={`group relative p-8 md:p-10 rounded-3xl bg-white border border-slate-200 shadow-sm transition-all duration-500 ${study.borderHover} hover:shadow-xl hover:-translate-y-1 overflow-hidden flex flex-col h-full block`}
-                            >
-                                {/* Abstract Gradient Mesh Placeholder */}
-                                <div className="absolute top-0 right-0 w-64 h-64 opacity-50 transition-transform duration-700 group-hover:scale-110 transform-gpu pointer-events-none">
-                                    <div className={`absolute inset-0 bg-gradient-to-br ${study.color} blur-3xl rounded-full translate-x-1/3 -translate-y-1/3 group-hover:opacity-100 transition-opacity duration-500 transform-gpu`} />
-                                </div>
+                <div className="flex flex-col gap-16">
+                    {caseStudies.map((study, index) => {
+                        const isEven = index % 2 === 0;
 
-                                <div className="relative z-10 flex flex-col h-full">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-700 border border-slate-200 group-hover:scale-110 transition-transform duration-500 shadow-sm">
-                                                {study.icon}
-                                            </div>
-                                            <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">{study.client}</span>
-                                        </div>
-                                        <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50 group-hover:border-blue-200 shadow-sm transition-all duration-300">
-                                            <ArrowUpRight size={20} />
-                                        </div>
+                        const TitleBlock = ({ className = "" }) => (
+                            <div className={`flex flex-col h-full justify-center ${className}`}>
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-[var(--text-primary)] border border-[var(--border-color)] group-hover:scale-105 transition-transform duration-500 shadow-[0_2px_10px_rgba(58,111,188,0.05)]">
+                                        {study.icon}
                                     </div>
+                                    <span className="font-space text-[12px] font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em]">{study.client}</span>
+                                </div>
+                                <h3 className="font-space text-[clamp(24px,3vw,36px)] font-semibold mb-4 leading-tight text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors">
+                                    {study.title}
+                                </h3>
+                            </div>
+                        );
 
-                                    <div className="mt-auto">
-                                        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-balance text-slate-900 group-hover:text-blue-700 transition-colors">
-                                            {study.title}
-                                        </h3>
-                                        <p className="text-slate-600 leading-relaxed mb-6">
-                                            {study.description}
+                        const ExplanationBlock = ({ className = "" }) => (
+                            <div className={`flex flex-col h-full justify-center ${className}`}>
+                                <div className="bg-white/50 backdrop-blur-sm border border-[var(--border-color)] rounded-2xl p-8 group-hover:bg-white transition-colors duration-500">
+                                    <p className="text-[16px] text-[var(--text-secondary)] leading-[1.7] mb-8 font-normal">
+                                        {study.description}
+                                    </p>
+                                    <div className="pt-6 border-t border-[var(--border-color)]">
+                                        <p className="text-[14px] text-[var(--text-secondary)] leading-[1.6]">
+                                            <span className="text-[var(--accent-cyan)] font-space font-bold uppercase tracking-widest text-[11px] block mb-2">Impact Delivered</span>
+                                            {study.impact}
                                         </p>
-
-                                        <div className="pt-6 border-t border-slate-100">
-                                            <p className="text-sm text-slate-700 leading-relaxed">
-                                                <span className="text-blue-600 font-bold mr-2 block mb-1">Impact:</span>
-                                                {study.impact}
-                                            </p>
-                                        </div>
                                     </div>
                                 </div>
-                            </Link>
-                        </ScrollReveal>
-                    ))}
+                            </div>
+                        );
+
+                        return (
+                            <ScrollReveal key={index} delay={100}>
+                                <Link
+                                    to={`/case-study/${study.id}`}
+                                    className="group relative block rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] transition-all duration-500 hover:shadow-[0_20px_60px_rgba(58,111,188,0.1)] hover:-translate-y-1 overflow-hidden"
+                                >
+                                    <div className="absolute top-0 right-0 w-[500px] h-[500px] opacity-20 transition-transform duration-700 group-hover:scale-110 transform-gpu pointer-events-none">
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${study.color} blur-[100px] rounded-full translate-x-1/3 -translate-y-1/3 group-hover:opacity-60 transition-opacity duration-500 transform-gpu`} />
+                                    </div>
+
+                                    <div className="relative z-10 p-8 md:p-12 lg:p-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-stretch">
+                                        {isEven ? (
+                                            <>
+                                                <TitleBlock />
+                                                <ExplanationBlock />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <ExplanationBlock className="order-2 md:order-1" />
+                                                <TitleBlock className="order-1 md:order-2" />
+                                            </>
+                                        )}
+                                        
+                                        {/* Hover Arrow Indicator */}
+                                        <div className={`absolute ${isEven ? 'top-8 right-8' : 'top-8 left-8'} w-12 h-12 rounded-full border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] group-hover:text-white group-hover:bg-[var(--accent-cyan)] group-hover:border-[var(--accent-cyan)] shadow-sm transition-all duration-300 z-20`}>
+                                            <ArrowUpRight size={20} className={!isEven ? 'rotate-90 md:rotate-0' : ''} />
+                                        </div>
+                                    </div>
+                                </Link>
+                            </ScrollReveal>
+                        );
+                    })}
                 </div>
 
-                <ScrollReveal delay={500}>
-                    <button className="md:hidden w-full flex items-center justify-center gap-2 mt-8 py-4 px-6 rounded-full border border-blue-200 text-sm font-bold text-blue-700 hover:bg-blue-50 transition-colors shadow-sm">
+                <ScrollReveal delay={300}>
+                    <button className="md:hidden w-full flex items-center justify-center gap-2 mt-12 py-4 px-6 rounded border border-[var(--accent-cyan)] text-[12px] font-space font-bold uppercase tracking-[0.1em] text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)] hover:text-white transition-colors shadow-sm">
                         View All Case Studies
                         <ArrowUpRight size={16} />
                     </button>

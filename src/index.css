@@ -3,6 +3,22 @@
 @tailwind utilities;
 
 @layer base {
+    :root {
+      --bg-main: #ffffff;
+      --bg-gradient: linear-gradient(135deg, #ffffff 0%, #e2ebf5 100%);
+      --bg-surface: rgba(255, 255, 255, 0.75);
+      --bg-card: rgba(255, 255, 255, 0.9);
+      
+      --text-primary: #1a3a6e;  /* Deep blue */
+      --text-secondary: #4a5e7a; /* Steel */
+      --text-muted: #8a9ab5;
+      
+      --accent-cyan: #3a6fbc; /* Accent blue */
+      --accent-hover: #225191;
+      --border-color: rgba(58, 111, 188, 0.15);
+      
+      --glow: 0 0 20px rgba(58, 111, 188, 0.15);
+    }
     html {
         scroll-padding-top: 5rem;
         /* Offsets anchor links so the fixed navbar doesn't cover content */
@@ -13,10 +29,24 @@
     .glass-card {
         @apply bg-white/70 backdrop-blur-xl border border-blue-100 shadow-xl shadow-blue-900/5 rounded-2xl;
     }
+    .font-space {
+        font-family: 'Space Grotesk', sans-serif;
+    }
 }
 
 body {
-    @apply bg-[#f8fafc] text-[#0f172a] antialiased;
+    @apply antialiased;
+    background: var(--bg-main);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+::selection {
+    background: var(--accent-cyan);
+    color: #fff;
 }
 
 /* ─── Unified Proposal Typography Engine (Final Parity) ─── */
@@ -101,7 +131,21 @@ body {
     }
 }
 
+@keyframes carouselScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 @layer utilities {
+    .animate-carousel {
+        animation: carouselScroll 50s linear infinite;
+        will-change: transform;
+    }
+    
+    .animate-carousel:hover {
+        animation-play-state: paused;
+    }
+
     .animate-fade-in {
         animation: fadeIn 0.5s ease-out forwards;
     }
