@@ -56,7 +56,7 @@ const Portfolio = () => {
                                 Architectural Proof
                             </div>
                             <h2 className="font-space text-[clamp(28px,4vw,48px)] font-medium leading-[1.1] tracking-[-0.01em] text-[var(--text-primary)]">
-                                From Curiosity to Impact.
+                                From Knowledge to Impact.
                             </h2>
                         </div>
                         <button className="hidden md:flex items-center gap-2 font-space text-[12px] font-bold uppercase tracking-[0.15em] text-[var(--accent-cyan)] hover:text-[var(--accent-hover)] transition-colors group mt-6 md:mt-0">
