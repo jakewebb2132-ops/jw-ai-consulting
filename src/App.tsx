@@ -81,14 +81,15 @@ const AppLayout = () => {
     const { pathname } = useLocation();
     
     // If the user visits the proposal subdomain but didn't hit a specific secure route,
-    // automatically bounce them to the admin dashboard instead of rendering the consumer marketing site.
-    const isBoardroomDomain = window.location.hostname.includes('boardroom') || window.location.hostname.includes('proposal');
-    
-    // EXCEPTION: If they are already ON an admin or proposal-generator path, do NOT redirect.
-    // This allows deep links like proposals.jwaiconsulting.com/admin/dashboard to work.
-    const isInternalPath = pathname.startsWith('/admin') || pathname.startsWith('/proposal-generator');
+    // automatically bounce them to the proposal generator instead of the council.
+    const isProposalsDomain = window.location.hostname.includes('proposal');
+    const isBoardroomDomain = window.location.hostname.includes('boardroom');
 
-    if (isBoardroomDomain && !isInternalPath) {
+    if (isProposalsDomain) {
+        return <Navigate to="/proposal-generator" replace />;
+    }
+
+    if (isBoardroomDomain) {
         return <Navigate to="/admin/council" replace />;
     }
 
