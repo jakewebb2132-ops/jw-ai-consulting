@@ -1,0 +1,18 @@
+wing: jw_ai_consulting
+rooms:
+- name: tasks
+  description: Files from tasks/
+- name: supabase
+  description: Files from supabase/
+- name: public
+  description: Files from public/
+- name: backend
+  description: Files from api/
+- name: src
+  description: Files from src/
+- name: scripts
+  description: Files from utils/
+- name: frontend
+  description: Files from components/
+- name: general
+  description: Files that don't fit other rooms
