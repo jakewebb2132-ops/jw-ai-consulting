@@ -1,0 +1,7 @@
+# Gmail OAuth secrets — never commit these
+gmail-auth/credentials.json
+gmail-auth/token.json
+
+# launchd logs (regenerated each run)
+../run-logs/launchd-stdout.log
+../run-logs/launchd-stderr.log

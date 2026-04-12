@@ -16,6 +16,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import Council from './pages/Council';
 import VisitorInsights from './pages/VisitorInsights';
 import CAPIPipeline from './pages/CAPIPipeline';
+import JobApplications from './pages/JobApplications';
 import LazySection from './components/LazySection';
 
 // Lazy load below-the-fold sections and subpages
@@ -44,7 +45,7 @@ const ScrollManager = () => {
         // We only want smooth scrolling on the public marketing pages / read-only proposals.
         // The Proposal Generator and Admin Dashboard use fixed heights with internal scrolling containers,
         // so we must destroy the global Lenis instance to prevent it from swallowing the native scroll events.
-        const isInternalApp = pathname.startsWith('/admin') || pathname.startsWith('/proposal-generator');
+        const isInternalApp = pathname.startsWith('/admin') || pathname.startsWith('/proposal-generator') || pathname.startsWith('/jobs');
         
         let lenis: Lenis | null = null;
         
@@ -142,6 +143,7 @@ function App() {
                 <Route path="/admin/council" element={<Council />} />
                 <Route path="/admin/leads" element={<VisitorInsights />} />
                 <Route path="/admin/pipeline" element={<CAPIPipeline />} />
+                <Route path="/admin/jobs" element={<JobApplications />} />
 
                 {/* Secure Magic Link Public Route (Does NOT require Auth) */}
                 <Route path="/p/:id" element={<ProposalPublic />} />

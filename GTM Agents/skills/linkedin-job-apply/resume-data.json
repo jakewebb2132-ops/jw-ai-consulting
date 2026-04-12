@@ -1,0 +1,107 @@
+{
+  "personal": {
+    "first_name": "Jake",
+    "last_name": "Webb",
+    "email": "jakewebb2132@gmail.com",
+    "phone": "512-665-5619",
+    "phone_type": "Mobile",
+    "location": "Austin, TX",
+    "city": "Austin",
+    "state": "Texas",
+    "zip": "78701",
+    "country": "United States"
+  },
+  "professional": {
+    "current_company": "JW AI Consulting",
+    "current_title": "Founder – Head of Sales",
+    "linkedin_url": "https://www.linkedin.com/in/jakewebb/",
+    "website": "https://jwaiconsulting.com",
+    "portfolio": "https://jwaiconsulting.com"
+  },
+  "resume_local_path": "/Users/jake/Documents/GTM Agents/Jake Webb - AI Sales Resume.pdf",
+  "work_authorization": {
+    "status": "US Citizen",
+    "requires_sponsorship": false,
+    "available_immediately": true
+  },
+  "availability": {
+    "remote_preferred": true,
+    "open_to_hybrid": true,
+    "willing_to_relocate": false,
+    "notice_period": "Immediately available"
+  },
+  "compensation": {
+    "target_range": "$150,000 – $250,000",
+    "base_min": 150000,
+    "base_max": 250000,
+    "open_to_commission": true,
+    "open_to_equity": true,
+    "currency": "USD"
+  },
+  "experience_years": {
+    "total_sales": 7,
+    "b2b_saas": 7,
+    "enterprise_sales": 5,
+    "ai_ml_sales": 4,
+    "salesforce": 5,
+    "hubspot": 4,
+    "gtm_strategy": 4,
+    "revenue_operations": 3,
+    "solution_consulting": 3,
+    "people_management": 4,
+    "startup_environments": 5,
+    "crm_tools": 6,
+    "account_management": 6,
+    "outbound_prospecting": 7,
+    "pipeline_management": 7,
+    "contract_negotiation": 5
+  },
+  "skills": [
+    "AI/ML Sales",
+    "Enterprise Sales",
+    "B2B SaaS",
+    "GTM Strategy",
+    "Salesforce",
+    "HubSpot",
+    "Revenue Operations",
+    "Solution Consulting",
+    "Pipeline Management",
+    "Account Management",
+    "Outbound Prospecting",
+    "C-Suite Engagement",
+    "Contract Negotiation",
+    "Sales Engineering",
+    "Strategic Partnerships",
+    "Team Leadership",
+    "Forecasting",
+    "CRM Tools"
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science",
+      "field": "Mass Communication / Sociology",
+      "institution": "Texas State University",
+      "graduation_year": 2008
+    }
+  ],
+  "screening_defaults": {
+    "quota_over_1M": true,
+    "closed_enterprise_deals": true,
+    "sold_technical_products": true,
+    "c_suite_experience": true,
+    "remote_self_starter": true,
+    "us_work_authorized": true,
+    "sponsorship_required": false,
+    "background_check_consent": true,
+    "drug_test_consent": true,
+    "willing_to_travel": "Up to 25%",
+    "start_date": "Immediately"
+  },
+  "key_achievements": [
+    "Built $12M enterprise pipeline at Protopia AI targeting Fortune 500 security teams",
+    "Generated $4.5M pipeline / $1.45M ARR at Mediafly through strategic outbound",
+    "Closed multi-year SaaS contracts with enterprise accounts averaging $250K ACV",
+    "Led GTM motion from 0→1 at two early-stage AI startups",
+    "Consistently exceeded 110%+ of annual quota in B2B SaaS roles"
+  ]
+}

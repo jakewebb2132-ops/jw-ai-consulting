@@ -4,7 +4,7 @@ import { useInteractionStore } from '../store/interactionStore';
 import { useSignalStore } from '../store/signalStore';
 import { useVisitorStore } from '../store/visitorStore';
 import { Link } from 'react-router-dom';
-import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise, ShieldCheck, LinkedinLogo, MagnifyingGlass, Broadcast, Funnel } from 'phosphor-react';
+import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise, ShieldCheck, LinkedinLogo, MagnifyingGlass, Broadcast, Funnel, CheckCircle } from 'phosphor-react';
 import { Proposal } from '../types/proposal';
 
 const AdminDashboard: React.FC = () => {
@@ -82,6 +82,9 @@ const AdminDashboard: React.FC = () => {
           </Link>
           <Link to="/admin/council" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold break-words">
             <Users size={20} /> The Council
+          </Link>
+          <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
+            <CheckCircle size={20} className="text-violet-400" /> Job Applications
           </Link>
         </nav>
       </aside>
