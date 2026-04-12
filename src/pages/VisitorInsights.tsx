@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Users, ArrowSquareOut, Activity, ArrowUpRight, Shield, Globe, LinkedinLogo, Eye, ChartLineUp, Broadcast, ArrowLeft, Clock, Briefcase } from 'phosphor-react';
 import { supabase } from '../lib/supabase';
 
+import Sidebar from '../components/Sidebar';
+
 const SalesIntelligence = () => {
     const { leads, fetchLeads, subscribeToLeads, isLoading: leadsLoading } = useVisitorStore();
     const { signals, fetchSignals, subscribeToSignals, isLoading: signalsLoading } = useSignalStore();
@@ -25,44 +27,7 @@ const SalesIntelligence = () => {
 
     return (
         <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100">
-            {/* Sidebar - Consistent with Admin */}
-            <aside className="w-64 bg-[#0a0a0b] text-zinc-400 p-6 flex flex-col gap-8 shrink-0 border-r border-white/5 shadow-2xl overflow-y-auto h-screen sticky top-0">
-                <div className="flex flex-col gap-1">
-                    <Link to="/admin/dashboard" className="flex items-center gap-3 group">
-                        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-                            <Shield size={20} weight="fill" />
-                        </div>
-                        <div>
-                            <h1 className="text-white font-bold text-lg tracking-tight leading-none">Intelligence</h1>
-                            <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest bg-blue-500/10 px-1 rounded mt-1">Executive Reveal</span>
-                        </div>
-                    </Link>
-                </div>
-
-                <nav className="flex flex-col gap-1">
-                    <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-2 px-2">Navigation</p>
-                    <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-                        <ArrowLeft size={18} /> Back to Boardroom
-                    </Link>
-                    <div className="h-px bg-white/5 my-2 mx-2"></div>
-                    <button 
-                        onClick={() => setActiveTab('website')}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold ${activeTab === 'website' ? 'bg-white/5 text-white border border-white/5 shadow-sm' : 'text-zinc-400 hover:text-white hover:bg-white/5'}`}
-                    >
-                        <Globe size={20} weight={activeTab === 'website' ? "fill" : "regular"} className={activeTab === 'website' ? "text-blue-400" : ""} /> Website Reveals
-                    </button>
-                    <button 
-                        onClick={() => setActiveTab('linkedin')}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-semibold ${activeTab === 'linkedin' ? 'bg-white/5 text-white border border-white/5 shadow-sm' : 'text-zinc-400 hover:text-white hover:bg-white/5'}`}
-                    >
-                        <LinkedinLogo size={20} weight={activeTab === 'linkedin' ? "fill" : "regular"} className={activeTab === 'linkedin' ? "text-[#0a66c2]" : ""} /> LinkedIn Signals
-                    </button>
-                    <div className="h-px bg-white/5 my-2 mx-2"></div>
-                    <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-                        <Briefcase size={20} className="text-violet-400" /> Job Applications
-                    </Link>
-                </nav>
-            </aside>
+            <Sidebar />
 
             {/* Main Content */}
             <main className="flex-1 p-10 overflow-y-auto">

@@ -77,6 +77,8 @@ const ADVISORS: Advisor[] = [
   }
 ];
 
+import Sidebar from '../components/Sidebar';
+
 const Council: React.FC = () => {
   const [selectedAdvisors, setSelectedAdvisors] = useState<Set<string>>(new Set(ADVISORS.map(a => a.id)));
   const [mode, setMode] = useState<'consensus' | 'debate'>('consensus');
@@ -197,35 +199,7 @@ const Council: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-[#07080d] text-zinc-300 font-sans">
-      {/* Sidebar - Shared with Dashboard */}
-      <div className="w-64 bg-[#0e0f16] border-r border-white/5 flex flex-col p-6">
-        <div className="flex items-center gap-3 mb-10 px-2">
-          <div className="w-8 h-8 bg-[#c9a96e] rounded-lg flex items-center justify-center font-serif italic text-[#07080d] font-bold">B</div>
-          <div>
-             <h1 className="text-white font-bold tracking-tight text-sm">Boardroom</h1>
-             <p className="text-[9px] text-[#c9a96e] font-bold tracking-widest uppercase">Executive</p>
-          </div>
-        </div>
-
-        <nav className="flex-1 space-y-1">
-          <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all">
-            <ChartLineUp size={20} />
-            <span className="text-sm font-medium">Strategic Overview</span>
-          </Link>
-          <Link to="/admin/council" className="flex items-center gap-3 px-4 py-3 bg-white/5 text-[#c9a96e] rounded-xl transition-all">
-            <Users size={20} weight="fill" />
-            <span className="text-sm font-medium">The Council</span>
-          </Link>
-          <div className="flex items-center gap-3 px-4 py-3 text-zinc-600 cursor-not-allowed">
-            <PresentationChart size={20} />
-            <span className="text-sm font-medium">Insights</span>
-          </div>
-          <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <Briefcase size={20} className="text-violet-400" />
-            <span className="text-sm font-medium">Job Applications</span>
-          </Link>
-        </nav>
-      </div>
+      <Sidebar />
 
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto bg-gradient-to-b from-[#0e0f16]/30 to-[#07080d]">

@@ -68,6 +68,8 @@ function timeAgo(iso: string) {
   return `${Math.floor(hrs / 24)}d ago`;
 }
 
+import Sidebar from '../components/Sidebar';
+
 const CAPIPipeline: React.FC = () => {
   const { leads, isLoading, fetchLeads } = useCAPIStore();
 
@@ -83,56 +85,7 @@ const CAPIPipeline: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-[#0a0a0b] text-zinc-400 p-6 flex flex-col gap-8 shrink-0 border-r border-white/5 shadow-2xl overflow-y-auto h-screen sticky top-0">
-        <div className="flex flex-col gap-1">
-          <Link to="/admin/dashboard" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-              <ChartLineUp size={20} weight="fill" />
-            </div>
-            <div>
-              <h1 className="text-white font-bold text-lg tracking-tight leading-none">Pipeline</h1>
-              <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest bg-emerald-500/10 px-1 rounded mt-1">CAPI Signal Feed</span>
-            </div>
-          </Link>
-        </div>
-
-        <nav className="flex flex-col gap-1">
-          <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-2 px-2">Navigation</p>
-          <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <ArrowLeft size={18} /> Back to Boardroom
-          </Link>
-          <div className="h-px bg-white/5 my-2 mx-2" />
-          <Link to="/admin/leads" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <Users size={20} /> Visitor Reveals
-          </Link>
-          <div className="flex items-center gap-3 px-4 py-3 bg-white/5 text-white rounded-xl font-semibold border border-white/5 shadow-sm">
-            <ChartLineUp size={20} className="text-emerald-400" weight="fill" /> CAPI Pipeline
-          </div>
-          <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <Briefcase size={20} className="text-violet-400" /> Job Applications
-          </Link>
-        </nav>
-
-        {/* Live stat */}
-        <div className="mt-auto p-4 rounded-2xl bg-white/5 border border-white/5">
-          <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Pipeline Health</p>
-          <div className="space-y-2">
-            <div className="flex justify-between text-xs">
-              <span className="text-zinc-400">Hot leads</span>
-              <span className="font-black text-emerald-400">{hotLeads.length}</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-zinc-400">Warming up</span>
-              <span className="font-black text-amber-400">{warmLeads.length}</span>
-            </div>
-            <div className="flex justify-between text-xs">
-              <span className="text-zinc-400">Total signals</span>
-              <span className="font-black text-white">{totalSignals}</span>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
 
       {/* Main */}
       <main className="flex-1 p-10 overflow-y-auto">

@@ -140,6 +140,8 @@ const StatCard: React.FC<{
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
+import Sidebar from '../components/Sidebar';
+
 const JobApplications: React.FC = () => {
   const [jobs, setJobs] = useState<JobApplication[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -213,61 +215,8 @@ const JobApplications: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100">
-      {/* ─── Sidebar ─────────────────────────────────────────────────────── */}
-      <aside className="w-64 bg-[#0a0a0b] text-zinc-400 p-6 flex flex-col gap-8 shrink-0 border-r border-white/5 shadow-2xl overflow-y-auto h-screen sticky top-0">
-        <div className="flex flex-col gap-1">
-          <Link to="/admin/dashboard" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 flex items-center justify-center text-white shadow-lg shadow-violet-500/20 group-hover:scale-105 transition-transform">
-              <Briefcase size={20} weight="fill" />
-            </div>
-            <div>
-              <h1 className="text-white font-bold text-lg tracking-tight leading-none">Applications</h1>
-              <span className="text-[10px] text-violet-400 font-bold uppercase tracking-widest bg-violet-500/10 px-1 rounded mt-1">AI Agent</span>
-            </div>
-          </Link>
-        </div>
-
-        <nav className="flex flex-col gap-1">
-          <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-2 px-2">Navigation</p>
-          <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <ArrowLeft size={18} /> Back to Boardroom
-          </Link>
-          <div className="h-px bg-white/5 my-2 mx-2" />
-
-          <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-2 px-2">Filter by Status</p>
-          {statusFilters.map(f => {
-            const isActive = filterStatus === f.value;
-            const count = f.value === 'all' ? stats.total
-              : f.value === 'submitted' ? stats.submitted
-              : f.value === 'needs_manual_review' ? stats.needs_manual_review
-              : f.value === 'error' ? stats.error
-              : stats.skipped;
-            return (
-              <button
-                key={f.value}
-                onClick={() => setFilterStatus(f.value)}
-                className={`flex items-center justify-between px-4 py-2.5 rounded-xl transition-all font-semibold text-sm ${
-                  isActive
-                    ? 'bg-white/[0.07] text-white border border-white/10 shadow-sm'
-                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <span>{f.label}</span>
-                <span className={`text-[10px] font-black tabular-nums px-1.5 py-0.5 rounded-md ${isActive ? 'bg-violet-500 text-white' : 'bg-white/5 text-zinc-500'}`}>
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Last refreshed */}
-        <div className="mt-auto flex items-center gap-2 text-[10px] text-zinc-600 font-bold uppercase tracking-wider">
-          <Clock size={12} />
-          <span>Refreshed {lastRefreshed.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-        </div>
-      </aside>
+    <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100 uppercase-badges">
+      <Sidebar />
 
       {/* ─── Main Content ─────────────────────────────────────────────────── */}
       <main className="flex-1 p-10 overflow-y-auto">

@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise, ShieldCheck, LinkedinLogo, MagnifyingGlass, Broadcast, Funnel, CheckCircle } from 'phosphor-react';
 import { Proposal } from '../types/proposal';
 
+import Sidebar from '../components/Sidebar';
+
 const AdminDashboard: React.FC = () => {
   const { proposals, fetchAllProposals } = useProposalStore();
   const { interactions, fetchInteractions, isLoading: isInteractionsLoading } = useInteractionStore();
@@ -54,60 +56,16 @@ const AdminDashboard: React.FC = () => {
   }, [proposals, interactions, signals, leads]);
 
   return (
-    <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100">
-      {/* Sidebar - Boardroom Branding */}
-      <aside className="w-64 bg-[#0a0a0b] text-zinc-400 p-6 flex flex-col gap-8 shrink-0 border-r border-white/5 shadow-2xl">
-        <div className="flex flex-col gap-1">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <PresentationChart size={20} weight="fill" />
-            </div>
-            <div>
-              <h1 className="text-white font-bold text-lg tracking-tight leading-none">Boardroom</h1>
-              <span className="text-[10px] text-blue-400 font-bold uppercase tracking-widest bg-blue-500/10 px-1 rounded mt-1">Executive</span>
-            </div>
-          </Link>
-        </div>
-
-        <nav className="flex flex-col gap-1">
-          <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em] mb-2 px-2">Main Menu</p>
-          <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <Briefcase weight="fill" /> Documents
-          </Link>
-          <Link to="/admin/leads" className="flex items-center gap-3 px-4 py-3 bg-white/5 text-white rounded-xl transition-all font-semibold shadow-sm border border-white/5">
-            <ShieldCheck weight="fill" className="text-blue-400" /> Sales Intelligence
-          </Link>
-          <Link to="/admin/pipeline" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <Funnel weight="fill" className="text-emerald-400" size={20} /> CAPI Pipeline
-          </Link>
-          <Link to="/admin/council" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold break-words">
-            <Users size={20} /> The Council
-          </Link>
-          <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <Briefcase size={20} className="text-violet-400" /> Job Applications
-          </Link>
-        </nav>
-      </aside>
+    <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100 uppercase-badges">
+      <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-10 overflow-y-auto">
         <div className="max-w-6xl mx-auto">
           {/* Header Section */}
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                <span className="text-[11px] font-bold text-blue-600 uppercase tracking-widest">Live Strategic Overview</span>
-              </div>
-              <h2 className="text-4xl font-black text-zinc-900 tracking-tight">Executive Boardroom</h2>
-              <p className="text-zinc-500 font-medium mt-1">Secure management of AI consulting implementations and deliverables.</p>
-            </div>
-            <Link 
-              to="/proposal-generator" 
-              className="px-8 py-3.5 bg-zinc-900 hover:bg-zinc-800 text-white font-bold rounded-xl shadow-xl shadow-zinc-200 hover:-translate-y-0.5 transition-all flex items-center gap-2 active:scale-95"
-            >
-              Draft New Strategy
-            </Link>
+          <div className="flex items-center gap-2 mb-8">
+            <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+            <span className="text-[11px] font-bold text-blue-600 uppercase tracking-widest text-[#4A5568]">Live Strategic Overview</span>
           </div>
 
           {/* Stats Grid */}
@@ -172,7 +130,7 @@ const AdminDashboard: React.FC = () => {
             <div className="px-8 py-5 border-b border-zinc-100 flex items-center justify-between bg-zinc-50/50">
               <div className="flex items-center gap-2">
                 <ClockCounterClockwise size={16} weight="bold" className="text-zinc-400" />
-                <h4 className="text-xs font-black text-zinc-400 uppercase tracking-[0.2em]">Boardroom Strategic Consultation Feed</h4>
+                <h4 className="text-xs font-black text-zinc-400 uppercase tracking-[0.2em]">Home Base Consultation Feed</h4>
               </div>
               {isInteractionsLoading && <CircleNotch size={14} className="animate-spin text-indigo-600" />}
             </div>
@@ -260,7 +218,7 @@ const AdminDashboard: React.FC = () => {
                      <td colSpan={6} className="px-8 py-20 text-center">
                         <div className="flex flex-col items-center gap-3">
                            <CircleNotch size={40} className="animate-spin text-blue-600" />
-                           <span className="text-zinc-900 font-bold tracking-tight">Synchronizing Boardroom Data...</span>
+                           <span className="text-zinc-900 font-bold tracking-tight">Synchronizing Home Base Data...</span>
                         </div>
                      </td>
                    </tr>
@@ -324,7 +282,7 @@ const AdminDashboard: React.FC = () => {
                            <Briefcase size={48} weight="thin" />
                          </div>
                          <div className="max-w-xs mx-auto">
-                           <p className="text-zinc-900 font-black text-xl tracking-tight">Boardroom Empty</p>
+                           <p className="text-zinc-900 font-black text-xl tracking-tight">Home Base Empty</p>
                            <p className="text-sm text-zinc-400 font-medium mt-1">Start by drafting your first executive AI delivery strategy using the generator.</p>
                          </div>
                       </div>

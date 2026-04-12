@@ -143,6 +143,8 @@ function App() {
                 <Route path="/admin/council" element={<Council />} />
                 <Route path="/admin/leads" element={<VisitorInsights />} />
                 <Route path="/admin/pipeline" element={<CAPIPipeline />} />
+                <Route path="/admin/activity" element={<CAPIPipeline />} /> {/* Placeholder */}
+                <Route path="/admin/workflows" element={<CAPIPipeline />} /> {/* Placeholder */}
                 <Route path="/admin/jobs" element={<JobApplications />} />
 
                 {/* Secure Magic Link Public Route (Does NOT require Auth) */}
