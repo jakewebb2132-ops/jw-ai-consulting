@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useVisitorStore } from '../store/visitorStore';
 import { useSignalStore } from '../store/signalStore';
 import { Link } from 'react-router-dom';
-import { Users, ArrowSquareOut, Activity, ArrowUpRight, Shield, Globe, LinkedinLogo, Eye, ChartLineUp, Broadcast, ArrowLeft, Clock } from 'phosphor-react';
+import { Users, ArrowSquareOut, Activity, ArrowUpRight, Shield, Globe, LinkedinLogo, Eye, ChartLineUp, Broadcast, ArrowLeft, Clock, Briefcase } from 'phosphor-react';
 import { supabase } from '../lib/supabase';
 
 const SalesIntelligence = () => {
@@ -57,6 +57,10 @@ const SalesIntelligence = () => {
                     >
                         <LinkedinLogo size={20} weight={activeTab === 'linkedin' ? "fill" : "regular"} className={activeTab === 'linkedin' ? "text-[#0a66c2]" : ""} /> LinkedIn Signals
                     </button>
+                    <div className="h-px bg-white/5 my-2 mx-2"></div>
+                    <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
+                        <Briefcase size={20} className="text-violet-400" /> Job Applications
+                    </Link>
                 </nav>
             </aside>
 

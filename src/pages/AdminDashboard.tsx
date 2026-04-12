@@ -84,7 +84,7 @@ const AdminDashboard: React.FC = () => {
             <Users size={20} /> The Council
           </Link>
           <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
-            <CheckCircle size={20} className="text-violet-400" /> Job Applications
+            <Briefcase size={20} className="text-violet-400" /> Job Applications
           </Link>
         </nav>
       </aside>

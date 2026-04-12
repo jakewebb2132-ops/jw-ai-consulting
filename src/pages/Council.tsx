@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ArrowRight, CircleNotch, Warning, ChartLineUp, Users, PresentationChart, Sword, Handshake } from 'phosphor-react';
+import { ArrowRight, CircleNotch, Warning, ChartLineUp, Users, PresentationChart, Sword, Handshake, Briefcase } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 
 interface Advisor {
@@ -220,6 +220,10 @@ const Council: React.FC = () => {
             <PresentationChart size={20} />
             <span className="text-sm font-medium">Insights</span>
           </div>
+          <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
+            <Briefcase size={20} className="text-violet-400" />
+            <span className="text-sm font-medium">Job Applications</span>
+          </Link>
         </nav>
       </div>
 

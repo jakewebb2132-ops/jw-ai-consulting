@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowLeft, CircleNotch, Broadcast, ChartLineUp, Users,
   LinkedinLogo, FacebookLogo, TiktokLogo, TwitterLogo,
-  CheckCircle, Clock, Warning,
+  CheckCircle, Clock, Warning, Briefcase,
 } from 'phosphor-react';
 import { useCAPIStore, LeadSummary } from '../store/capiStore';
 
@@ -109,6 +109,9 @@ const CAPIPipeline: React.FC = () => {
           <div className="flex items-center gap-3 px-4 py-3 bg-white/5 text-white rounded-xl font-semibold border border-white/5 shadow-sm">
             <ChartLineUp size={20} className="text-emerald-400" weight="fill" /> CAPI Pipeline
           </div>
+          <Link to="/admin/jobs" className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-semibold">
+            <Briefcase size={20} className="text-violet-400" /> Job Applications
+          </Link>
         </nav>
 
         {/* Live stat */}
