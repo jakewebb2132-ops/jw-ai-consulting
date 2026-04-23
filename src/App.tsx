@@ -18,6 +18,8 @@ import VisitorInsights from './pages/VisitorInsights';
 import CAPIPipeline from './pages/CAPIPipeline';
 import JobApplications from './pages/JobApplications';
 import LazySection from './components/LazySection';
+import JustStartTeaser from './components/JustStartTeaser';
+import JustStart from './pages/JustStart';
 
 // Lazy load below-the-fold sections and subpages
 const ServicesSection = lazy(() => import('./components/Services'));
@@ -69,6 +71,7 @@ const HomePage = () => (
         <LazySection minHeight="800px">
             <ServicesSection />
         </LazySection>
+        <JustStartTeaser />
         <LazySection minHeight="800px">
             <Portfolio />
         </LazySection>
@@ -108,6 +111,7 @@ const AppLayout = () => {
                     </LazySection>
                 } />
                 <Route path="/case-study/:id" element={<CaseStudy />} />
+                <Route path="/just-start" element={<JustStart />} />
             </Routes>
         </main>
         <footer className="border-t border-slate-200 bg-white px-6 py-8">
