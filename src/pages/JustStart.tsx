@@ -1,4 +1,4 @@
-import { ArrowRight, Phone, Users, ChatCircleText, FileText, CheckCircle, Sparkle } from "phosphor-react";
+import { ArrowRight, Phone, Users, ChatCircleText, FileText, CheckCircle, Sparkle, GraduationCap, Robot } from "phosphor-react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ScrollReveal from "../components/ScrollReveal";
@@ -39,6 +39,16 @@ const includes = [
         body: "Your goals, your situation, my honest take — all in one focused conversation.",
     },
     {
+        icon: <GraduationCap size={18} weight="bold" />,
+        title: "90-Min AI 101 Class",
+        body: "What AI actually is, what it can do for your business, and where to start — no jargon, no fluff.",
+    },
+    {
+        icon: <Robot size={18} weight="bold" />,
+        title: "Build Your First Agent",
+        body: "We build one together. Reference use case: Autonomous AI — a production Claude Code Agent that does real work.",
+    },
+    {
         icon: <Users size={18} weight="bold" />,
         title: "Weekly Team Meeting",
         body: "I join once a week to answer questions, clear up confusion, and keep momentum going.",
@@ -57,6 +67,8 @@ const includes = [
 
 const features = [
     "1-hour kickoff call (your goals + my read)",
+    "90-min AI 101 class — what AI can do for you, right now",
+    "Build your first agent — Autonomous AI (production Claude Code Agent)",
     "Weekly team meeting (up to 1 hour each)",
     "Dedicated Slack channel for your whole team",
     "Tailored AI roadmap at end of month",
@@ -86,13 +98,13 @@ const JustStart = () => {
                             <em className="not-italic text-[var(--accent-cyan)]">Start.</em>
                         </h1>
                         <p className="font-inter text-[clamp(16px,1.5vw,20px)] font-normal text-[var(--text-secondary)] max-w-[520px] leading-[1.65] mb-6">
-                            One call. One month. One person who actually answers your questions about your actual business.
+                            One month with a fractional Head of AI.
                         </p>
                     </ScrollReveal>
 
                     <ScrollReveal delay={200}>
                         <div className="flex items-baseline gap-3 mb-12">
-                            <span className="font-space text-[clamp(40px,5vw,64px)] font-bold text-[var(--text-primary)] tracking-[-0.03em] leading-none">$1,500</span>
+                            <span className="font-space text-[clamp(40px,5vw,64px)] font-bold text-[var(--text-primary)] tracking-[-0.03em] leading-none">$2,500</span>
                             <span className="font-inter text-[18px] text-[var(--text-muted)]">/ month</span>
                             <span className="font-inter text-[14px] text-[var(--accent-cyan)] font-semibold ml-2">Full refund if you don't get value</span>
                         </div>
@@ -194,10 +206,7 @@ const JustStart = () => {
             <section className="relative z-10 px-6 md:px-[60px] py-24 bg-white">
                 <div className="max-w-7xl mx-auto">
                     <ScrollReveal>
-                        <p className="font-space text-[11px] font-bold tracking-[0.2em] uppercase text-[var(--accent-cyan)] mb-4 text-center">Pricing</p>
-                        <h2 className="font-space text-[clamp(28px,4vw,48px)] font-semibold leading-[1.1] tracking-[-0.02em] text-[var(--text-primary)] mb-14 text-center max-w-[400px] mx-auto">
-                            One flat price. No surprises.
-                        </h2>
+                        <p className="font-space text-[11px] font-bold tracking-[0.2em] uppercase text-[var(--accent-cyan)] mb-14 text-center">Pricing</p>
                     </ScrollReveal>
 
                     <ScrollReveal delay={100}>
@@ -208,7 +217,7 @@ const JustStart = () => {
 
                             <div className="text-center mb-10">
                                 <div className="flex items-baseline justify-center gap-2">
-                                    <span className="font-space text-[72px] font-bold text-[var(--text-primary)] tracking-[-0.04em] leading-none">$1,500</span>
+                                    <span className="font-space text-[72px] font-bold text-[var(--text-primary)] tracking-[-0.04em] leading-none">$2,500</span>
                                     <span className="font-inter text-[18px] text-[var(--text-muted)]">/ month</span>
                                 </div>
                             </div>
@@ -256,7 +265,7 @@ const JustStart = () => {
                         <p className="font-space text-[11px] font-bold tracking-[0.2em] uppercase text-blue-300/70 mb-5">Zero risk</p>
                         <h2 className="font-space text-[clamp(32px,5vw,60px)] font-semibold leading-[1.08] tracking-[-0.02em] text-white mb-7 max-w-[640px] mx-auto">
                             If it didn't move the needle — you get the{" "}
-                            <em className="not-italic text-[var(--accent-cyan)]">$1,500 back.</em>
+                            <em className="not-italic text-[var(--accent-cyan)]">$2,500 back.</em>
                         </h2>
                         <p className="font-inter text-[18px] text-white/60 max-w-[520px] mx-auto mb-12 leading-[1.7]">
                             No forms. No argument. If after 30 days you feel like you didn't get real value, I'll refund every dollar. That's the deal.
