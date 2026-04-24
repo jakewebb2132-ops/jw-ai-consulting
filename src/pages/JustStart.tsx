@@ -92,7 +92,7 @@ const JustStart = () => {
 
                     <ScrollReveal delay={200}>
                         <div className="flex items-baseline gap-3 mb-12">
-                            <span className="font-space text-[clamp(40px,5vw,64px)] font-bold text-[var(--text-primary)] tracking-[-0.03em] leading-none">$500</span>
+                            <span className="font-space text-[clamp(40px,5vw,64px)] font-bold text-[var(--text-primary)] tracking-[-0.03em] leading-none">$1,500</span>
                             <span className="font-inter text-[18px] text-[var(--text-muted)]">/ month</span>
                             <span className="font-inter text-[14px] text-[var(--accent-cyan)] font-semibold ml-2">Full refund if you don't get value</span>
                         </div>
@@ -208,7 +208,7 @@ const JustStart = () => {
 
                             <div className="text-center mb-10">
                                 <div className="flex items-baseline justify-center gap-2">
-                                    <span className="font-space text-[72px] font-bold text-[var(--text-primary)] tracking-[-0.04em] leading-none">$500</span>
+                                    <span className="font-space text-[72px] font-bold text-[var(--text-primary)] tracking-[-0.04em] leading-none">$1,500</span>
                                     <span className="font-inter text-[18px] text-[var(--text-muted)]">/ month</span>
                                 </div>
                             </div>
@@ -256,7 +256,7 @@ const JustStart = () => {
                         <p className="font-space text-[11px] font-bold tracking-[0.2em] uppercase text-blue-300/70 mb-5">Zero risk</p>
                         <h2 className="font-space text-[clamp(32px,5vw,60px)] font-semibold leading-[1.08] tracking-[-0.02em] text-white mb-7 max-w-[640px] mx-auto">
                             If it didn't move the needle — you get the{" "}
-                            <em className="not-italic text-[var(--accent-cyan)]">$500 back.</em>
+                            <em className="not-italic text-[var(--accent-cyan)]">$1,500 back.</em>
                         </h2>
                         <p className="font-inter text-[18px] text-white/60 max-w-[520px] mx-auto mb-12 leading-[1.7]">
                             No forms. No argument. If after 30 days you feel like you didn't get real value, I'll refund every dollar. That's the deal.
