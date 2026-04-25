@@ -25,15 +25,15 @@ const JustStartTeaser = () => {
                                 <em className="not-italic text-[var(--accent-cyan)]">is a lot.</em>
                             </h2>
                             <p className="font-inter text-[15px] text-white/55 mt-4 max-w-[460px] leading-[1.7]">
-                                $1,500/month gets you a person &mdash; not a course &mdash; who answers your actual questions
+                                $2,500 gets you a person &mdash; not a course &mdash; who answers your actual questions
                                 about your actual business. One call to start. Full refund if it doesn't land.
                             </p>
                         </div>
 
                         <div className="flex flex-col items-start md:items-end gap-4 relative flex-shrink-0">
                             <div>
-                                <div className="font-space text-[48px] font-bold text-white tracking-[-0.04em] leading-none md:text-right">$1,500</div>
-                                <div className="font-inter text-[13px] text-white/40 mt-1 md:text-right">per month &middot; cancel anytime</div>
+                                <div className="font-space text-[48px] font-bold text-white tracking-[-0.04em] leading-none md:text-right">$2,500</div>
+                                <div className="font-inter text-[13px] text-white/40 mt-1 md:text-right">One Month</div>
                             </div>
                             <MagneticHover>
                                 <Link

@@ -2,6 +2,13 @@
 
 All notable changes to JW AI Consulting are documented here.
 
+## [0.0.1.1] - 2026-04-24
+
+### Changed
+- Just Start teaser: price display updated to $2,500 (from $1,500)
+- Just Start teaser: subtitle changed from "per month · cancel anytime" to "One Month"
+- Just Start teaser: body copy updated to reflect new price ($2,500 gets you a person)
+
 ## [0.0.1.0] - 2026-04-24
 
 ### Changed
