@@ -1,0 +1,6 @@
+platform: vercel
+project: jw-ai-consulting
+org: jwconsulting2132
+production_branch: main
+deploy_command: npx vercel --prod --yes
+health_check_url: https://jw-ai-consulting.vercel.app/just-start

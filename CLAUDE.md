@@ -17,7 +17,7 @@ Refer to the official repository for documentation on individual skills: [garryt
 
 - **Checkpoint / compile / save progress / new session** → invoke `/checkpoint`, but ALWAYS ask the user first: "Ready to save a checkpoint so you can resume in a fresh session?" and wait for confirmation before running the skill.
 - **Bugs, errors, "why is this broken"** → invoke `/investigate`
-- **Ship, deploy, push, create PR** → invoke `/ship`
+- **Ship, deploy, push, create PR, go live** → invoke `/ship`, then immediately invoke `/land-and-deploy` to merge the PR and deploy to production. Always run both in sequence — `/ship` alone does not go live.
 - **QA, test the site, find bugs** → invoke `/qa`
 - **Code review, check my diff** → invoke `/review`
 - **Design audit, visual polish** → invoke `/design-review`
