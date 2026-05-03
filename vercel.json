@@ -14,12 +14,12 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/austin-events/assets/:path*",
-      "destination": "https://austin-events-plum.vercel.app/assets/:path*"
-    },
-    {
       "source": "/austin-events",
       "destination": "https://austin-events-plum.vercel.app"
+    },
+    {
+      "source": "/austin-events/:path*",
+      "destination": "https://austin-events-plum.vercel.app/:path*"
     },
     {
       "source": "/((?!api/).*)",
