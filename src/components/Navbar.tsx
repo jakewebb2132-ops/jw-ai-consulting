@@ -17,6 +17,7 @@ const Navbar = () => {
     const navLinks = [
         { name: "Services", href: "/#services" },
         { name: "Portfolio", href: "/#portfolio" },
+        { name: "Austin AI Events", href: "/austin-events", isPage: true },
         { name: "Discovery", href: "https://calendar.app.google/jfu9ejCAa4fAnrVF9", isExternal: true },
     ];
 
@@ -65,7 +66,7 @@ const Navbar = () => {
                             href={link.href}
                             target={link.isExternal ? "_blank" : undefined}
                             rel={link.isExternal ? "noopener noreferrer" : undefined}
-                            onClick={link.isExternal ? undefined : (e) => handleLinkClick(e, link.href)}
+                            onClick={link.isExternal || link.isPage ? undefined : (e) => handleLinkClick(e, link.href)}
                             className="font-space text-[13px] font-semibold tracking-[0.1em] uppercase text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors relative after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-0 after:h-[2px] after:bg-[var(--accent-cyan)] after:transition-all hover:after:w-full"
                         >
                             {link.name}
@@ -100,7 +101,7 @@ const Navbar = () => {
                             target={link.isExternal ? "_blank" : undefined}
                             rel={link.isExternal ? "noopener noreferrer" : undefined}
                             className="font-space text-lg font-bold text-[var(--text-primary)] hover:text-[var(--accent-cyan)] transition-colors"
-                            onClick={link.isExternal ? undefined : (e) => handleLinkClick(e, link.href)}
+                            onClick={link.isExternal || link.isPage ? undefined : (e) => handleLinkClick(e, link.href)}
                         >
                             {link.name}
                         </a>
