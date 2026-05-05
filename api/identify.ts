@@ -76,7 +76,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 console.warn(`[REVEAL] Skipping enrichment for internal/local IP: ${ipAddress}`);
             } else {
                 try {
-                    console.log(`[REVEAL] Enrichment: Fetching company data for IP ${ipAddress}`);
+                    console.log(`[REVEAL] Step 1: Fetching company data for IP ${ipAddress}`);
                     const apolloResponse = await fetch(`https://api.apollo.io/v1/organizations/enrich?ip=${ipAddress}`, {
                         headers: {
                             'Cache-Control': 'no-cache',
@@ -89,8 +89,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         const apolloData = await apolloResponse.json();
                         if (apolloData.organization) {
                             const org = apolloData.organization;
-                            console.log(`[REVEAL] Enrichment: Found Organization: ${org.name}`);
+                            console.log(`[REVEAL] Found Organization: ${org.name}`);
                             
+                            // --- ICP FILTER (THE PRE-FILTER) ---
+                            const domain = org.primary_domain?.toLowerCase() || '';
+                            const isISP = domain.includes('comcast') || domain.includes('verizon') || domain.includes('att') || domain.includes('spectrum') || domain.includes('cox');
+                            const industry = org.industry?.toLowerCase() || '';
+                            const keywords = (org.keywords || []).join(' ').toLowerCase();
+                            
+                            const isTech = industry.includes('software') || industry.includes('technology') || industry.includes('information') || keywords.includes('ai') || keywords.includes('artificial intelligence') || keywords.includes('saas');
+                            const isSmallToMed = org.estimated_num_employees && org.estimated_num_employees <= 500;
+
+                            if (isISP || !isTech) {
+                                console.log(`[REVEAL] Dropped: ${org.name} does not fit ICP (ISP: ${isISP}, Tech: ${isTech}).`);
+                                return res.status(200).json({ status: 'dropped_non_icp' });
+                            }
+
+                            console.log(`[REVEAL] Target Verified! Passing to Step 2 for ${org.name}...`);
                             enrichedData = {
                                 full_name: 'Exec from ' + org.name,
                                 job_title: 'Decision Maker',
@@ -100,9 +115,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                 profile_image_url: org.logo_url
                             };
 
-                            // PERSON UPGRADE: Search for a top contact at this company
+                            // Step 2: Search for a top contact at this company
                             try {
-                                console.log(`[REVEAL] Enrichment: Searching for key contacts at ${org.primary_domain}`);
+                                console.log(`[REVEAL] Step 2: Searching for key contacts at ${org.primary_domain}`);
                                 const peopleResponse = await fetch(`https://api.apollo.io/v1/mixed_people/search`, {
                                     method: 'POST',
                                     headers: {
@@ -122,7 +137,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                     const peopleData = await peopleResponse.json();
                                     if (peopleData.people && peopleData.people.length > 0) {
                                         const person = peopleData.people[0];
-                                        console.log(`[REVEAL] Enrichment: Identified Person: ${person.name} (${person.title})`);
+                                        console.log(`[REVEAL] Identified Person: ${person.name} (${person.title})`);
                                         enrichedData.full_name = person.name;
                                         enrichedData.job_title = person.title;
                                         enrichedData.linkedin_url = person.linkedin_url;
@@ -134,6 +149,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             }
                         } else {
                             console.log(`[REVEAL] Enrichment: No organization found for IP ${ipAddress}`);
+                            return res.status(200).json({ status: 'dropped_no_org' });
                         }
                     } else {
                         const errText = await apolloResponse.text();

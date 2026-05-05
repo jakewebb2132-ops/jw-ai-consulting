@@ -87,11 +87,20 @@ EXIT_CODE=$?
 
 if [[ $EXIT_CODE -eq 0 ]]; then
   echo "[$(date -Iseconds)] Agent completed successfully. Check $RUN_LOG for results."
-  # ── Sync to dashboard public dir so the Job Applications tab stays fresh ──
+  # ── Sync to dashboard public dirs so the Job Applications tab stays fresh ──
   DASHBOARD_DATA_DIR="$(cd "$SKILL_DIR/../../.." && pwd)/public/data"
+  SALES_DASHBOARD_DATA_DIR="$(cd "$SKILL_DIR/../../../../jw-sales-command" && pwd)/public/data"
+
   if [[ -d "$DASHBOARD_DATA_DIR" ]]; then
+    mkdir -p "$DASHBOARD_DATA_DIR"
     cp "$APPLIED_LOG" "$DASHBOARD_DATA_DIR/applied-jobs.json"
-    echo "[$(date -Iseconds)] Synced applied-jobs.json → public/data/ for dashboard."
+    echo "[$(date -Iseconds)] Synced to jw-ai-consulting."
+  fi
+
+  if [[ -d "$SALES_DASHBOARD_DATA_DIR" ]]; then
+    mkdir -p "$SALES_DASHBOARD_DATA_DIR"
+    cp "$APPLIED_LOG" "$SALES_DASHBOARD_DATA_DIR/applied-jobs.json"
+    echo "[$(date -Iseconds)] Synced to jw-sales-command."
   fi
 else
   echo "[$(date -Iseconds)] Agent exited with code $EXIT_CODE. Check ${LOG_DIR}/launchd-stderr.log" >&2

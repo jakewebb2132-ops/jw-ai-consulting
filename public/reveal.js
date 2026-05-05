@@ -1,6 +1,7 @@
 /**
  * Executive Reveal - Visitor Identification Pixel (RB2B Clone)
  * This script captures anonymous visitor signals and sends them to the identification engine.
+ * UPDATED: Only fires upon reaching an intent threshold to save API credits.
  */
 (function() {
     // Configuration
@@ -12,7 +13,7 @@
     const OVERRIDE_ENDPOINT = currentScript ? currentScript.getAttribute('data-api') : null;
     const API_ENDPOINT = OVERRIDE_ENDPOINT || (SCRIPT_ORIGIN ? `${SCRIPT_ORIGIN}/api/identify` : '/api/identify');
     
-    const HEARTBEAT_INTERVAL = 30000; // 30 seconds
+    let hasSentIntent = false;
 
     // Simple Fingerprinting
     function getFingerprint() {
@@ -21,7 +22,6 @@
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         
-        // Basic canvas fingerprinting
         ctx.textBaseline = "top";
         ctx.font = "14px 'Arial'";
         ctx.textBaseline = "alphabetic";
@@ -43,7 +43,10 @@
         ].join('|'));
     }
 
-    async function sendPulse(event = 'heartbeat') {
+    async function sendPulse(event = 'intent_reached') {
+        if (hasSentIntent) return;
+        hasSentIntent = true;
+
         const data = {
             visitor_id: getFingerprint(),
             url: window.location.href,
@@ -57,29 +60,29 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
-                keepalive: true // Ensure request finishes even if page closes
+                keepalive: true
             });
+            console.log(`✅ Executive Reveal: Intent Captured (${event})`);
         } catch (e) {
-            // Silently fail to avoid disrupting user experience
+            // Silently fail
         }
     }
 
-    // Initialize
-    if (document.readyState === 'complete') {
-        sendPulse('page_view');
+    // Intent Rules
+    const highIntentPaths = ['/services', '/contact', '/pricing', '/austin-events'];
+    const currentPath = window.location.pathname.toLowerCase();
+    
+    if (highIntentPaths.some(p => currentPath.includes(p))) {
+        // High-intent page: fire immediately
+        if (document.readyState === 'complete') {
+            sendPulse('high_intent_page');
+        } else {
+            window.addEventListener('load', () => sendPulse('high_intent_page'));
+        }
     } else {
-        window.addEventListener('load', () => sendPulse('page_view'));
+        // Low-intent page: wait 30 seconds before firing
+        setTimeout(() => {
+            sendPulse('time_on_site_30s');
+        }, 30000);
     }
-
-    // Set Heartbeat
-    setInterval(() => sendPulse('heartbeat'), HEARTBEAT_INTERVAL);
-
-    // Track visibility change (returning to tab)
-    document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-            sendPulse('return');
-        }
-    });
-
-    console.log('✅ Executive Reveal Active');
 })();
