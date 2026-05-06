@@ -5,6 +5,10 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import App from './App.tsx'
 import './index.css'
+import { trackVisit } from './lib/trackVisit.js'
+
+// Fire B2B IP enrichment — non-blocking, runs alongside PostHog
+trackVisit();
 
 posthog.init(
     import.meta.env.VITE_POSTHOG_KEY || '',
