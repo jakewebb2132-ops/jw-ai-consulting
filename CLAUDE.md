@@ -1,3 +1,11 @@
+# Brain — Load First
+
+Read `brain/CONTEXT.md` before every session. It is the single source of truth for identity, personality, rules, and project registry. Then load `brain/SOUL.md` and `brain/RULES.md`.
+
+All brain files live in the `brain/` folder of this repo and are synced nightly from the master brain.
+
+---
+
 # Project Gstack Skills
 
 This project uses **Gstack** by Garry Tan to enhance strategic review and security checkup capabilities.
