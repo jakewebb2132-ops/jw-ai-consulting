@@ -8,6 +8,7 @@ _Read this before starting any task. One line per project — follow the link fo
 | [jw-ai-consulting](jw-ai-consulting.md) | live | `~/Sites/jw-ai-consulting` | https://jwaiconsulting.com |
 | [jw-sales-dashboard](jw-sales-dashboard.md) | live | `~/.gemini/antigravity/scratch/jw-sales-command` | https://dashboard.jwaiconsulting.com |
 | [brain](brain.md) | live | `~/brain` | https://github.com/jakewebb2132-ops/brain |
+| [aura-deck](aura-deck.md) | live | `~/.gemini/antigravity-ide/scratch/aura-deck` | https://aura-deck-swart.vercel.app |
 
 ---
 

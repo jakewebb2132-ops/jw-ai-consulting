@@ -1,6 +1,21 @@
 # Log
 _Append-only. Newest at top. Parse with: `grep "^## \[" log.md`_
 
+## [2026-05-22] ingest | Compound Orchestrator (Ken Huang)
+**Raw file**: `raw/2026-05-22-compound-orchestrator.md`
+**Pages created**: `concepts/agent-architecture/compound-orchestrator.md`
+**Key takeaways**: Agentic coding bottleneck is now coordination, not output. Six HTML planning contracts (prd→spec→test-cases) as visible artifacts. Parallelize drafting, serialize acceptance. Two-round review with mandatory author revision. README freshness as a hard gate. Maps well to Jake's existing brain setup; gap is persistent HTML planning artifacts.
+
+## [2026-05-22] ingest | Notion LinkedIn Articles Ingest (16 articles)
+**Raw file**: `raw/2026-05-22-linkedin-ingest.md`
+**Pages created**: 15 pages across agent-architecture, knowledge-systems, content-strategy, ai-gtm, platforms, models, and tools.
+**Key takeaways**: High-quality summaries generated with Gemini for LinkedIn posts and articles covering agent architecture, knowledge retention, content engines, AI optimization, and video production (Higgsfield). All articles successfully pushed to Supabase semantic memory.
+
+## [2026-05-22] ingest | Karpathy CLAUDE.md Rules (GitHub Trending #1)
+**Raw file**: `raw/2026-05-22-karpathy-claude-md.md`
+**Pages created**: `wiki/concepts/agent-architecture/karpathy-claude-md-rules.md`
+**Key takeaways**: Karpathy's 4 core rules improve agent coding accuracy from 65% to 94%. Strict boundaries on scope, changes, and destruction prevent unauthorized code changes. Local brain setup maps well to these (SOUL.md vibe, CLAUDE.md surgically locked scope, LEARNINGS.md errors, and Supabase memory), but CLAUDE.md can be updated with more explicit safety controls and post-task manifests.
+
 ## [2026-05-06] ingest | LinkedIn Articles & Inspiration (Jake's Notion page)
 **Raw file**: `raw/2026-05-06-linkedin-articles-inspiration.md`
 **Pages created**: `wiki/concepts/ai-organizational-readiness.md`, `wiki/concepts/ai-organizational-autonomy-levels.md`, `wiki/concepts/intelligent-ai-delegation.md`, `wiki/concepts/kv-cache-machine-memory.md`, `wiki/concepts/content-at-scale-pipeline.md`, `wiki/concepts/geo-ai-overview-manipulation.md`

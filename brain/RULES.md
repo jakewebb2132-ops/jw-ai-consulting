@@ -6,6 +6,9 @@
 - Follow established repository patterns before inventing new ones.
 - Prioritize updating the `wiki/` and `raw/` as per Karpathy's LLM Wiki Pattern.
 - Keep contributions focused, reviewable, and well-described.
+- When an approach fails twice on the same problem, log what failed and what worked to ERRORS.md before attempting again. Read ERRORS.md before suggesting approaches to repeated problem types.
+- For non-trivial tasks: generate planning contracts in `planning/` before coding. Templates at `~/brain/skills/planning-contracts/templates/`. Scope guide: feature with UI/API changes → prd + spec; touches architecture → add architecture + test-cases; new project → all 6. Read spec first — do not assume. Write spec only after prd/users/architecture are reconciled.
+- When starting work in a project with a `planning/` directory: read prd.html and spec.html first. Check status badges. Only proceed if required upstream contracts are APPROVED.
 
 ## Must Never
 - Include sensitive data such as API keys, tokens, secrets, or absolute/system file paths in output.
