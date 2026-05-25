@@ -52,3 +52,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [scaling-institutional-knowledge-systems](concepts/knowledge-systems/scaling-institutional-knowledge-systems.md) — Leveraging AI for Scalable Institutional Knowledge Systems
 - [reducing-institutional-knowledge-tax](concepts/knowledge-systems/reducing-institutional-knowledge-tax.md) — Reducing Institutional Knowledge Tax Through Documentation
 - [institutional-knowledge-retention](concepts/knowledge-systems/institutional-knowledge-retention.md) — The Strategic Importance of Institutional Knowledge Retention
+
+### Agent Architecture
+- [strategic-ai-agentic-workflows](concepts/agent-architecture/strategic-ai-agentic-workflows.md) — Strategic Implementation of AI Agentic Workflows
+- [managing-ai-coding-agent-context](concepts/agent-architecture/managing-ai-coding-agent-context.md) — Managing AI Coding Agent Context Window Limitations
