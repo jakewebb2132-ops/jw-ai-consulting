@@ -13,6 +13,8 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [gemma-4](models/gemma-4.md) — Google's 26B MoE (3.8B active), first truly open commercial license, #3 globally on Arena AI
 
 ## Tools & Libraries
+- [open-source-tech-stack-replacements](tools/open-source-tech-stack-replacements.md) — Open Source Tools Replacing Expensive Tech Stacks
+- [open-source-productivity-stack](tools/open-source-productivity-stack.md) — Open Source Alternatives for Personal Productivity Systems
 - [claude-code-optimization-settings](tools/claude-code-optimization-settings.md) — Optimizing Claude Code for Developer Productivity
 - [autoagent](tools/autoagent.md) — open-source meta-agent that self-optimizes your agent overnight; #1 SpreadsheetBench (96.5%)
 
@@ -56,3 +58,6 @@ _Updated on every ingest. LLM reads this first when answering queries._
 ### Agent Architecture
 - [strategic-ai-agentic-workflows](concepts/agent-architecture/strategic-ai-agentic-workflows.md) — Strategic Implementation of AI Agentic Workflows
 - [managing-ai-coding-agent-context](concepts/agent-architecture/managing-ai-coding-agent-context.md) — Managing AI Coding Agent Context Window Limitations
+
+### Knowledge Systems
+- [fmhy-decentralized-resource-index](concepts/knowledge-systems/fmhy-decentralized-resource-index.md) — FMHY: The Decentralized Index of Digital Resources
