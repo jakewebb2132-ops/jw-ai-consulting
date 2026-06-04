@@ -56,8 +56,10 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [institutional-knowledge-retention](concepts/knowledge-systems/institutional-knowledge-retention.md) — The Strategic Importance of Institutional Knowledge Retention
 
 ### Agent Architecture
+- [quarq-agent-long-memory-architecture](concepts/agent-architecture/quarq-agent-long-memory-architecture.md) — Quarq Agent Achieves 98.2% on LongMemEval
 - [strategic-ai-agentic-workflows](concepts/agent-architecture/strategic-ai-agentic-workflows.md) — Strategic Implementation of AI Agentic Workflows
 - [managing-ai-coding-agent-context](concepts/agent-architecture/managing-ai-coding-agent-context.md) — Managing AI Coding Agent Context Window Limitations
 
 ### Knowledge Systems
+- [alphasignal-ai-emerging-trends](concepts/knowledge-systems/alphasignal-ai-emerging-trends.md) — AlphaSignal AI Article on Emerging Trends
 - [fmhy-decentralized-resource-index](concepts/knowledge-systems/fmhy-decentralized-resource-index.md) — FMHY: The Decentralized Index of Digital Resources
