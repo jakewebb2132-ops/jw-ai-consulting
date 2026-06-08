@@ -63,3 +63,6 @@ _Updated on every ingest. LLM reads this first when answering queries._
 ### Knowledge Systems
 - [alphasignal-ai-emerging-trends](concepts/knowledge-systems/alphasignal-ai-emerging-trends.md) — AlphaSignal AI Article on Emerging Trends
 - [fmhy-decentralized-resource-index](concepts/knowledge-systems/fmhy-decentralized-resource-index.md) — FMHY: The Decentralized Index of Digital Resources
+
+### Content Strategy
+- [ai-search-optimization-content-strategy](concepts/content-strategy/ai-search-optimization-content-strategy.md) — Optimizing Content Strategy for AI Search Engines
