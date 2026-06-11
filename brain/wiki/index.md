@@ -13,6 +13,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [gemma-4](models/gemma-4.md) — Google's 26B MoE (3.8B active), first truly open commercial license, #3 globally on Arena AI
 
 ## Tools & Libraries
+- [claude-code-hallucination-prevention](tools/claude-code-hallucination-prevention.md) — Preventing Claude Code Hallucinations via Setup
 - [open-source-tech-stack-replacements](tools/open-source-tech-stack-replacements.md) — Open Source Tools Replacing Expensive Tech Stacks
 - [open-source-productivity-stack](tools/open-source-productivity-stack.md) — Open Source Alternatives for Personal Productivity Systems
 - [claude-code-optimization-settings](tools/claude-code-optimization-settings.md) — Optimizing Claude Code for Developer Productivity
