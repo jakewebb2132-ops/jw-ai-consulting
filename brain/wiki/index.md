@@ -2,6 +2,7 @@
 _Updated on every ingest. LLM reads this first when answering queries._
 
 ## Platforms
+- [vercel-drop-deployment-innovation](platforms/vercel-drop-deployment-innovation.md) — Vercel Drop Simplifies Deployment Through Browser Drag-and-Drop
 - [higgsfield-ai-production-risks](platforms/higgsfield-ai-production-risks.md) — Higgsfield Cinema Studio and AI Production Risks
 - [higgsfield-cinema-studio-production](platforms/higgsfield-cinema-studio-production.md) — Higgsfield Cinema Studio and AI Production Workflows
 - [claude-managed-agents](platforms/claude-managed-agents.md) — Anthropic's hosted agent fleet; sandboxed execution, state mgmt, $0.08/hr; public beta Apr 2026
@@ -13,6 +14,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [gemma-4](models/gemma-4.md) — Google's 26B MoE (3.8B active), first truly open commercial license, #3 globally on Arena AI
 
 ## Tools & Libraries
+- [multi-mac-agent-infrastructure](tools/multi-mac-agent-infrastructure.md) — Optimizing Multi-Mac AI Agent Infrastructure
 - [claude-code-hallucination-prevention](tools/claude-code-hallucination-prevention.md) — Preventing Claude Code Hallucinations via Setup
 - [open-source-tech-stack-replacements](tools/open-source-tech-stack-replacements.md) — Open Source Tools Replacing Expensive Tech Stacks
 - [open-source-productivity-stack](tools/open-source-productivity-stack.md) — Open Source Alternatives for Personal Productivity Systems
@@ -57,6 +59,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [institutional-knowledge-retention](concepts/knowledge-systems/institutional-knowledge-retention.md) — The Strategic Importance of Institutional Knowledge Retention
 
 ### Agent Architecture
+- [zongheng-yang-ai-infrastructure](concepts/agent-architecture/zongheng-yang-ai-infrastructure.md) — Zongheng Yang on AI Infrastructure and Scaling
 - [quarq-agent-long-memory-architecture](concepts/agent-architecture/quarq-agent-long-memory-architecture.md) — Quarq Agent Achieves 98.2% on LongMemEval
 - [strategic-ai-agentic-workflows](concepts/agent-architecture/strategic-ai-agentic-workflows.md) — Strategic Implementation of AI Agentic Workflows
 - [managing-ai-coding-agent-context](concepts/agent-architecture/managing-ai-coding-agent-context.md) — Managing AI Coding Agent Context Window Limitations
