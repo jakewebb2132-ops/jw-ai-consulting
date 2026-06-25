@@ -70,3 +70,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 
 ### Content Strategy
 - [ai-search-optimization-content-strategy](concepts/content-strategy/ai-search-optimization-content-strategy.md) — Optimizing Content Strategy for AI Search Engines
+
+### AI GTM & Strategy
+- [google-workspace-cli-firing](concepts/ai-gtm/google-workspace-cli-firing.md) — Corporate Friction and the Google Workspace CLI
+- [evals-strategic-ip-ai](concepts/ai-gtm/evals-strategic-ip-ai.md) — Evals as the Strategic IP for AI
