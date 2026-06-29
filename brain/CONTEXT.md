@@ -54,6 +54,7 @@ Plain markdown. Git-backed. Human-readable. Works in any AI tool.
 ├── agents/             ← agent definitions (*.md with YAML frontmatter)
 ├── skills/             ← skill definitions (*/SKILL.md)
 ├── brand-guidelines/   ← typography, colors, motion, compiled guide
+├── health/             ← personal health, fitness, nutrition context
 ├── raw/                ← immutable source documents (never modify)
 └── scripts/
     ├── brain.py        ← Supabase semantic layer CLI
