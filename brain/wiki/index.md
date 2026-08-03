@@ -2,6 +2,7 @@
 _Updated on every ingest. LLM reads this first when answering queries._
 
 ## Platforms
+- [living-library-ai-book-interaction](platforms/living-library-ai-book-interaction.md) — The Living Library AI Book Interaction Platform
 - [vercel-drop-deployment-innovation](platforms/vercel-drop-deployment-innovation.md) — Vercel Drop Simplifies Deployment Through Browser Drag-and-Drop
 - [higgsfield-ai-production-risks](platforms/higgsfield-ai-production-risks.md) — Higgsfield Cinema Studio and AI Production Risks
 - [higgsfield-cinema-studio-production](platforms/higgsfield-cinema-studio-production.md) — Higgsfield Cinema Studio and AI Production Workflows
@@ -14,6 +15,10 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [gemma-4](models/gemma-4.md) — Google's 26B MoE (3.8B active), first truly open commercial license, #3 globally on Arena AI
 
 ## Tools & Libraries
+- [graph-based-presentation-slides](tools/graph-based-presentation-slides.md) — Graph-Based Non-Linear Presentation Slides by Yohei Nakajima
+- [inference-autotune-model-distillation](tools/inference-autotune-model-distillation.md) — Distilling Frontier Models with Inference AutoTune
+- [optimizing-fable-token-usage](tools/optimizing-fable-token-usage.md) — Optimizing Fable Token Usage via Agent Delegation
+- [codebase-memory-token-reduction](tools/codebase-memory-token-reduction.md) — Reducing Token Usage With Codebase Memory
 - [multi-mac-agent-infrastructure](tools/multi-mac-agent-infrastructure.md) — Optimizing Multi-Mac AI Agent Infrastructure
 - [claude-code-hallucination-prevention](tools/claude-code-hallucination-prevention.md) — Preventing Claude Code Hallucinations via Setup
 - [open-source-tech-stack-replacements](tools/open-source-tech-stack-replacements.md) — Open Source Tools Replacing Expensive Tech Stacks
@@ -59,18 +64,29 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [institutional-knowledge-retention](concepts/knowledge-systems/institutional-knowledge-retention.md) — The Strategic Importance of Institutional Knowledge Retention
 
 ### Agent Architecture
+- [self-improving-agent-loops](concepts/agent-architecture/self-improving-agent-loops.md) — Self-Improving Agent Loops Using Pydantic AI
+- [https-x-com-bcherny-status-20779293796](concepts/agent-architecture/https-x-com-bcherny-status-20779293796.md) — https://x.com/bcherny/status/2077929379661844559?s=46&t=hKsCOqDSqhQTmxGk_H5iPQ
+- [self-improving-ai-native-companies](concepts/agent-architecture/self-improving-ai-native-companies.md) — Building Self-Improving AI Native Organizations
+- [robust-agentic-workflows](concepts/agent-architecture/robust-agentic-workflows.md) — Building Robust Agentic Workflows and Systems
+- [ai-agent-operational-challenges](concepts/agent-architecture/ai-agent-operational-challenges.md) — Navigating AI Agent Implementation and Operational Challenges
+- [https-x-com-rhyssullivan-status-207281](concepts/agent-architecture/https-x-com-rhyssullivan-status-207281.md) — https://x.com/rhyssullivan/status/2072819391834751312?s=46&t=hKsCOqDSqhQTmxGk_H5iPQ
+- [handling-ai-agent-navigation-failures](concepts/agent-architecture/handling-ai-agent-navigation-failures.md) — Handling AI Agent System Navigation Failures
 - [zongheng-yang-ai-infrastructure](concepts/agent-architecture/zongheng-yang-ai-infrastructure.md) — Zongheng Yang on AI Infrastructure and Scaling
 - [quarq-agent-long-memory-architecture](concepts/agent-architecture/quarq-agent-long-memory-architecture.md) — Quarq Agent Achieves 98.2% on LongMemEval
 - [strategic-ai-agentic-workflows](concepts/agent-architecture/strategic-ai-agentic-workflows.md) — Strategic Implementation of AI Agentic Workflows
 - [managing-ai-coding-agent-context](concepts/agent-architecture/managing-ai-coding-agent-context.md) — Managing AI Coding Agent Context Window Limitations
 
 ### Knowledge Systems
+- [visualizing-dynamic-curriculum-knowledge-graphs](concepts/knowledge-systems/visualizing-dynamic-curriculum-knowledge-graphs.md) — Visualizing Dynamic Curriculum Knowledge Graphs for Education
+- [handling-unavailable-external-content](concepts/knowledge-systems/handling-unavailable-external-content.md) — Handling Unavailable External Content and Link Rot
 - [alphasignal-ai-emerging-trends](concepts/knowledge-systems/alphasignal-ai-emerging-trends.md) — AlphaSignal AI Article on Emerging Trends
 - [fmhy-decentralized-resource-index](concepts/knowledge-systems/fmhy-decentralized-resource-index.md) — FMHY: The Decentralized Index of Digital Resources
 
 ### Content Strategy
+- [unavailable-twitter-post-knowledge-capture](concepts/content-strategy/unavailable-twitter-post-knowledge-capture.md) — Unavailable Twitter Post Knowledge Capture
 - [ai-search-optimization-content-strategy](concepts/content-strategy/ai-search-optimization-content-strategy.md) — Optimizing Content Strategy for AI Search Engines
 
 ### AI GTM & Strategy
+- [ai-pilling-company-productivity](concepts/ai-gtm/ai-pilling-company-productivity.md) — The Evolution of Engineering Productivity with AI
 - [google-workspace-cli-firing](concepts/ai-gtm/google-workspace-cli-firing.md) — Corporate Friction and the Google Workspace CLI
 - [evals-strategic-ip-ai](concepts/ai-gtm/evals-strategic-ip-ai.md) — Evals as the Strategic IP for AI
