@@ -15,6 +15,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [gemma-4](models/gemma-4.md) — Google's 26B MoE (3.8B active), first truly open commercial license, #3 globally on Arena AI
 
 ## Tools & Libraries
+- [interactive-finger-frame-effect](tools/interactive-finger-frame-effect.md) — Interactive Finger Frame Effect Vision Tool
 - [graph-based-presentation-slides](tools/graph-based-presentation-slides.md) — Graph-Based Non-Linear Presentation Slides by Yohei Nakajima
 - [inference-autotune-model-distillation](tools/inference-autotune-model-distillation.md) — Distilling Frontier Models with Inference AutoTune
 - [optimizing-fable-token-usage](tools/optimizing-fable-token-usage.md) — Optimizing Fable Token Usage via Agent Delegation
