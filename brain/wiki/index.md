@@ -65,6 +65,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [institutional-knowledge-retention](concepts/knowledge-systems/institutional-knowledge-retention.md) — The Strategic Importance of Institutional Knowledge Retention
 
 ### Agent Architecture
+- [boom-automations-ai-operating-system](concepts/agent-architecture/boom-automations-ai-operating-system.md) — Boom Automations AI Operating System Framework
 - [self-improving-agent-loops](concepts/agent-architecture/self-improving-agent-loops.md) — Self-Improving Agent Loops Using Pydantic AI
 - [https-x-com-bcherny-status-20779293796](concepts/agent-architecture/https-x-com-bcherny-status-20779293796.md) — https://x.com/bcherny/status/2077929379661844559?s=46&t=hKsCOqDSqhQTmxGk_H5iPQ
 - [self-improving-ai-native-companies](concepts/agent-architecture/self-improving-ai-native-companies.md) — Building Self-Improving AI Native Organizations
