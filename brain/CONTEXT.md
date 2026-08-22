@@ -58,8 +58,15 @@ Plain markdown. Git-backed. Human-readable. Works in any AI tool.
 ├── raw/                ← immutable source documents (never modify)
 └── scripts/
     ├── brain.py        ← Supabase semantic layer CLI
-    └── learn.py        ← unified learning CLI
+    ├── learn.py        ← unified learning CLI
+    └── compile-brain.sh ← nightly compilation loop (22:30 launchd) → COMPILE-BRIEF.md
 ```
+
+**Nightly compilation loop.** `scripts/compile-brain.sh` runs at 22:30 (launchd:
+`com.jwaiconsulting.brain-compile`), just before the 23:00 sync. It finds new `raw/`
+sources + stale wiki pages, invokes `claude -p` to compile them into the wiki per the
+Karpathy pattern, and writes the morning brief to `COMPILE-BRIEF.md` (what changed,
+what linked, what was flagged, what to look at). Prompt: `prompts/compile-loop.md`.
 
 **Layer 2 — Semantic/Supabase (session memory)**
 For decisions, builds, and context too small for a wiki page but too important to lose.

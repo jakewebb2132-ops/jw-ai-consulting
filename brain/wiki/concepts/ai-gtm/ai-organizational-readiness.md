@@ -43,4 +43,4 @@ A company is AI-ready if it can answer quickly and consistently across quarters:
 7. What projects implement those strategies?
 8. Who does what, and what does it cost?
 
-**Cross-references**: [[ai-organizational-autonomy-levels]], [[karpathy-llm-wiki-pattern]]
+**Cross-references**: [[ai-organizational-autonomy-levels]], [[karpathy-llm-wiki-pattern]], [[boom-automations-ai-operating-system]]

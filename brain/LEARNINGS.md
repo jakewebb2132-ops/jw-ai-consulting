@@ -12,6 +12,34 @@
 
 <!-- EXPERIMENTS BELOW — newest at top -->
 
+## EXP-004 — Lossless Health Ingestion Requires Sparse Upserts and Mixed Sleep-State Validation
+**Date**: 2026-08-22
+**Pillar**: Infrastructure — Health Data Integrity
+**Hypothesis**: Archiving every Health Auto Export request and preserving omitted fields during incremental upserts makes normalized health data recoverable and prevents valid daily values from disappearing.
+**Method**: Compared `health_metrics` gaps with `health_record_history`, raw `health_ingest_events` payloads, and normalized Apple Watch workouts after active-calorie and sleep gaps appeared in August 2026.
+
+### Findings
+
+**1. Missing metrics are not zeroes.** Health Auto Export sends sparse incremental batches. An omitted metric means “not included in this request,” not “clear the existing daily value.” Batched PostgREST upserts can normalize different objects to a shared column set and turn an omitted property into an explicit `null`.
+
+**2. Upsert daily metric rows independently.** Strip `null` properties, upsert one date at a time, use `defaultToNull: false`, and regression-test that replaying a sparse payload cannot erase an existing non-null field.
+
+**3. Raw payloads and append-only row history are required recovery layers.** The erased August 1, 9, and 10 active-energy values were recoverable because prior normalized versions and raw requests had been retained. Never mutate or delete `health_ingest_events` or `health_record_history` during cleanup.
+
+**4. Apple sleep can mix staged and generic asleep time.** `totalSleep` may equal Deep + REM + Core + generic `asleep`. A validator that compares only Deep + REM + Core with `totalSleep` can reject a valid record. Validate against all sleep-state buckets, retain generic asleep separately when possible, and do not discard the entire night solely because staged sleep is less than total sleep.
+
+**5. Integrity checks must detect regressions, not just failed requests.** Alert when a previously non-null daily metric becomes null, when recent activity has steps but no active energy, or when a raw sleep record exists without a normalized sleep row.
+
+### Verdict
+**CONFIRMED.** The lossless archive made repair possible. Sparse per-date upserts prevent the activity erasure path, but the sleep validator must also account for generic asleep time to prevent another rejected night.
+
+### Permanent Guardrails
+
+- Treat omitted fields as no-op updates.
+- Reject non-null-to-null metric regressions unless an explicit correction flag is present.
+- Test incremental, mixed-date, replayed, and mixed sleep-state payloads before deploying ingestion changes.
+- Run a daily coverage audit against the raw archive and append-only history.
+
 ## EXP-003 — Model-Agnostic Shared Memory Architecture
 **Date**: 2026-05-03
 **Pillar**: Infrastructure — Cross-Model Persistence

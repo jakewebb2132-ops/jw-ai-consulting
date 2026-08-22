@@ -29,4 +29,4 @@ Operational scaffolding doesn't make the agent smarter — it makes failures **r
 - Every skill in `~/brain/skills/` should have: defined inputs, expected outputs, a verification step, and a rollback path
 - This is the argument for why clients need Jake's consulting: they want agent reliability but are building prompts, not systems
 
-**Cross-references**: [[agentic-reasoning-survey]], [[intelligent-ai-delegation]], [[ai-organizational-readiness]]
+**Cross-references**: [[agentic-reasoning-survey]], [[intelligent-ai-delegation]], [[ai-organizational-readiness]], [[boom-automations-ai-operating-system]]

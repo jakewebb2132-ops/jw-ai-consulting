@@ -1,6 +1,12 @@
 # Log
 _Append-only. Newest at top. Parse with: `grep "^## \[" log.md`_
 
+## [2026-08-22] ingest | Boom Automations AI Operating System Framework (Luke Pierce)
+**Raw file**: `raw/2026-08-19-linkedin-ingest.md`
+**Pages created**: `concepts/agent-architecture/boom-automations-ai-operating-system.md` (page existed already, dated 2026-08-19, but was never logged — backfilling the log entry now)
+**Key takeaways**: Workflow mapping and process consolidation (absorb/keep/kill) before tool selection. One write path per entity, documented before building. Phased agent deployment with intake first. Route cheap tasks to cheap models, reserve frontier models for reasoning (>80% token savings).
+**Lint**: fixed cross-reference syntax on the page (was plain text, not `[[wiki-links]]`) and added missing back-references from [[ai-organizational-readiness]], [[runbooks-and-production-agent-ops]], and [[institutional-knowledge-tax]].
+
 ## [2026-05-22] ingest | Compound Orchestrator (Ken Huang)
 **Raw file**: `raw/2026-05-22-compound-orchestrator.md`
 **Pages created**: `concepts/agent-architecture/compound-orchestrator.md`
@@ -44,3 +50,6 @@ _Append-only. Newest at top. Parse with: `grep "^## \[" log.md`_
 **Raw file**: `raw/2026-04-18-ai-weekly-newsletter.md`  
 **Pages created**: `wiki/platforms/claude-managed-agents.md`, `wiki/platforms/claude-m365-connector.md`, `wiki/platforms/claude-mythos.md`, `wiki/models/gemma-4.md`, `wiki/tools/autoagent.md`  
 **Key takeaways**: Claude Managed Agents obsoletes orchestration middleware layer. AutoAgent applicable to enrichment pipeline self-optimization. M365 connector undercuts Copilot.
+
+## [2026-08-22] ingest | LinkedIn: "Build the compiler, not the library" (Karpathy LLM Wiki popularization)
+Re-packaging of the existing Karpathy pattern. Net-new: honest limitations (bad-source amplification, ~50-100 source density threshold, slow first weeks) + change-brief as a required ingest output + source-quality gating at ingest. Folded into [[karpathy-llm-wiki-pattern]] concept page and the CLAUDE.md ingest workflow. No raw file created — content is derivative of the primary Karpathy source already in raw/.

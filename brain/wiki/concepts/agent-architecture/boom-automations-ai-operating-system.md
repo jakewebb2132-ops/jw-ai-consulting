@@ -16,5 +16,4 @@ Building high-value AI operating systems requires strict workflow mapping and pr
 ## Why this matters for Jake
 This operational blueprint aligns directly with how we structure internal AI readiness and deploy scalable agentic workflows for clients. It provides a concrete runbook for turning chaotic company processes into systematic AI implementations.
 
-## Cross-references
-[ai-organizational-readiness, runbooks-and-production-agent-ops, institutional-knowledge-tax]
+**Cross-references**: [[ai-organizational-readiness]], [[runbooks-and-production-agent-ops]], [[institutional-knowledge-tax]]

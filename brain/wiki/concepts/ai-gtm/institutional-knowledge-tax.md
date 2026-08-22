@@ -28,4 +28,4 @@ The pitch to clients: your AI implementation will fail not because of model capa
 
 Strong LinkedIn post angle: "Your AI can't read your Slack history. Here's what I built instead."
 
-**Cross-references**: [[ai-organizational-readiness]], [[karpathy-llm-wiki-pattern]]
+**Cross-references**: [[ai-organizational-readiness]], [[karpathy-llm-wiki-pattern]], [[boom-automations-ai-operating-system]]
