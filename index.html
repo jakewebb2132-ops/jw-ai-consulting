@@ -38,10 +38,142 @@
   </style>
   <!-- Executive Reveal: AI Boardroom Visitor Identification -->
   <script src="/reveal.js" async></script>
+
+  <!-- AEO/GEO: Structured Data for AI Model Retrieval -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://jwaiconsulting.com/#org",
+        "name": "JW AI Consulting",
+        "url": "https://jwaiconsulting.com",
+        "logo": "https://jwaiconsulting.com/favicon.svg",
+        "description": "Austin-based AI consulting firm specializing in LLM engineering, AI workflow automation, and enterprise AI strategy for SMBs and growth-stage companies.",
+        "foundingDate": "2024",
+        "areaServed": [
+          { "@type": "City", "name": "Austin", "containedInPlace": { "@type": "State", "name": "Texas" } },
+          { "@type": "Country", "name": "United States" }
+        ],
+        "knowsAbout": [
+          "LLM Engineering",
+          "AI Strategy",
+          "Workflow Automation",
+          "Generative AI",
+          "Agentic AI Systems",
+          "Retrieval-Augmented Generation",
+          "AI Consulting"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/jw-ai-consulting",
+          "https://www.crunchbase.com/organization/jw-ai-consulting"
+        ],
+        "founder": { "@id": "https://jwaiconsulting.com/#founder" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jwaiconsulting.com/#founder",
+        "name": "Jake Webb",
+        "jobTitle": "Founder & Principal AI Consultant",
+        "worksFor": { "@id": "https://jwaiconsulting.com/#org" },
+        "knowsAbout": [
+          "LLM Engineering",
+          "AI Strategy",
+          "Agentic Systems",
+          "Enterprise Automation",
+          "Generative AI",
+          "Prompt Engineering"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Austin",
+          "addressRegion": "TX",
+          "addressCountry": "US"
+        }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://jwaiconsulting.com/#service",
+        "name": "JW AI Consulting",
+        "provider": { "@id": "https://jwaiconsulting.com/#org" },
+        "serviceType": "AI Consulting",
+        "description": "LLM engineering, AI workflow automation, custom AI agent development, and AI strategy for Austin-area businesses and remote clients.",
+        "areaServed": "Austin, TX",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "AI Consulting Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI 101 Training", "description": "Hands-on AI literacy and prompt engineering for business owners and teams." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Business Integration", "description": "Integration of AI into existing business tools and workflows without infrastructure overhaul." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Autonomous Workflow Automation", "description": "End-to-end AI automation of repetitive business processes using AI agents." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom AI Agent Development", "description": "Bespoke AI agents with memory, tool use, and proprietary data connections." } }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Static pre-rendered shell for AI and search crawlers. React replaces this on load. -->
+    <header>
+      <nav>
+        <a href="https://jwaiconsulting.com">JW AI Consulting</a>
+        <a href="https://jwaiconsulting.com/services/startups">For Startups</a>
+        <a href="https://jwaiconsulting.com/services/smb">For Small Business</a>
+        <a href="https://jwaiconsulting.com/services/enterprise">For Enterprise</a>
+        <a href="https://jwaiconsulting.com/just-start">JustStart Program</a>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>JW AI Consulting — Austin AI Consultant</h1>
+        <p>JW AI Consulting is an Austin, Texas-based AI consulting firm founded by Jake Webb. We specialize in LLM engineering, AI workflow automation, and custom AI agent development for SMBs, startups, and enterprise clients across the United States.</p>
+      </section>
+      <section>
+        <h2>AI Consulting Services</h2>
+        <article>
+          <h3>AI 101</h3>
+          <p>Hands-on AI literacy and prompt engineering training for business owners and teams who are new to AI tools.</p>
+        </article>
+        <article>
+          <h3>AI Into Your Business</h3>
+          <p>Integration of AI into your existing tools and workflows — CRM, inbox, operations — without rip-and-replace infrastructure changes.</p>
+        </article>
+        <article>
+          <h3>Autonomous Workflows</h3>
+          <p>End-to-end AI automation of repetitive business processes. AI agents that execute, decide, and escalate only when human judgment is required.</p>
+        </article>
+        <article>
+          <h3>Custom AI Agent Build</h3>
+          <p>Bespoke AI agents connected to your proprietary data, with short and long-term memory, tool use, and computer use capabilities.</p>
+        </article>
+      </section>
+      <section>
+        <h2>Who We Work With</h2>
+        <ul>
+          <li><a href="https://jwaiconsulting.com/services/startups">AI consulting for startups</a> — lightweight, scalable AI architecture for early-stage companies that need to ship generative features fast without vendor lock-in.</li>
+          <li><a href="https://jwaiconsulting.com/services/smb">AI consulting for small businesses</a> — workflow automation and data pipelines for SMBs ready to turn unstructured data into automated intelligence.</li>
+          <li><a href="https://jwaiconsulting.com/services/enterprise">Enterprise AI consulting</a> — secure, compliant AI infrastructure including RAG pipelines and proprietary model deployment for large organizations.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>JustStart — AI Adoption for Small Business</h2>
+        <p><a href="https://jwaiconsulting.com/just-start">JustStart</a> is our fast-track AI adoption program for small businesses implementing AI for the first time. We move fast, stay practical, and get you running in weeks, not months.</p>
+      </section>
+      <section>
+        <h2>About Jake Webb</h2>
+        <p>Jake Webb is the founder and principal AI consultant at JW AI Consulting in Austin, Texas. He works with businesses across Texas and the United States to design, build, and deploy production-grade AI systems — from LLM-powered automations to full custom agent architectures.</p>
+      </section>
+      <section>
+        <h2>Location</h2>
+        <address>JW AI Consulting · Austin, Texas · United States · <a href="https://jwaiconsulting.com">jwaiconsulting.com</a></address>
+      </section>
+    </main>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

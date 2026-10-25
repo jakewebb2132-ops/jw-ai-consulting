@@ -1,0 +1,32 @@
+# JW AI Consulting
+
+> Austin-based AI consulting firm founded by Jake Webb. We build LLM-powered systems, AI workflow automation, and intelligent enterprise applications for growth-stage companies and SMBs across Texas and the US.
+
+## Services
+
+- [AI 101](https://jwaiconsulting.com): Hands-on AI literacy and prompt engineering training for business owners and teams who are new to AI tools.
+- [AI Into Your Business](https://jwaiconsulting.com): Integration of AI into existing tools and workflows — CRM, inbox, operations — without rip-and-replace infrastructure changes.
+- [Autonomous Workflows](https://jwaiconsulting.com): End-to-end AI automation of repetitive business processes. AI agents that execute, decide, and escalate only when human judgment is required.
+- [Custom Agent Build](https://jwaiconsulting.com): Bespoke AI agents connected to proprietary data, with short and long-term memory, tool use, and computer use capabilities.
+
+## Service Areas by Client Type
+
+- [Startups](https://jwaiconsulting.com/services/startups): AI architecture for early-stage companies. Lightweight, scalable intelligence layers for rapid deployment of generative features without vendor lock-in.
+- [SMB](https://jwaiconsulting.com/services/smb): Workflow automation and data pipeline engineering for small and medium businesses. Turns unstructured data into automated intelligence flows.
+- [Enterprise](https://jwaiconsulting.com/services/enterprise): Context engineering, RAG pipelines, and compliant AI infrastructure for large organizations.
+
+## Programs
+
+- [JustStart](https://jwaiconsulting.com/just-start): Fast-track AI adoption program for small businesses ready to implement AI for the first time.
+
+## About
+
+Jake Webb is the founder and principal AI consultant at JW AI Consulting. He specializes in LLM engineering, agentic system design, and AI strategy for businesses that want to move fast without accumulating technical debt.
+
+## Location
+
+Austin, Texas, United States. Serving clients locally and remotely across the US.
+
+## Contact
+
+Website: https://jwaiconsulting.com
