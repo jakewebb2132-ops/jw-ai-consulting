@@ -29,3 +29,11 @@ CREATE POLICY "Allow authenticated users to view signals"
 ON public.signals 
 FOR SELECT 
 USING (auth.role() = 'authenticated');
+
+GRANT SELECT
+ON public.signals
+TO authenticated;
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON public.signals
+TO service_role;

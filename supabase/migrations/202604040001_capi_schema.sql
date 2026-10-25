@@ -86,6 +86,12 @@ alter table capi_signals   enable row level security;
 alter table outreach_queue enable row level security;
 alter table crm_push_log   enable row level security;
 
+-- These operational tables are reachable only by trusted backend code.
+grant select, insert, update, delete on leads          to service_role;
+grant select, insert, update, delete on capi_signals   to service_role;
+grant select, insert, update, delete on outreach_queue to service_role;
+grant select, insert, update, delete on crm_push_log   to service_role;
+
 -- ─── Dashboard view (for Sales Dashboard queries) ─────────────────────────────
 create or replace view lead_activity_summary as
 select
@@ -107,3 +113,5 @@ left join outreach_queue oq on oq.lead_id = l.id and oq.status = 'pending'
 group by l.id, l.company, l.job_title, l.score,
          l.first_seen_at, l.last_seen_at, oq.status
 order by l.score desc;
+
+grant select on lead_activity_summary to service_role;

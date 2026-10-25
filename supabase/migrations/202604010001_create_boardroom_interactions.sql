@@ -26,3 +26,8 @@ CREATE POLICY "Allow public read access for monitoring"
 ON public.boardroom_interactions 
 FOR SELECT 
 USING (true);
+
+-- The Vercel backend is the only Data API caller for this table.
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON public.boardroom_interactions
+TO service_role;

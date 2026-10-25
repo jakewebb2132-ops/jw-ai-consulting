@@ -34,3 +34,11 @@ CREATE POLICY "Allow authenticated users to view leads"
 ON public.visitor_leads 
 FOR SELECT 
 USING (auth.role() = 'authenticated');
+
+GRANT SELECT
+ON public.visitor_leads
+TO authenticated;
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON public.visitor_leads
+TO service_role;
