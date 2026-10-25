@@ -29,7 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { visitor_id, url, referrer, event } = req.body;
+    const { visitor_id, url, event } = req.body;
     const ipAddress = (req.headers['x-forwarded-for'] as string)?.split(',')[0].trim() || 
                       (req.headers['x-real-ip'] as string) || 
                       req.socket.remoteAddress || 
@@ -98,7 +98,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             const keywords = (org.keywords || []).join(' ').toLowerCase();
                             
                             const isTech = industry.includes('software') || industry.includes('technology') || industry.includes('information') || keywords.includes('ai') || keywords.includes('artificial intelligence') || keywords.includes('saas');
-                            const isSmallToMed = org.estimated_num_employees && org.estimated_num_employees <= 500;
 
                             if (isISP || !isTech) {
                                 console.log(`[REVEAL] Dropped: ${org.name} does not fit ICP (ISP: ${isISP}, Tech: ${isTech}).`);

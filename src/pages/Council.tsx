@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { ArrowRight, CircleNotch, Warning, ChartLineUp, Users, PresentationChart, Sword, Handshake, Briefcase } from 'phosphor-react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { ArrowRight, CircleNotch, Warning, Users, Sword, Handshake } from 'phosphor-react';
 
 interface Advisor {
   id: string;

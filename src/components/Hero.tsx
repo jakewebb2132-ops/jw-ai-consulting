@@ -1,5 +1,4 @@
 import { ArrowRight, Sparkle } from "phosphor-react";
-import { Link } from "react-router-dom";
 import ScrollReveal from "./ScrollReveal";
 import MagneticHover from "./MagneticHover";
 

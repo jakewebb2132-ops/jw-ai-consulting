@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useVisitorStore } from '../store/visitorStore';
 import { useSignalStore } from '../store/signalStore';
-import { Link } from 'react-router-dom';
-import { Users, ArrowSquareOut, Activity, ArrowUpRight, Shield, Globe, LinkedinLogo, Eye, ChartLineUp, Broadcast, ArrowLeft, Clock, Briefcase } from 'phosphor-react';
-import { supabase } from '../lib/supabase';
+import { Users, ArrowSquareOut, Activity, ArrowUpRight, Globe, LinkedinLogo, Broadcast, Clock } from 'phosphor-react';
 
 import Sidebar from '../components/Sidebar';
 
 const SalesIntelligence = () => {
     const { leads, fetchLeads, subscribeToLeads, isLoading: leadsLoading } = useVisitorStore();
     const { signals, fetchSignals, subscribeToSignals, isLoading: signalsLoading } = useSignalStore();
-    const [activeTab, setActiveTab] = useState<'website' | 'linkedin'>('website');
+    const [activeTab] = useState<'website' | 'linkedin'>('website');
 
     useEffect(() => {
         fetchLeads();

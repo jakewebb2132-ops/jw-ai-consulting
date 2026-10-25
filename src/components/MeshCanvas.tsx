@@ -12,8 +12,8 @@ export default function MeshCanvas() {
         let W = 0, H = 0;
         let points: any[] = [];
         let animId: number;
-        let mouse = { x: -1000, y: -1000, vx: 0, vy: 0 };
-        let lastMouse = { x: -1000, y: -1000 };
+        const mouse = { x: -1000, y: -1000, vx: 0, vy: 0 };
+        const lastMouse = { x: -1000, y: -1000 };
 
         const handleMouseMove = (e: MouseEvent) => {
             lastMouse.x = mouse.x;

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Lightbulb, Plug, Infinity, Cpu } from "phosphor-react";
+import { Lightbulb, Plug, Infinity as InfinityIcon, Cpu } from "phosphor-react";
 import ScrollReveal from "./ScrollReveal";
 
 const services = [
@@ -16,7 +16,7 @@ const services = [
     {
         title: "Autonomous Workflows",
         content: "What if your business ran while you slept? We map your most repetitive processes and hand them off to AI that executes, decides, and escalates — only when it needs you.",
-        icon: <Infinity size={32} weight="thin" />
+        icon: <InfinityIcon size={32} weight="thin" />
     },
     {
         title: "Custom Agent Build",

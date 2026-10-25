@@ -82,7 +82,7 @@
     async function startSync() {
         notify('LinkedIn Stealth Scan Starting...');
         
-        let signals = [];
+        let signals;
         const url = window.location.href;
 
         if (url.includes('/me/profile-views/')) {
@@ -113,7 +113,6 @@
                 const result = await response.json();
                 notify(`Success! ${result.count} new interactions captured.`, 'success');
             } else {
-                const error = await response.text();
                 notify(`Sync failed: ${response.status}`, 'error');
             }
         } catch (e) {

@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -12,8 +11,6 @@ if (!supabaseUrl || !supabaseServiceKey) {
   console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.production');
   process.exit(1);
 }
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 async function hardenDatabase() {
   console.log('🚀 Hardening database RLS policies...');

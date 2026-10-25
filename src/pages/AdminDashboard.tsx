@@ -4,7 +4,7 @@ import { useInteractionStore } from '../store/interactionStore';
 import { useSignalStore } from '../store/signalStore';
 import { useVisitorStore } from '../store/visitorStore';
 import { Link } from 'react-router-dom';
-import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, Users, PresentationChart, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise, ShieldCheck, LinkedinLogo, MagnifyingGlass, Broadcast, Funnel, CheckCircle } from 'phosphor-react';
+import { FileText, Eye, CircleNotch, Briefcase, ChartLineUp, ChatCenteredDots, Sword, Handshake, ClockCounterClockwise, LinkedinLogo, MagnifyingGlass, Broadcast } from 'phosphor-react';
 import { Proposal } from '../types/proposal';
 
 import Sidebar from '../components/Sidebar';

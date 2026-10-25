@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  ArrowLeft,
   Briefcase,
   CheckCircle,
   WarningCircle,
@@ -17,7 +15,6 @@ import {
   Buildings,
   MapPin,
   Robot,
-  Clock,
 } from 'phosphor-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -147,8 +144,8 @@ const JobApplications: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
-  const [filterStatus, setFilterStatus] = useState<JobStatus | 'all'>('all');
-  const [lastRefreshed, setLastRefreshed] = useState<Date>(new Date());
+  const [filterStatus] = useState<JobStatus | 'all'>('all');
+  const [, setLastRefreshed] = useState<Date>(new Date());
 
   const loadJobs = async () => {
     try {
@@ -204,15 +201,6 @@ const JobApplications: React.FC = () => {
     // Sort dates descending
     return Object.entries(groups).sort(([a], [b]) => b.localeCompare(a));
   }, [filtered]);
-
-  const statusFilters: Array<{ value: JobStatus | 'all'; label: string }> = [
-    { value: 'all', label: 'All' },
-    { value: 'submitted', label: 'Submitted' },
-    { value: 'needs_manual_review', label: 'Manual Review' },
-    { value: 'error', label: 'Errors' },
-    { value: 'skipped_duplicate', label: 'Duplicate' },
-    { value: 'skipped_irrelevant', label: 'Irrelevant' },
-  ];
 
   return (
     <div className="min-h-screen bg-[#fcfcfd] flex font-sans selection:bg-blue-100 uppercase-badges">

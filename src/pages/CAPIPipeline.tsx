@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  ArrowLeft, CircleNotch, Broadcast, ChartLineUp, Users,
+  CircleNotch, Broadcast,
   LinkedinLogo, FacebookLogo, TiktokLogo, TwitterLogo,
-  CheckCircle, Clock, Warning, Briefcase,
+  CheckCircle, Clock, Warning,
 } from 'phosphor-react';
 import { useCAPIStore, LeadSummary } from '../store/capiStore';
 

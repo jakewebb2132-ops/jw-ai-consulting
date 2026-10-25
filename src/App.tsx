@@ -82,7 +82,7 @@ const HomePage = () => (
 );
 
 const AppLayout = () => {
-    const { pathname } = useLocation();
+    useLocation(); // keeps this layout subscribed to route changes
     
     // If the user visits the proposal subdomain but didn't hit a specific secure route,
     // automatically bounce them to the proposal generator instead of the council.
