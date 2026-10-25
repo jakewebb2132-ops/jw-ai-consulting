@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useVisitorStore } from '../store/visitorStore';
 import { useSignalStore } from '../store/signalStore';
 import { Users, ArrowSquareOut, Activity, ArrowUpRight, Globe, LinkedinLogo, Broadcast, Clock } from 'phosphor-react';

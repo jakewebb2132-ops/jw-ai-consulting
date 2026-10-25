@@ -7,6 +7,7 @@ cd "$(dirname "$0")"
 
 CHECKS=(
   "npm run lint"
+  "npm run typecheck"
   "npm run build"
   "npm test"
 )
