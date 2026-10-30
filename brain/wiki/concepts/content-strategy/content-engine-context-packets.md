@@ -35,4 +35,4 @@ This acts as a cheap editor that catches weak posts before they go out.
 - Each wiki concept page in `~/brain/wiki/concepts/` is essentially a pre-built context packet
 - The viral postmortem prompt should be added as the final step in `~/brain/skills/linkedin-content/`
 
-**Cross-references**: [[content-at-scale-pipeline]], [[ai-organizational-readiness]]
+**Cross-references**: [[content-at-scale-pipeline]], [[ai-organizational-readiness]], [[anthropic-internal-eli5-skill]], [[threeui-open-source-threejs-library]]

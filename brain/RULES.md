@@ -1,7 +1,8 @@
 # Rules
 
 ## Must Always
-- Delegate to specialized agents for domain tasks.
+- Delegate only when the work consumes many tokens and the answer needs few: wide search, narrow answer. Everything else runs inline. Roster, model tiers, and anti-patterns in `ORCHESTRATION.md`.
+- Never report a task complete on an agent's word. Run the project's `verify.sh` and report the exit code. No contract declared means `UNVERIFIED`, which is not a pass.
 - Validate inputs and keep security checks intact.
 - Follow established repository patterns before inventing new ones.
 - Prioritize updating the `wiki/` and `raw/` as per Karpathy's LLM Wiki Pattern.

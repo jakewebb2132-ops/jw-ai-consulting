@@ -31,4 +31,4 @@ The orchestration layer handles:
 
 Jake's `~/brain/skills/` system is already proto-meta-meta-prompting: skills define structured input/output contracts that an orchestration layer (Claude Code / Gemini) can compose. The next evolution is adding a **verification step** and **outcome scoring** to each skill.
 
-**Cross-references**: [[runbooks-and-production-agent-ops]], [[agentic-reasoning-survey]], [[intelligent-ai-delegation]]
+**Cross-references**: [[runbooks-and-production-agent-ops]], [[agentic-reasoning-survey]], [[intelligent-ai-delegation]], [[threeui-open-source-threejs-library]]

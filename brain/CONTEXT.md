@@ -14,8 +14,9 @@ Email: jakewebb2132@gmail.com | GitHub: jakewebb2132-ops
 
 1. **`~/brain/SOUL.md`** — my personality preferences and hard behavioral rules for every AI session
 2. **`~/brain/RULES.md`** — always/never rules, agent and skill format conventions
-3. **`~/brain/projects/INDEX.md`** — registry of everything built and deployed; read before starting any task
-4. **`~/brain/wiki/index.md`** — compiled knowledge base; check before answering questions about tools, models, platforms
+3. **`~/brain/ORCHESTRATION.md`** — when to delegate, to which agent, at which model tier, and the verification contract that decides when work is actually done
+4. **`~/brain/projects/INDEX.md`** — registry of everything built and deployed; read before starting any task
+5. **`~/brain/wiki/index.md`** — compiled knowledge base; check before answering questions about tools, models, platforms
 
 ---
 

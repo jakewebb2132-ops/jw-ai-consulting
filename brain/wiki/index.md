@@ -9,12 +9,15 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [claude-managed-agents](platforms/claude-managed-agents.md) — Anthropic's hosted agent fleet; sandboxed execution, state mgmt, $0.08/hr; public beta Apr 2026
 - [claude-m365-connector](platforms/claude-m365-connector.md) — Claude reads Outlook/SharePoint/Teams, free tier, undercuts Copilot at $30/user/mo
 - [claude-mythos](platforms/claude-mythos.md) — Anthropic's unreleased frontier model; found 27yr OpenBSD vuln, broke sandbox; restricted to Project Glasswing
+- [planview](platforms/planview.md) — enterprise strategy-to-execution platform; SPM category Leader (Gartner MQ 5yr, Forrester Wave Q2 2026); Nunito Sans + #B60001 brand; ProjectPlace↔Portfolios connector verified from the Success Center 2026-10-29
 
 ## Models
 - [vertical-language-model-efficiency](models/vertical-language-model-efficiency.md) — Building Competitive Vertical Language Models Efficiently
 - [gemma-4](models/gemma-4.md) — Google's 26B MoE (3.8B active), first truly open commercial license, #3 globally on Arena AI
 
 ## Tools & Libraries
+- [analyzing-trending-ai-repositories-and-tools](tools/analyzing-trending-ai-repositories-and-tools.md) — Analyzing Trending AI Repositories and Tools
+- [no-slop-ui](tools/no-slop-ui.md) — restrained UI review rules that block generic AI dashboard patterns, decorative gradients, oversized cards, filler metrics, and vague product copy
 - [threeui-open-source-threejs-library](tools/threeui-open-source-threejs-library.md) — ThreeUI Open Source ThreeJS Component Library
 - [anthropic-internal-eli5-skill](tools/anthropic-internal-eli5-skill.md) — Anthropic Internal ELI5 Skill and Plugin
 - [interactive-finger-frame-effect](tools/interactive-finger-frame-effect.md) — Interactive Finger Frame Effect Vision Tool
@@ -31,6 +34,11 @@ _Updated on every ingest. LLM reads this first when answering queries._
 
 ## Concepts & Patterns
 
+### 📊 Portfolio & Operating Models
+- [strategic-portfolio-management](concepts/portfolio-operating-models/strategic-portfolio-management.md) — chooses and governs the bets; not status reporting; 20% of execs confident in resourcing
+- [product-operating-model](concepts/portfolio-operating-models/product-operating-model.md) — organizes durable ownership; does not replace SPM; only 12% fully shifted, 65% can't see their value stream network
+- [flow-framework](concepts/portfolio-operating-models/flow-framework.md) — Kersten's 4 flow items + 5 flow metrics; adopted by SAFe 6.0; 80% don't inspect daily
+
 ### 🤖 Agent Architecture
 - [compound-orchestrator](concepts/agent-architecture/compound-orchestrator.md) — project harness that makes agent tasks compound: planning contracts, two-round review, README gate, parallel draft/serial accept (Ken Huang)
 - [agentic-reasoning-survey](concepts/agent-architecture/agentic-reasoning-survey.md) — 3-layer framework: Foundational→Self-Evolving→Collective; thought+action for long-horizon tasks (Wei et al.)
@@ -46,6 +54,7 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [optimizing-agentic-workflows](concepts/agent-architecture/optimizing-agentic-workflows.md) — Optimizing AI Agentic Workflows and Infrastructure
 
 ### 📈 AI GTM & Strategy
+- [ai-assisted-legacy-sql-to-postgresql-migration](concepts/ai-gtm/ai-assisted-legacy-sql-to-postgresql-migration.md) — Production evidence and a defensible case for using AI to accelerate legacy SQL Server/Oracle migrations to PostgreSQL
 - [ai-organizational-readiness](concepts/ai-gtm/ai-organizational-readiness.md) — AI fails when companies can't describe themselves; clarity first, AI second (Miessler)
 - [ai-organizational-autonomy-levels](concepts/ai-gtm/ai-organizational-autonomy-levels.md) — 6-level maturity model: Theater → Personal → Team → Infrastructure → OS → Self-Driving
 - [ai-moat-institution-not-features](concepts/ai-gtm/ai-moat-institution-not-features.md) — AI commoditizes features; real moat is how company organizes judgment and compounds knowledge
@@ -81,16 +90,27 @@ _Updated on every ingest. LLM reads this first when answering queries._
 - [managing-ai-coding-agent-context](concepts/agent-architecture/managing-ai-coding-agent-context.md) — Managing AI Coding Agent Context Window Limitations
 
 ### Knowledge Systems
+- [invalid-url-or-empty-content](concepts/knowledge-systems/invalid-url-or-empty-content.md) — Invalid URL Or Empty Content Provided
 - [visualizing-dynamic-curriculum-knowledge-graphs](concepts/knowledge-systems/visualizing-dynamic-curriculum-knowledge-graphs.md) — Visualizing Dynamic Curriculum Knowledge Graphs for Education
 - [handling-unavailable-external-content](concepts/knowledge-systems/handling-unavailable-external-content.md) — Handling Unavailable External Content and Link Rot
 - [alphasignal-ai-emerging-trends](concepts/knowledge-systems/alphasignal-ai-emerging-trends.md) — AlphaSignal AI Article on Emerging Trends
 - [fmhy-decentralized-resource-index](concepts/knowledge-systems/fmhy-decentralized-resource-index.md) — FMHY: The Decentralized Index of Digital Resources
 
 ### Content Strategy
+- [analyzing-x-post-content-url](concepts/content-strategy/analyzing-x-post-content-url.md) — Analyzing X Post Content URL Knowledge Capture
+- [analyzing-x-post-content-and-ai-strategy](concepts/content-strategy/analyzing-x-post-content-and-ai-strategy.md) — Analyzing X Post Content and AI Strategy
+- [kitze-social-media-post-context](concepts/content-strategy/kitze-social-media-post-context.md) — Analyzing Kitze Social Media Post Context
 - [unavailable-twitter-post-knowledge-capture](concepts/content-strategy/unavailable-twitter-post-knowledge-capture.md) — Unavailable Twitter Post Knowledge Capture
 - [ai-search-optimization-content-strategy](concepts/content-strategy/ai-search-optimization-content-strategy.md) — Optimizing Content Strategy for AI Search Engines
 
 ### AI GTM & Strategy
+- [ai-strategy-gtm-insights-overview](concepts/ai-gtm/ai-strategy-gtm-insights-overview.md) — AI Strategy and Go-To-Market Insights Overview
+- [scaling-ai-gtm-strategy](concepts/ai-gtm/scaling-ai-gtm-strategy.md) — Scaling AI Go-To-Market Strategy Effectively
+- [analyzing-x-post-ai-gtm](concepts/ai-gtm/analyzing-x-post-ai-gtm.md) — Analyzing X Post on AI GTM
+- [navigating-ai-strategy-market-dynamics](concepts/ai-gtm/navigating-ai-strategy-market-dynamics.md) — Navigating AI Strategy and Market Dynamics
+- [optimizing-ai-gtm-strategies-and-systems](concepts/ai-gtm/optimizing-ai-gtm-strategies-and-systems.md) — Optimizing AI GTM Strategies and Systems
+- [analyzing-x-post-ai-strategy](concepts/ai-gtm/analyzing-x-post-ai-strategy.md) — Analyzing X Post on AI Strategy
+- [suraj-sharma-ai-post-insights](concepts/ai-gtm/suraj-sharma-ai-post-insights.md) — Analyzing Suraj Sharma AI Post Insights
 - [ai-pilling-company-productivity](concepts/ai-gtm/ai-pilling-company-productivity.md) — The Evolution of Engineering Productivity with AI
 - [google-workspace-cli-firing](concepts/ai-gtm/google-workspace-cli-firing.md) — Corporate Friction and the Google Workspace CLI
 - [evals-strategic-ip-ai](concepts/ai-gtm/evals-strategic-ip-ai.md) — Evals as the Strategic IP for AI
